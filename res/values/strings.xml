@@ -3,7 +3,6 @@
 
     <string name="app_name">PubShare</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="title_activity_article_list">ArticleListActivity</string>
+    <string name="title_activity_article_list">Search Results</string>
 
 </resources>

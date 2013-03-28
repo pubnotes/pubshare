@@ -26,6 +26,7 @@ public class ArticleListActivity extends Activity {
 		super.onCreate(savedInstanceState);				
 
 		setContentView(R.layout.activity_article_list);
+		setTitle(R.string.title_activity_article_list);
 		
 		List<Article> articles = ArticleListMockFactory.makeArticleList();		
 		

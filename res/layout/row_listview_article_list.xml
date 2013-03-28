@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"    
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -36,8 +36,10 @@
         android:layout_below="@+id/conferenceText"
         android:paddingLeft="8dp"
         android:paddingTop="4dp"
+        android:paddingBottom="4dp"
         android:textSize="12sp"
         android:text="Publication Year: 2012"
+        
         android:textAppearance="?android:attr/textAppearanceMedium" />
     
       <TextView
@@ -49,6 +51,7 @@
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:paddingTop="4dp"
+        android:paddingBottom="4dp"
         android:textSize="12sp"
         android:text="Page(s): 8"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -62,6 +65,7 @@
           android:layout_toRightOf="@+id/countPagesText"
           android:isIndicator="true"
           android:numStars="5"
-          android:paddingTop="4dp" />
+          android:paddingTop="4dp" 
+          android:paddingBottom="4dp"/>
 
 </RelativeLayout>
