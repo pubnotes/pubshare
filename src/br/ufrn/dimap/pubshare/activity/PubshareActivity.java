@@ -1,0 +1,27 @@
+package br.ufrn.dimap.pubshare.activity;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+
+/**
+ * Entry point of application. It can be used to perform some processing, 
+ * redirecting to some activity by some logic.
+ *
+ */
+public class PubshareActivity extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		
+		//When you develop, change this line to start your activity. (Dev Only)
+		Intent i = new Intent(this, ArticleListActivity.class);        	        
+				    
+		startActivity(i);
+		finish();
+	}
+
+	 
+
+}
