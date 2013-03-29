@@ -18,16 +18,18 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity
             android:name="br.ufrn.dimap.pubshare.activity.ArticleListActivity"
             android:label="@string/title_activity_article_list" >
         </activity>
-        
-        
+        <activity
+            android:name="br.ufrn.dimap.pubshare.activity.ArticlesDownloadedActivity"
+            android:label="@string/title_activity_articles_downloaded" >
+        </activity>
     </application>
 
 </manifest>
