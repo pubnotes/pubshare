@@ -68,7 +68,7 @@ public class ArticleListActivity extends Activity {
 				return true;
 			case R.id.contextual_menu_download:
 				Intent intent = new Intent(this,  DownloaderService.class );
-				// put extra...
+				intent.putExtra( Article.KEY_REMOTE_URL , "http://www.natalnet.br/~luksrn/05068879.pdf");
 				startService(intent);				
 				return true;
 			case R.id.contextual_menu_share:

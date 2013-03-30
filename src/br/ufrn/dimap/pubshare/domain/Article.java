@@ -10,6 +10,10 @@ public class Article {
 	
 	public static final String KEY_INSTANCE = "br.ufrn.dimap.pubshare.domain.Article?List";
 	
+	public static final String KEY_REMOTE_URL = "br.ufrn.dimap.pubshare.domain.Article?remoteUrl";
+	
+	
+	
 	private String title;
 
 	public String getTitle() {

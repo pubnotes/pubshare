@@ -10,14 +10,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 import br.ufrn.dimap.pubshare.adapters.ArticlesDownloadedListAdapter;
+import br.ufrn.dimap.pubshare.domain.Article;
 import br.ufrn.dimap.pubshare.domain.ArticleDownloaded;
 import br.ufrn.dimap.pubshare.mocks.ArticlesDownloadedMockFactory;
 
@@ -83,11 +85,22 @@ public class ArticlesDownloadedActivity extends Activity {
 			case R.id.contextual_menu_share:
 				// share
 				return true;
+				
+			case R.id.contextual_menu_delete:
+				deleteDownloadedFile( item );
+				return true;
+		
 		
 			default:
 				return super.onContextItemSelected(item);
 		}
 
+	}
+
+	private void deleteDownloadedFile(MenuItem item) {
+		Toast toast = Toast.makeText(this, "Article xpto.pdf was removed", Toast.LENGTH_LONG);
+		toast.setGravity( Gravity.BOTTOM| Gravity.CENTER, 0, 0);
+		toast.show();
 	}
 
 	@Override
@@ -106,7 +119,7 @@ public class ArticlesDownloadedActivity extends Activity {
 	            // app icon in action bar clicked; go home
 	            Intent intent = new Intent(this, ArticleListActivity.class);
 	            // See Using the App Icon for Navigation ref: http://developer.android.com/guide/topics/ui/actionbar.html
-	            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);	            
 	            startActivity(intent);
 	            return true;
 	        default:
