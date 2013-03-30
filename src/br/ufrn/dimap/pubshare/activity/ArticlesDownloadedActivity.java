@@ -8,14 +8,25 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import br.ufrn.dimap.pubshare.adapters.ArticlesDownloadedListAdapter;
 import br.ufrn.dimap.pubshare.domain.ArticleDownloaded;
 import br.ufrn.dimap.pubshare.mocks.ArticlesDownloadedMockFactory;
 
+/**
+ * Activity that presents articles downloaded.
+ * 
+ * @author luksrn
+ *
+ */
 public class ArticlesDownloadedActivity extends Activity {
 
 	private ArrayAdapter<ArticleDownloaded> adapter;
@@ -46,9 +57,38 @@ public class ArticlesDownloadedActivity extends Activity {
 			Log.d(this.getClass().getSimpleName(), "Cant find R.layout.row_listview_article_list");
 		}
 		downloadsListView.setAdapter( adapter );
+		registerForContextMenu( downloadsListView );
 	}
 
 
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {	
+		super.onCreateContextMenu(menu, v, menuInfo);
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.menu_long_press_article_list, menu);
+	    
+	    MenuItem menuItem = (MenuItem)menu.findItem(R.id.contextual_menu_download);
+	    menuItem.setVisible(false);
+
+	}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+ 
+		switch (item.getItemId()) {
+			case R.id.contextual_menu_view:
+				// view
+				return true;
+			 
+			case R.id.contextual_menu_share:
+				// share
+				return true;
+		
+			default:
+				return super.onContextItemSelected(item);
+		}
+
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
