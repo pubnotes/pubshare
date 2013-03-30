@@ -5,9 +5,9 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="13" />
-
+        android:minSdkVersion="8" 
+        android:targetSdkVersion="13" />  
+	
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -30,6 +30,10 @@
             android:name="br.ufrn.dimap.pubshare.activity.ArticlesDownloadedActivity"
             android:label="@string/title_activity_articles_downloaded" >
         </activity>
+        
+        <service android:name="br.ufrn.dimap.pubshare.service.DownloaderService">
+            
+        </service>
     </application>
 
 </manifest>

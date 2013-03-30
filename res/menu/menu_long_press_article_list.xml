@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+   
+    <item android:id="@+id/contextual_menu_view"
+          android:title="@string/contextual_menu_view" />
+        
+    
+     <item android:id="@+id/contextual_menu_share"
+          android:title="@string/contextual_menu_share" />
+    
+     
+     <item android:id="@+id/contextual_menu_download"
+          android:title="@string/contextual_menu_download" />
+
+     
+     <item android:id="@+id/contextual_menu_delete"
+          android:title="@string/contextual_menu_delete" />
+     
+     
+</menu>

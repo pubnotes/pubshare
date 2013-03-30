@@ -2,7 +2,7 @@ package br.ufrn.dimap.pubshare.domain;
 
 /**
  *
- *
+ * @author luksrn
  */
 public class Article {
 	
