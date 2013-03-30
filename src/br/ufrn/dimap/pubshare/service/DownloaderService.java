@@ -1,6 +1,7 @@
 package br.ufrn.dimap.pubshare.service;
 
 import android.app.IntentService;
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
@@ -11,10 +12,13 @@ import android.widget.Toast;
 import br.ufrn.dimap.pubshare.activity.R;
 
 /**
+ * Service responsible for downloading articles from online libraries
  * 
  * @author luksrn
  * 
  * @see http://developer.android.com/guide/components/services.html
+ * @see http://stackoverflow.com/questions/3028306/download-a-file-with-android-and-showing-the-progress-in-a-progressdialog
+ * 
  */
 public class DownloaderService  extends IntentService {
 	
@@ -36,29 +40,28 @@ public class DownloaderService  extends IntentService {
 			
 		NotificationManager nManager = (NotificationManager)
 				getSystemService(Context.NOTIFICATION_SERVICE);
+
+		nManager.notify(DOWNLOADER_SERVICE_NOTIFICATION_ID,
+				buildNotification("Download article", "Downloading....") );
+		
+		downloadArticle();
+		
+		nManager.cancel(DOWNLOADER_SERVICE_NOTIFICATION_ID);
+	 
+		nManager.notify(DOWNLOADER_SERVICE_NOTIFICATION_ID, buildNotification("Download complete!","Article xpto.pdf download from IEEE.") );
+	}
+	
+	private Notification buildNotification(String title, String text){
 		
 		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
 		        .setSmallIcon(R.drawable.ic_menu_download)
-		        .setContentTitle("Download article")
-		        .setContentText("Downloading....")
+		        .setContentTitle( title )
+		        .setContentText( text )
 		        .setWhen( System.currentTimeMillis() ); // TODO Add more info
-		
-
-		nManager.notify(DOWNLOADER_SERVICE_NOTIFICATION_ID, mBuilder.build() );
-		
-		doSomeWork();
-		
-		nManager.cancel(DOWNLOADER_SERVICE_NOTIFICATION_ID);
-		
-		NotificationCompat.Builder mBuilderEnd = new NotificationCompat.Builder(this)
-		        .setSmallIcon(R.drawable.ic_menu_download)
-		        .setContentTitle("Download complete!")
-		        .setContentText("Article xpto.pdf download from IEEE.")
-		        .setWhen( System.currentTimeMillis() );
-		nManager.notify(DOWNLOADER_SERVICE_NOTIFICATION_ID, mBuilderEnd.build() );
+		return mBuilder.build();
 	}
 	
-	private void doSomeWork() {
+	private void downloadArticle() {
 		   // For while, just sleep for 15 seconds.
 	      long endTime = System.currentTimeMillis() + 15*1000;
 	      while (System.currentTimeMillis() < endTime) {
