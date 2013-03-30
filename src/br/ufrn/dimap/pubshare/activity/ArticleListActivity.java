@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import br.ufrn.dimap.pubshare.adapters.ArticleListAdapter;
 import br.ufrn.dimap.pubshare.domain.Article;
-import br.ufrn.dimap.pubshare.mocks.ArticleListMockFactory;
+import br.ufrn.dimap.pubshare.mocks.ArticleMockFactory;
 
 /**
  * Responsible for managing the activity of displaying articles available.
@@ -32,15 +32,19 @@ public class ArticleListActivity extends Activity {
 		setContentView(R.layout.activity_article_list);
 		setTitle(R.string.title_activity_article_list);	 
 		
-		List<Article> articles = ArticleListMockFactory.makeArticleList();		
+		List<Article> articles = ArticleMockFactory.makeArticleList();		
 		
+		configureListView(articles);		
+	}
+
+	private void configureListView(List<Article> articles) {
 		adapter = new ArticleListAdapter(this, R.layout.row_listview_article_list , articles);
 		
 		articlesListView = (ListView) findViewById(R.id.list_view_articles);
 		if ( articlesListView == null ){
 			Log.d(this.getClass().getSimpleName(), "Não foi possível encontrar R.layout.row_listview_article_list");
 		}
-		articlesListView.setAdapter( adapter );		
+		articlesListView.setAdapter( adapter );
 	}
 
 	@Override

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"    
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/titleText"
+        style="@style/FontLarge.Bold" 
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Titulo do artigo"/>
+
+    <TextView
+        android:id="@+id/conferenceText"
+        style="@style/FontLarge.Bold.Gray"            
+        android:layout_below="@+id/titleText"       
+        android:paddingTop="4dp"     
+        android:text="IEEE Conference Publications "         
+        android:drawableRight="@drawable/ic_navigation_next_item" />
+    
+    <TextView
+        android:id="@+id/publicationYear"
+        style="@style/FontSmall.Gray"        
+        android:paddingBottom="4dp"
+        android:text="Publication Year: 2012" 
+        android:layout_below="@+id/conferenceText"   />
+    
+      <TextView
+        android:id="@+id/countPagesText"
+        style="@style/FontSmall.Gray"       
+        android:layout_below="@+id/conferenceText"
+        android:layout_toRightOf="@+id/publicationYear"        
+        android:paddingBottom="4dp"         
+        android:text="Page(s): 8"  />
+
+    
+     
+     <TextView
+        android:id="@+id/dateTime"
+        style="@style/FontSmall.Gray"       
+        android:layout_below="@+id/conferenceText" 
+        android:layout_toRightOf="@+id/countPagesText"        		      
+        android:paddingBottom="4dp"      
+        android:text="22/04/2013" />
+     
+</RelativeLayout>
