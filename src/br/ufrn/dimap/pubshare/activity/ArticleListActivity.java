@@ -67,8 +67,9 @@ public class ArticleListActivity extends Activity {
 				// view
 				return true;
 			case R.id.contextual_menu_download:
-				Intent intent = new Intent(this,  DownloaderService.class );
-				intent.putExtra( Article.KEY_REMOTE_URL , "http://www.natalnet.br/~luksrn/05068879.pdf");
+				Intent intent = new Intent(this,  DownloaderService.class );		
+				Article selectedArticle =  ArticleMockFactory.singleArticle();
+				intent.putExtra( Article.KEY_INSTANCE , selectedArticle );
 				startService(intent);				
 				return true;
 			case R.id.contextual_menu_share:

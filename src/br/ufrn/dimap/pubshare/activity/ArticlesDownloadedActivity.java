@@ -19,7 +19,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 import br.ufrn.dimap.pubshare.adapters.ArticlesDownloadedListAdapter;
-import br.ufrn.dimap.pubshare.domain.Article;
 import br.ufrn.dimap.pubshare.domain.ArticleDownloaded;
 import br.ufrn.dimap.pubshare.mocks.ArticlesDownloadedMockFactory;
 

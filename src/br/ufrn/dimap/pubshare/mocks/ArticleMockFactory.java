@@ -45,4 +45,11 @@ public class ArticleMockFactory {
 	public static List<Article> makeArticleList(){
 		return makeArticleList( articlesTittles.length  );		 
 	}	
+	
+	public static Article singleArticle(){
+		Article article = new Article();
+		article.setTitle("GTMV: Virtual Museum Authoring Systems");
+		article.setRemoteLocation("http://www.natalnet.br/~luksrn/05068879.pdf");
+		return article;
+	}
 }
