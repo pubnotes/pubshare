@@ -7,6 +7,11 @@ import java.util.List;
 import br.ufrn.dimap.pubshare.domain.Article;
 import br.ufrn.dimap.pubshare.domain.ArticleDownloaded;
 
+/**
+ * 
+ * @author Lucas Farias de Oliveira <i>luksrn@gmail.com</i>
+ *
+ */
 public class ArticlesDownloadedMockFactory {
 
 	public static List<ArticleDownloaded> makeArticleDownloadedList(){

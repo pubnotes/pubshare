@@ -28,7 +28,7 @@ import br.ufrn.dimap.pubshare.mocks.ArticlesDownloadedMockFactory;
 /**
  * Activity that presents articles downloaded.
  * 
- * @author luksrn
+ * @author Lucas Farias de Oliveira <i>luksrn@gmail.com</i>
  *
  */
 public class ArticlesDownloadedActivity extends Activity {

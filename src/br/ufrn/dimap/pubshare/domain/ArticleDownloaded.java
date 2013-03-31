@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * This class contains information from an article downloaded by the user.
  * 
- * @author luksrn
+ * @author Lucas Farias de Oliveira <i>luksrn@gmail.com</i>
  *
  */
 public class ArticleDownloaded {

@@ -24,7 +24,7 @@ import br.ufrn.dimap.pubshare.domain.Article;
 /**
  * Service responsible for downloading articles from online libraries
  * 
- * @author luksrn
+ *	@author Lucas Farias de Oliveira <i>luksrn@gmail.com</i>
  * 
  * @see http://developer.android.com/guide/components/services.html
  * @see http://developer.android.com/guide/topics/ui/notifiers/notifications.html Displaying a fixed-duration progress indicator 
@@ -76,7 +76,7 @@ public class DownloaderService  extends IntentService {
 			InputStream input = new BufferedInputStream(url.openStream());
 			OutputStream output = new FileOutputStream( getExternalStorePath() + selectedArticle.generateFileName() );
 
-			byte data[] = new byte[1024];
+			byte data[] = new byte[ 1024 * 8 ];
 			long total = 0;
 			int count;
 			while ((count = input.read(data)) != -1) {
@@ -157,7 +157,4 @@ public class DownloaderService  extends IntentService {
 		toast.show();
 		return super.onStartCommand(intent, flags, startId);
 	}
-
- 
-
 }
