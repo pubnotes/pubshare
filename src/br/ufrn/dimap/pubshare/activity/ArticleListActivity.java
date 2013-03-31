@@ -25,7 +25,7 @@ import br.ufrn.dimap.pubshare.service.DownloaderService;
  */
 public class ArticleListActivity extends Activity {
 	
-	private static final String TAG = "br.ufrn.dimap.pubshare.activity.ArticleListActivity";
+	private static final String TAG = ArticleListActivity.class.getSimpleName();
 
 	private ListView articlesListView;
 	private ArticleListAdapter adapter;

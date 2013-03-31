@@ -4,6 +4,8 @@ import java.util.List;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -30,7 +33,10 @@ import br.ufrn.dimap.pubshare.mocks.ArticlesDownloadedMockFactory;
  */
 public class ArticlesDownloadedActivity extends Activity {
 
+	private static final String TAG = ArticlesDownloadedActivity.class.getSimpleName();
+	
 	private ArrayAdapter<ArticleDownloaded> adapter;
+	
 	private ListView downloadsListView;
 	
 	@Override
@@ -75,7 +81,7 @@ public class ArticlesDownloadedActivity extends Activity {
 	
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
- 
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
 		switch (item.getItemId()) {
 			case R.id.contextual_menu_view:
 				// view
@@ -86,7 +92,7 @@ public class ArticlesDownloadedActivity extends Activity {
 				return true;
 				
 			case R.id.contextual_menu_delete:
-				deleteDownloadedFile( item );
+				deleteDownloadedFile(info.position );
 				return true;
 		
 		
@@ -96,10 +102,35 @@ public class ArticlesDownloadedActivity extends Activity {
 
 	}
 
-	private void deleteDownloadedFile(MenuItem item) {
-		Toast toast = Toast.makeText(this, "Article xpto.pdf was removed", Toast.LENGTH_LONG);
-		toast.setGravity( Gravity.BOTTOM| Gravity.CENTER, 0, 0);
-		toast.show();
+	private void deleteDownloadedFile(int rowIndexInAdapter ) {
+
+		if ( ! adapter.isEmpty() ){
+			final ArticleDownloaded articleDownloaded = adapter.getItem( rowIndexInAdapter );
+			
+			
+			  //Ask the user if they want really remove the article
+			new AlertDialog.Builder(this)
+			.setIcon(android.R.drawable.ic_dialog_alert)
+			.setTitle("Confirmation of deletion")
+			.setMessage("Do you really want to " + articleDownloaded.getArticle().getTitle() + "?")
+			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+
+					// Remove!
+					adapter.remove(articleDownloaded);
+					adapter.notifyDataSetChanged();
+					
+					Toast toast = Toast.makeText( getApplicationContext() , "Article '" + articleDownloaded.getArticle().getTitle() +"' was removed", Toast.LENGTH_LONG);
+					toast.setGravity( Gravity.BOTTOM| Gravity.CENTER, 0, 0);
+					toast.show();  
+				}
+
+			})
+			.setNegativeButton("No", null)
+			.show();	
+		}		
 	}
 
 	@Override

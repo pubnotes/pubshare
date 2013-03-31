@@ -27,14 +27,14 @@ import br.ufrn.dimap.pubshare.domain.Article;
  * @author luksrn
  * 
  * @see http://developer.android.com/guide/components/services.html
- * @see http://stackoverflow.com/questions/3028306/download-a-file-with-android-and-showing-the-progress-in-a-progressdialog
- * @see http://developer.android.com/training/notify-user/display-progress.html
+ * @see http://developer.android.com/guide/topics/ui/notifiers/notifications.html Displaying a fixed-duration progress indicator 
+ * @see http://stackoverflow.com/questions/3028306/download-a-file-with-android-and-showing-the-progress-in-a-progressdialog  
  * @see http://stackoverflow.com/questions/10508498/is-this-a-stock-android-notification-remoteview-layout to keep compatible with android < 3
  * 
  */
 public class DownloaderService  extends IntentService {
 	
-	private static final String TAG = "br.ufrn.dimap.pubshare.service.DownloaderService";
+	private static final String TAG = DownloaderService.class.getSimpleName();
 	
 	private static final int DOWNLOADER_SERVICE_NOTIFICATION_ID = 1;
  
@@ -85,8 +85,7 @@ public class DownloaderService  extends IntentService {
 				output.write(data, 0, count);
 				// publishing the progress....
 				int progress = (int) (total * 100 / fileLength);				
-				notificationBuilder.setProgress(100, progress, false);
-				notificationBuilder.setContentText("Downloading article from IEEE... " + progress + "%");
+				notificationBuilder.setProgress(100, progress, false); 
 				
 				nManager.notify(DOWNLOADER_SERVICE_NOTIFICATION_ID, notificationBuilder.build() );			 
 			}
