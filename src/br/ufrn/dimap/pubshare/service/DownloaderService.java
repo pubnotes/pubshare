@@ -8,16 +8,22 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.List;
 
 import android.app.IntentService;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.os.Environment;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.widget.Toast;
+import br.ufrn.dimap.pubshare.activity.ArticlesDownloadedActivity;
 import br.ufrn.dimap.pubshare.activity.R;
 import br.ufrn.dimap.pubshare.domain.Article;
 
@@ -63,7 +69,7 @@ public class DownloaderService  extends IntentService {
 
 		Article selectedArticle = (Article) intent.getSerializableExtra( Article.KEY_INSTANCE );
 		
-		NotificationCompat.Builder notificationBuilder = notificationBuilder("Research on the Virtual Reality Simulation Engine", "Downloading...." , R.drawable.ic_menu_download);
+		NotificationCompat.Builder notificationBuilder = notificationBuilder( selectedArticle.getTitle() , "Downloading...." , R.drawable.ic_menu_download);
 		
 		try {
 			URL url = new URL( selectedArticle.getRemoteLocation() );
@@ -74,7 +80,8 @@ public class DownloaderService  extends IntentService {
 
 			// download the file
 			InputStream input = new BufferedInputStream(url.openStream());
-			OutputStream output = new FileOutputStream( getExternalStorePath() + selectedArticle.generateFileName() );
+			String outputFile =  getExternalStorePath() + selectedArticle.generateFileName() ;
+			OutputStream output = new FileOutputStream(outputFile);
 
 			byte data[] = new byte[ 1024 * 8 ];
 			long total = 0;
@@ -92,18 +99,39 @@ public class DownloaderService  extends IntentService {
 			
 			Log.i(getClass().getName(), "File write at " + getExternalStorePath() );
 
+			output.flush();
+			output.close();
+			input.close();
+
 			  // When the loop is finished, updates the notification
 			notificationBuilder.setContentText("Download complete!")
                     .setProgress(0,0,false)  // Removes the progress bar
                     .setContentText("Article '" +  selectedArticle.getTitle() + "' download from IEEE. Click to view")                    
 		        .setWhen( System.currentTimeMillis() );
+			
+			
+			// Creates an explicit intent for an Activity in your app
+			// A status bar notification should be used for any case in which a background service needs to alert 
+			//the user about an event that requires a response. A background service should never launch an activity 
+			//on its own in order to receive user interaction. The service should instead create a status bar notification 
+			//that will launch the activity when selected by the user.
+			Intent resultIntent = new Intent(Intent.ACTION_VIEW);
+			resultIntent.setType("application/pdf");
+			
+			List<ResolveInfo> resolvers = getPackageManager().queryIntentActivities(resultIntent, PackageManager.MATCH_DEFAULT_ONLY);
+			if ( !resolvers.isEmpty() ){
+				File fileInDisk = new File(outputFile);
+	            intent.setData( Uri.fromFile(fileInDisk) );
+	            
+	            PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, resultIntent, 0 ); //
+	            notificationBuilder.setContentIntent(pendingIntent);
+			}
+			
+		 
 			// publish
+	
 			nManager.notify( DOWNLOADER_SERVICE_NOTIFICATION_ID , notificationBuilder.build());
 
-            
-			output.flush();
-			output.close();
-			input.close();
 		} catch (IOException e) {
 			Log.e( TAG , "Error: " + e.getMessage() );
 			notificationBuilder = notificationBuilder("An error occurred while writing the file.",

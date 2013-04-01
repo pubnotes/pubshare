@@ -5,6 +5,11 @@ import java.util.List;
 
 import br.ufrn.dimap.pubshare.domain.Article;
 
+/**
+ * 
+ * @author Lucas Farias de Oliveira <i>luksrn@gmail.com</i>
+ *
+ */
 public class ArticleMockFactory {
 	
 	public static String [] articlesTittles = {
