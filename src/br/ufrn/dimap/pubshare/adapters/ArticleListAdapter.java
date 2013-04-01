@@ -15,7 +15,8 @@ import br.ufrn.dimap.pubshare.domain.Article;
 /**
  * ListAdapter that manages a ListView backed by an array of Articles found in previous consult.
  * 
- * @author luksrn@gmail.com
+ * @author Lucas Farias de Oliveira <i>luksrn@gmail.com</i>
+ * 
  * @see ArticleListActivity
  */
 public class ArticleListAdapter extends ArrayAdapter<Article>{

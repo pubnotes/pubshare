@@ -5,7 +5,12 @@ import java.util.List;
 
 import br.ufrn.dimap.pubshare.domain.Article;
 
-public class ArticleListMockFactory {
+/**
+ * 
+ * @author Lucas Farias de Oliveira <i>luksrn@gmail.com</i>
+ *
+ */
+public class ArticleMockFactory {
 	
 	public static String [] articlesTittles = {
 		"Electromagnetic pulse protection requirments and test methods for systems",
@@ -22,10 +27,16 @@ public class ArticleListMockFactory {
 		"A novel approach of automation testing on mobile devices"
 	};
 	
-	public static List<Article> makeArticleList(){
+	
+	public static List<Article> makeArticleList( int amount ){
+		
+		if ( amount > articlesTittles.length ){
+			throw new IllegalArgumentException();
+		}
+		
 		List<Article> articles = new ArrayList<Article>();
 		
-		for( int i = 0; i < articlesTittles.length ; i++ ){
+		for( int i = 0; i < amount ; i++ ){
 			Article article = new Article();
 			article.setTitle( articlesTittles[i] );
 			
@@ -33,6 +44,17 @@ public class ArticleListMockFactory {
 		}
 		
 		return articles;
+	}	
+	
+	
+	public static List<Article> makeArticleList(){
+		return makeArticleList( articlesTittles.length  );		 
+	}	
+	
+	public static Article singleArticle(){
+		Article article = new Article();
+		article.setTitle("GTMV: Virtual Museum Authoring Systems");
+		article.setRemoteLocation("http://www.natalnet.br/~luksrn/05068879.pdf");
+		return article;
 	}
-
 }
