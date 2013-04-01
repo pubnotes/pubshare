@@ -1,7 +1,11 @@
 package br.ufrn.dimap.pubshare.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
+import br.ufrn.dimap.pubshare.evaluation.domain.Evaluation;
+
+ 
 /**
  *
  * @author Lucas Farias de Oliveira <i>luksrn@gmail.com</i>
@@ -17,6 +21,11 @@ public class Article implements Serializable {
 	private String title;
 
 	private String remoteLocation;
+	
+	/**
+	 * The evaluations made for the article
+	 */
+	private List<Evaluation> evaluations;
 	
 	public String getTitle() {
 		return title;
@@ -38,8 +47,15 @@ public class Article implements Serializable {
 		return "IEEE_-_ARTICLENAME" +  System.currentTimeMillis() + ".pdf";
 	}
 
-	 
 
-	// More fields
+	public List<Evaluation> getEvaluations() 
+	{
+		return evaluations;
+	}
+
+	public void setEvaluations(List<Evaluation> evaluations) 
+	{
+		this.evaluations = evaluations;
+	}
 	
 }

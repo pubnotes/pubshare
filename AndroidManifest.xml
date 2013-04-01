@@ -16,8 +16,9 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
-        
+        android:theme="@style/AppTheme" 
+        android:debuggable="true">
+
         <activity
             android:name="br.ufrn.dimap.pubshare.activity.PubshareActivity"
             android:label="@string/app_name" >
@@ -37,10 +38,17 @@
             android:name="br.ufrn.dimap.pubshare.activity.ArticlesDownloadedActivity"
             android:label="@string/title_activity_articles_downloaded" >
         </activity>
+
+        <activity
+            android:name="br.ufrn.dimap.pubshare.evaluation.activity.ArticleEvaluationListActivity"
+            android:label="@string/title_activity_evaluation_article_list">
+        </activity>
         
-        <service android:name="br.ufrn.dimap.pubshare.service.DownloaderService">
+           
+        <service android:name="br.ufrn.dimap.pubshare.service.DownloaderService" />
             
-        </service>
+   
+
     </application>
 
 </manifest>
