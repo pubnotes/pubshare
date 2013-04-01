@@ -57,6 +57,8 @@ public class ArticleListActivity extends Activity {
 	    MenuInflater inflater = getMenuInflater();
 	    inflater.inflate(R.menu.menu_long_press_article_list, menu);
 
+	    MenuItem menuItem = (MenuItem)menu.findItem(R.id.contextual_menu_delete);
+	    menuItem.setVisible(false);
 	}
 	
 	@Override
