@@ -1,4 +1,4 @@
-package br.ufrn.dimap.pubshare.mocks;
+package br.ufrn.dimap.pubshare.download.mocks;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -6,6 +6,7 @@ import java.util.List;
 
 import br.ufrn.dimap.pubshare.domain.Article;
 import br.ufrn.dimap.pubshare.domain.ArticleDownloaded;
+import br.ufrn.dimap.pubshare.mocks.ArticleMockFactory;
 
 /**
  * 

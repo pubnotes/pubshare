@@ -2,19 +2,14 @@ package br.ufrn.dimap.pubshare.evaluation.activity;
 
 import java.util.List;
 
-import br.ufrn.dimap.pubshare.activity.ArticlesDownloadedActivity;
+import android.app.Activity;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.ListView;
 import br.ufrn.dimap.pubshare.activity.R;
-import br.ufrn.dimap.pubshare.adapters.ArticleListAdapter;
 import br.ufrn.dimap.pubshare.evaluation.adapters.EvaluationListAdapter;
 import br.ufrn.dimap.pubshare.evaluation.domain.Evaluation;
 import br.ufrn.dimap.pubshare.evaluation.mocks.EvaluationListMockFactory;
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.ListView;
 
 /**
  * Class responsible for showing the evaluations made for a specific article
