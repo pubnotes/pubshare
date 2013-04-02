@@ -2,19 +2,22 @@
 <resources>
 
     <string name="app_name">PubShare</string>
-
     <string name="title_activity_article_list">Search Results</string>
     <string name="title_activity_articles_downloaded">My Downloads</string>
     <string name="title_activity_evaluation_article_list">Evaluations</string>
-     
     <string name="menu_search">Search</string>
     <string name="menu_my_downloads">Downloads</string>
-
     <string name="action_settings">Settings</string>
-    
     <string name="contextual_menu_share">Share</string>
     <string name="contextual_menu_delete">Delete</string>
     <string name="contextual_menu_download">Get this article</string>
     <string name="contextual_menu_view">View details</string>
-
+    <string name="title_activity_article_evaluation">ArticleEvaluationActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="article_evaluation">Article Evaluation</string>
+    <string name="innovation">Innovation</string>
+    <string name="write">Write</string>
+    <string name="relevance">Relevance</string>
+    <string name="comments">Comments</string>
+    <string name="save">Save</string>
 </resources>
