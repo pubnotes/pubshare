@@ -1,4 +1,4 @@
-package br.ufrn.dimap.pubshare.evaluation.domain;
+package br.ufrn.dimap.pubshare.domain;
 
 public enum OverallRecommendation 
 {

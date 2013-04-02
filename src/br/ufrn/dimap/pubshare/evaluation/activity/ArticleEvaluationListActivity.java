@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
 import br.ufrn.dimap.pubshare.activity.R;
+import br.ufrn.dimap.pubshare.domain.Evaluation;
 import br.ufrn.dimap.pubshare.evaluation.adapters.EvaluationListAdapter;
-import br.ufrn.dimap.pubshare.evaluation.domain.Evaluation;
 import br.ufrn.dimap.pubshare.evaluation.mocks.EvaluationListMockFactory;
 
 /**
