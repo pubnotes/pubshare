@@ -3,7 +3,6 @@ package br.ufrn.dimap.pubshare.domain;
 import java.io.Serializable;
 import java.util.List;
 
-import br.ufrn.dimap.pubshare.evaluation.domain.Evaluation;
 
  
 /**

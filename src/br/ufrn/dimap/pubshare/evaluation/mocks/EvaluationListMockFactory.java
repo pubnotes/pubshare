@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import br.ufrn.dimap.pubshare.evaluation.domain.Evaluation;
-import br.ufrn.dimap.pubshare.evaluation.domain.OverallRecommendation;
+import br.ufrn.dimap.pubshare.domain.Evaluation;
+import br.ufrn.dimap.pubshare.domain.OverallRecommendation;
 
 public class EvaluationListMockFactory 
 {

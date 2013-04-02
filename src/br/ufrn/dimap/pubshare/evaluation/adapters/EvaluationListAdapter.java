@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import br.ufrn.dimap.pubshare.evaluation.domain.Evaluation;
+import br.ufrn.dimap.pubshare.domain.Evaluation;
 
 public class EvaluationListAdapter extends ArrayAdapter<Evaluation> 
 {
