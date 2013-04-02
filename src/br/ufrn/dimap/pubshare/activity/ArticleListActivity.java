@@ -15,8 +15,10 @@ import android.view.View;
 import android.widget.ListView;
 import br.ufrn.dimap.pubshare.adapters.ArticleListAdapter;
 import br.ufrn.dimap.pubshare.domain.Article;
+import br.ufrn.dimap.pubshare.download.activity.ArticlesDownloadedActivity;
+import br.ufrn.dimap.pubshare.download.service.DownloaderService;
 import br.ufrn.dimap.pubshare.mocks.ArticleMockFactory;
-import br.ufrn.dimap.pubshare.service.DownloaderService;
+ 
 
 /**
  * Responsible for managing the activity of displaying articles available.

@@ -1,4 +1,4 @@
-package br.ufrn.dimap.pubshare.service;
+package br.ufrn.dimap.pubshare.download.service;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -23,7 +23,6 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.widget.Toast;
-import br.ufrn.dimap.pubshare.activity.ArticlesDownloadedActivity;
 import br.ufrn.dimap.pubshare.activity.R;
 import br.ufrn.dimap.pubshare.domain.Article;
 

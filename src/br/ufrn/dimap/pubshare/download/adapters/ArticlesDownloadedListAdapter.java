@@ -1,4 +1,4 @@
-package br.ufrn.dimap.pubshare.adapters;
+package br.ufrn.dimap.pubshare.download.adapters;
 
 import java.util.List;
 
@@ -8,9 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import br.ufrn.dimap.pubshare.activity.ArticlesDownloadedActivity;
 import br.ufrn.dimap.pubshare.activity.R;
 import br.ufrn.dimap.pubshare.domain.ArticleDownloaded;
+import br.ufrn.dimap.pubshare.download.activity.ArticlesDownloadedActivity;
 import br.ufrn.dimap.pubshare.util.DateFormat;
 
 /**

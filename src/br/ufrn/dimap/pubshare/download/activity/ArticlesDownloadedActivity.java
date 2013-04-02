@@ -1,4 +1,4 @@
-package br.ufrn.dimap.pubshare.activity;
+package br.ufrn.dimap.pubshare.download.activity;
 
 import java.util.List;
 
@@ -21,9 +21,11 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-import br.ufrn.dimap.pubshare.adapters.ArticlesDownloadedListAdapter;
+import br.ufrn.dimap.pubshare.activity.ArticleListActivity;
+import br.ufrn.dimap.pubshare.activity.R;
 import br.ufrn.dimap.pubshare.domain.ArticleDownloaded;
-import br.ufrn.dimap.pubshare.mocks.ArticlesDownloadedMockFactory;
+import br.ufrn.dimap.pubshare.download.adapters.ArticlesDownloadedListAdapter;
+import br.ufrn.dimap.pubshare.download.mocks.ArticlesDownloadedMockFactory;
 
 /**
  * Activity that presents articles downloaded.
