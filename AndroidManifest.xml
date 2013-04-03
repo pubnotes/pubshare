@@ -5,11 +5,10 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="9"
         android:targetSdkVersion="13" />
 
-    <uses-permission android:name="android.permission.INTERNET" >
-    </uses-permission>
+    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -43,6 +42,19 @@
 
         <service android:name="br.ufrn.dimap.pubshare.download.service.DownloaderService" />
 
+        
+       <receiver android:name="br.ufrn.dimap.pubshare.download.receiver.ClickDownloadedReceiver" >
+        	<intent-filter>            	 
+     			<action android:name="android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED" />
+            </intent-filter>   
+        </receiver>
+       
+       <receiver android:name="br.ufrn.dimap.pubshare.download.receiver.DownloadCompleteReceiver" >
+	       	<intent-filter >
+	       	    <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+	       	</intent-filter>    
+       </receiver>
+       
         <activity
             android:name="br.ufrn.dimap.pubshare.activity.ArticleEvaluationActivity"
             android:label="@string/title_activity_article_evaluation" >
@@ -52,6 +64,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        
     </application>
 
 </manifest>
