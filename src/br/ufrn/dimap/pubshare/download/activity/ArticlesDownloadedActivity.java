@@ -114,7 +114,7 @@ public class ArticlesDownloadedActivity extends Activity {
 			new AlertDialog.Builder(this)
 			.setIcon(android.R.drawable.ic_dialog_alert)
 			.setTitle("Confirmation of deletion")
-			.setMessage("Do you really want to " + articleDownloaded.getArticle().getTitle() + "?")
+			.setMessage("Do you really want to " + articleDownloaded.getTitle() + "?")
 			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 
 				@Override
@@ -124,7 +124,7 @@ public class ArticlesDownloadedActivity extends Activity {
 					adapter.remove(articleDownloaded);
 					adapter.notifyDataSetChanged();
 					
-					Toast toast = Toast.makeText( getApplicationContext() , "Article '" + articleDownloaded.getArticle().getTitle() +"' was removed", Toast.LENGTH_LONG);
+					Toast toast = Toast.makeText( getApplicationContext() , "Article '" + articleDownloaded.getTitle() +"' was removed", Toast.LENGTH_LONG);
 					toast.setGravity( Gravity.BOTTOM| Gravity.CENTER, 0, 0);
 					toast.show();  
 				}

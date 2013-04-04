@@ -22,9 +22,11 @@ public class ArticlesDownloadedMockFactory {
 		List<ArticleDownloaded> downloads = new ArrayList<ArticleDownloaded>();
 		
 		for( Article article : articles ){
-			ArticleDownloaded articleDownloaded = new ArticleDownloaded(article, 
-					new Date() , 
-					"/sdcard/pubshare/downloads/file.pdf", true );
+			ArticleDownloaded articleDownloaded = new ArticleDownloaded();
+			articleDownloaded.setTitle( article.getTitle() );
+			articleDownloaded.setDownloadedAt( new Date() );
+			articleDownloaded.setPathSdCard( "/sdcard/pubshare/downloads/file.pdf");
+			articleDownloaded.setDigitalLibrary("IEEE");			
 			
 			downloads.add( articleDownloaded );
 		}

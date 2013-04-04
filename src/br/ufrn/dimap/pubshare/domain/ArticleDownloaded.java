@@ -9,11 +9,10 @@ import java.util.Date;
  *
  */
 public class ArticleDownloaded {
+		
+	private String title;
 	
-	/**
-	 * Article downloaded. 
-	 */
-	private Article article;
+	private String digitalLibrary;
 	
 	private Date downloadedAt;
 	
@@ -22,28 +21,29 @@ public class ArticleDownloaded {
 	 */
 	private String pathSdCard;
 	
-	/**
-	 * Indicates if the user removed the file on the SD card.
-	 */
-	private boolean fileExistsInPathSdCard;
+	private String mimeType;
 	
+	private long size;
 	
+	private long downloadKey;
+	
+	private String urlSource;
+	 
 
-	public ArticleDownloaded(Article article, Date downloadedAt,
-			String pathSdCard, boolean fileExistsInPathSdCard) {
-		super();
-		this.article = article;
-		this.downloadedAt = downloadedAt;
-		this.pathSdCard = pathSdCard;
-		this.fileExistsInPathSdCard = fileExistsInPathSdCard;
+	public String getTitle() {
+		return title;
 	}
 
-	public Article getArticle() {
-		return article;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public void setArticle(Article article) {
-		this.article = article;
+	public String getDigitalLibrary() {
+		return digitalLibrary;
+	}
+
+	public void setDigitalLibrary(String digitalLibrary) {
+		this.digitalLibrary = digitalLibrary;
 	}
 
 	public Date getDownloadedAt() {
@@ -61,13 +61,45 @@ public class ArticleDownloaded {
 	public void setPathSdCard(String pathSdCard) {
 		this.pathSdCard = pathSdCard;
 	}
-
-	public boolean isFileExistsInPathSdCard() {
-		return fileExistsInPathSdCard;
+ 
+	public long getSize() {
+		return size;
 	}
 
-	public void setFileExistsInPathSdCard(boolean fileExistsInPathSdCard) {
-		this.fileExistsInPathSdCard = fileExistsInPathSdCard;
+	public void setSize(long size) {
+		this.size = size;
 	}
-	
+
+	public String getMimeType() {
+		return mimeType;
+	}
+
+	public void setMimeType(String mimeType) {
+		this.mimeType = mimeType;
+	}
+
+	public long getDownloadKey() {
+		return downloadKey;
+	}
+
+	public void setDownloadKey(long downloadKey) {
+		this.downloadKey = downloadKey;
+	}
+
+	public String getUrlSource() {
+		return urlSource;
+	}
+
+	public void setUrlSource(String urlSource) {
+		this.urlSource = urlSource;
+	}
+
+	@Override
+	public String toString() {
+		return "ArticleDownloaded [title=" + title + ", digitalLibrary="
+				+ digitalLibrary + ", downloadedAt=" + downloadedAt
+				+ ", pathSdCard=" + pathSdCard + ", mimeType=" + mimeType
+				+ ", size=" + size + ", downloadKey=" + downloadKey
+				+ ", urlSource=" + urlSource + "]";
+	}
 }

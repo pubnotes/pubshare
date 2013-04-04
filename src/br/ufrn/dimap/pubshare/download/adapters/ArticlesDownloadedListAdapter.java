@@ -37,7 +37,7 @@ public class ArticlesDownloadedListAdapter extends ArrayAdapter<ArticleDownloade
 		ArticleDownloaded item = getItem(position);
 		if (item!= null) {
 			TextView titleText = (TextView) view.findViewById(R.id.titleText);
-			titleText.setText( item.getArticle().getTitle() );
+			titleText.setText( item.getTitle() );
 			
 			TextView dateDownload = (TextView) view.findViewById(R.id.dateTime);
 			dateDownload.setText( DateFormat.format( item.getDownloadedAt() ) );
