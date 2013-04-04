@@ -18,15 +18,19 @@
 package br.ufrn.dimap.pubshare.download.service;
 
 import android.app.DownloadManager;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.DownloadManager.Request;
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.widget.Toast;
+import br.ufrn.dimap.pubshare.activity.R;
 import br.ufrn.dimap.pubshare.domain.Article;
 import br.ufrn.dimap.pubshare.domain.ArticleDownloaded;
 import br.ufrn.dimap.pubshare.download.sqlite.DownloadDao;
@@ -54,20 +58,31 @@ public class DownloaderService  extends IntentService {
 	protected void onHandleIntent(Intent intent) {
 		Log.i( TAG , "onHandleIntent on DownloadService");
 		
+
+		Article selectedArticle = (Article) intent.getSerializableExtra( Article.KEY_INSTANCE );
+		
+		
 		if ( ! isExternalStorageAvailable () ){
 			// Generate Menssages
+		    NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
+		   			.setSmallIcon( R.drawable.ic_menu_notifications )
+					.setContentTitle( "External storage is unavailable")
+					.setContentText(  "Check media availability"); 
+			Notification notification = mBuilder.build();
+			// Set the Notification as ongoing
+			notification.flags = notification.flags | Notification.FLAG_AUTO_CANCEL ;
+			
+			NotificationManager nManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+			nManager.notify(0, notification);
 			return;
 		}
 		
 		DownloadManager dowloadManager = (DownloadManager) getSystemService( Context.DOWNLOAD_SERVICE ); // since API level 9
 		
-		Article selectedArticle = (Article) intent.getSerializableExtra( Article.KEY_INSTANCE );
-		
 		Request request = new Request( Uri.parse( selectedArticle.getRemoteLocation() ));
 		request.setAllowedNetworkTypes( Request.NETWORK_WIFI | Request.NETWORK_MOBILE );
 		request.setTitle( selectedArticle.getTitle() );
-		//request.setNotificationVisibility( Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED );
-		request.setDestinationInExternalFilesDir( this, Environment.DIRECTORY_DOWNLOADS	, selectedArticle.generateFileName() );
+		request.setDestinationInExternalPublicDir( Environment.DIRECTORY_DOWNLOADS	, selectedArticle.generateFileName() );
 		
 		long enqueue = dowloadManager.enqueue(request);
 		

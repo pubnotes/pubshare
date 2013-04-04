@@ -32,11 +32,10 @@ import br.ufrn.dimap.pubshare.domain.ArticleDownloaded;
 public class DownloadDao {
 
 	// Database fields
-	private SQLiteDatabase database;
-	private DownloadOpenHelper dbHelper;
+	private SQLiteDatabase database; 
 	  
 	public DownloadDao(Context ctx) {
-		dbHelper = new DownloadOpenHelper(ctx);
+		DownloadOpenHelper dbHelper = new DownloadOpenHelper(ctx);
 		database = dbHelper.getWritableDatabase();		
 	}
 	  
@@ -48,6 +47,10 @@ public class DownloadDao {
 		
 		database.insert( DownloadOpenHelper.DOWNLOAD_TABLE_NAME , null , values);
 	}		
+	
+	public void update( ArticleDownloaded download ){
+		
+	}
 	
 	public ArticleDownloaded getById( long downloadId ){
 		

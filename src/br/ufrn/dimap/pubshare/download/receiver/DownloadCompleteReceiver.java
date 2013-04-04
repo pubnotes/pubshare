@@ -29,12 +29,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import br.ufrn.dimap.pubshare.activity.R;
 import br.ufrn.dimap.pubshare.domain.ArticleDownloaded;
 import br.ufrn.dimap.pubshare.download.sqlite.DownloadDao;
 
-public class DownloadCompleteReceiver extends BroadcastReceiver{
+/**
+ * 
+ * @author Lucas Farias de Oliveira <i>luksrn@gmail.com</i>
+ *
+ */
+public class DownloadCompleteReceiver extends BroadcastReceiver {
 
 	private static final String TAG = DownloadCompleteReceiver.class.getSimpleName();
 	
@@ -75,7 +81,7 @@ public class DownloadCompleteReceiver extends BroadcastReceiver{
 			articleDownloaded.setUrlSource( cursor.getString( uriToBeDownloaded ) );
 			DownloadDao downloadDao = new DownloadDao(context);
 			
-			downloadDao.insert(articleDownloaded);
+			downloadDao.update(articleDownloaded);
 			
 			Log.i(TAG, "Article found and created for key " + downloadKey + " saved at " + articleDownloaded );
 			
@@ -86,13 +92,16 @@ public class DownloadCompleteReceiver extends BroadcastReceiver{
 			showArticle.setData( Uri.parse( articleDownloaded.getPathSdCard() ));
 			PendingIntent pi = PendingIntent.getActivity(context, 1, showArticle, 0);
 			// Set the Notification UI parameters
-			Notification notification = new Notification(R.drawable.ic_menu_download,
-						"Open " + articleDownloaded.getTitle() , System.currentTimeMillis());
-			notification.setLatestEventInfo(context, "Title", "Text", pi);
+			 
+			NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
+						.setSmallIcon( R.drawable.ic_menu_download )
+						.setContentTitle( "Download complete!" )
+						.setContentText(  articleDownloaded.getTitle() )
+						.setContentIntent(pi);  
+			Notification notification = mBuilder.build();
 			// Set the Notification as ongoing
-			notification.flags = notification.flags | Notification.FLAG_ONGOING_EVENT;
-			
-
+			notification.flags = notification.flags | Notification.FLAG_AUTO_CANCEL ;
+ 
 			NotificationManager nManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
 			nManager.notify(0, notification);
 
