@@ -11,4 +11,10 @@ public class DateFormat {
 		return sdf.format(format);
 	}
 
+	public static String formatForDatabase( Date format ){		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS", Locale.US);
+		return sdf.format(format);
+	}
+
+
 }

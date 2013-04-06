@@ -8,6 +8,11 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.util.Log;
 
+/**
+ * 
+ * @author Lucas Oliveira
+ *
+ */
 public class ClickDownloadedReceiver extends BroadcastReceiver {
 
 	private static final String TAG = ClickDownloadedReceiver.class.getSimpleName();
@@ -25,7 +30,7 @@ public class ClickDownloadedReceiver extends BroadcastReceiver {
 		DownloadManager dm = (DownloadManager) ctx.getSystemService(Context.DOWNLOAD_SERVICE);
 	
 		Query query = new Query();
-		query.setFilterById(downloadKey);
+		query.setFilterById( downloadKey );
 		query.setFilterByStatus( DownloadManager.STATUS_SUCCESSFUL );
 		
 		Cursor cursor = dm.query(query);
@@ -34,8 +39,6 @@ public class ClickDownloadedReceiver extends BroadcastReceiver {
 			Log.d(TAG, "Clicked download successful completed.");
 		}else{
 			Log.d(TAG, "clicking on a download that is not complete. Just let us have patience ...");
-		}
-				
+		}				
 	}
-
 }

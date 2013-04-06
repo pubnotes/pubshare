@@ -35,7 +35,7 @@ public class DownloaderService  extends IntentService {
 	*/
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		Log.i( TAG , "onHandleIntent on DownloadService");
+		Log.d( TAG , "onHandleIntent on DownloadService");
 		
 		if ( ! isExternalStorageAvailable () ){
 			// Generate Menssages
@@ -64,7 +64,7 @@ public class DownloaderService  extends IntentService {
 		DownloadDao downloadDao = new DownloadDao(this);
 		downloadDao.insert(articleDownloaded);
 		
-		Log.d( TAG, "Insert ArticleDownloaded in SqLite: OK");			
+		Log.d( TAG, "Insert " + articleDownloaded + " in SqLite: OK");			
 	}	
  
 	private boolean isExternalStorageAvailable(){

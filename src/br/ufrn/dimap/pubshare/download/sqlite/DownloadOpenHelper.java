@@ -24,11 +24,14 @@ public class DownloadOpenHelper extends SQLiteOpenHelper {
     
     public static final String URL_SOURCE = "url_source";
     
+    public static final String TITLE = "title"; 
+    
     private static final String DOWNLOAD_TABLE_CREATE =
 					                "CREATE TABLE " + DOWNLOAD_TABLE_NAME + " (" +
 					                 ID  + " integer primary key autoincrement," +
 					                 DOWNLOAD_KEY + " REAL," +
 					                 PATH + " TEXT, " +
+					                 TITLE + " TEXT, " +
 					                 MIMETYPE + " TEXT," + 
 					                 SIZE + " INTEGER," +
 					                 URL_SOURCE + " TEXT," +

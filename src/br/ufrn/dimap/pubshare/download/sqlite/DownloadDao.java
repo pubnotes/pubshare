@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import br.ufrn.dimap.pubshare.domain.ArticleDownloaded;
 
 /**
@@ -14,6 +15,8 @@ import br.ufrn.dimap.pubshare.domain.ArticleDownloaded;
  */
 public class DownloadDao {
 
+	private static final String TAG = DownloadDao.class.getSimpleName();
+	
 	// Database fields
 	private SQLiteDatabase database;
 	private DownloadOpenHelper dbHelper;
@@ -32,7 +35,23 @@ public class DownloadDao {
 		database.insert( DownloadOpenHelper.DOWNLOAD_TABLE_NAME , null , values);
 	}		
 	
+	public void update( ArticleDownloaded download ){
+		ContentValues values = new ContentValues();
+		values.put( DownloadOpenHelper.URL_SOURCE , download.getUrlSource() );
+		values.put( DownloadOpenHelper.SIZE , download.getSize() );
+		values.put( DownloadOpenHelper.DOWNLOADED_AT , "getdate()" );
+		values.put( DownloadOpenHelper.PATH , download.getPathSdCard() );
+		values.put( DownloadOpenHelper.TITLE , download.getTitle() );
+		 
+		database.update( DownloadOpenHelper.DOWNLOAD_TABLE_NAME ,
+				values, 
+				DownloadOpenHelper.ID + " = ?",
+				new String [] { Long.toString(download.getDownloadKey()) });
+	}
+	
 	public ArticleDownloaded getById( long downloadId ){
+		
+		Log.d(TAG, "getById( " + downloadId + ")");
 		
 		Cursor cursor = database.query( DownloadOpenHelper.DOWNLOAD_TABLE_NAME ,
 				new String[] {
@@ -41,10 +60,11 @@ public class DownloadDao {
 		} , DownloadOpenHelper.DOWNLOAD_KEY + " = " + downloadId ,
 			null, null, null, null);
 		
-		cursor.moveToFirst();
-		
-		ArticleDownloaded articleDownloaded =  getArticleDownloaded(cursor);
-		
+		ArticleDownloaded articleDownloaded = null;
+		if ( cursor.moveToFirst() ){
+			articleDownloaded =  getArticleDownloaded(cursor);			
+		}
+				
 		cursor.close();
 		
 		return articleDownloaded; 		
