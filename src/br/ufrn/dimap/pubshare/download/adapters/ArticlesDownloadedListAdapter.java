@@ -57,7 +57,7 @@ public class ArticlesDownloadedListAdapter extends ArrayAdapter<ArticleDownloade
 			titleText.setText( item.getTitle() );
 			
 			TextView dateDownload = (TextView) view.findViewById(R.id.dateTime);
-			dateDownload.setText( DateFormat.format( item.getDownloadedAt() ) );
+			dateDownload.setText( DateFormat.iso8601Format( item.getDownloadedAt() ) );
 		}
 
 		return view;

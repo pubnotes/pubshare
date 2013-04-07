@@ -26,6 +26,8 @@ import java.util.Date;
  *
  */
 public class ArticleDownloaded {
+	
+	private int _id;
 		
 	private String title;
 	
@@ -46,6 +48,14 @@ public class ArticleDownloaded {
 	
 	private String urlSource;
 	 
+
+	public int getId() {
+		return _id;
+	}
+
+	public void setId(int _id) {
+		this._id = _id;
+	}
 
 	public String getTitle() {
 		return title;

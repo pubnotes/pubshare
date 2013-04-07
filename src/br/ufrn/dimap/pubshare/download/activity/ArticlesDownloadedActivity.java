@@ -43,6 +43,7 @@ import br.ufrn.dimap.pubshare.activity.R;
 import br.ufrn.dimap.pubshare.domain.ArticleDownloaded;
 import br.ufrn.dimap.pubshare.download.adapters.ArticlesDownloadedListAdapter;
 import br.ufrn.dimap.pubshare.download.mocks.ArticlesDownloadedMockFactory;
+import br.ufrn.dimap.pubshare.download.sqlite.DownloadDao;
 
 /**
  * Activity that presents articles downloaded.
@@ -63,7 +64,9 @@ public class ArticlesDownloadedActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_articles_downloaded);		
 		configureActionBar();	
-		List<ArticleDownloaded> downloads = ArticlesDownloadedMockFactory.makeArticleDownloadedList();
+		DownloadDao dao = new DownloadDao(this);
+		List<ArticleDownloaded> downloads = dao.findAll();
+		//List<ArticleDownloaded> downloads = ArticlesDownloadedMockFactory.makeArticleDownloadedList();
 		configureListView(downloads);	
 	}
 	
