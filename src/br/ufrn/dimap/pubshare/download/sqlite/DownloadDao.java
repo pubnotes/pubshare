@@ -1,3 +1,20 @@
+/**
+ *    This file is part of PubShare.
+ *
+ *    PubShare is free software: you can redistribute it and/or modify
+ *    it under the terms of the GNU General Public License as published by
+ *    the Free Software Foundation, either version 3 of the License, or
+ *    (at your option) any later version.
+ *
+ *    Foobar is distributed in the hope that it will be useful,
+ *    but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *    GNU General Public License for more details.
+ *
+ *    You should have received a copy of the GNU General Public License
+ *    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package br.ufrn.dimap.pubshare.download.sqlite;
 
 import java.util.ArrayList;
@@ -23,11 +40,10 @@ public class DownloadDao {
 	private static final String TAG = DownloadDao.class.getSimpleName();
 	
 	// Database fields
-	private SQLiteDatabase database;
-	private DownloadOpenHelper dbHelper;
+	private SQLiteDatabase database; 
 	  
 	public DownloadDao(Context ctx) {
-		dbHelper = new DownloadOpenHelper(ctx);
+		DownloadOpenHelper dbHelper = new DownloadOpenHelper(ctx);
 		database = dbHelper.getWritableDatabase();		
 	}
 	  
