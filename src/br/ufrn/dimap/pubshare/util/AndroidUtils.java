@@ -15,28 +15,20 @@
  *    along with PubShare.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package br.ufrn.dimap.pubshare.activity;
+package br.ufrn.dimap.pubshare.util;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
+import android.os.Environment;
 
-/**
- * Entry point of application. It can be used to perform some processing, 
- * redirecting to some activity by some logic.
- *
- * @author Lucas Farias de Oliveira <i>luksrn@gmail.com</i>
- */
-public class PubshareActivity extends Activity {
+public class AndroidUtils {
+	
+	public static boolean isExternalStorageAvailable(){
+		String state = Environment.getExternalStorageState();
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		
-		//When you develop, change this line to start your activity. (Dev Only)
-		Intent i = new Intent(this, ArticleListActivity.class);        	        
-				    
-		startActivity(i);
-		finish();
+		if (Environment.MEDIA_MOUNTED.equals(state)) {
+		    // We can read and write the media
+			return true;
+		}
+		return false;
 	}
+
 }
