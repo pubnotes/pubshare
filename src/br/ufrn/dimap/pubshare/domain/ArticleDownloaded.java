@@ -17,6 +17,7 @@
 
 package br.ufrn.dimap.pubshare.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -25,8 +26,10 @@ import java.util.Date;
  * @author Lucas Farias de Oliveira <i>luksrn@gmail.com</i>
  *
  */
-public class ArticleDownloaded {
-	
+public class ArticleDownloaded implements Serializable {
+ 
+	private static final long serialVersionUID = 6112191778772834685L;
+
 	private int _id;
 		
 	private String title;

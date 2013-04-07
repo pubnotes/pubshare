@@ -24,6 +24,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,7 +35,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -42,7 +45,6 @@ import br.ufrn.dimap.pubshare.activity.ArticleListActivity;
 import br.ufrn.dimap.pubshare.activity.R;
 import br.ufrn.dimap.pubshare.domain.ArticleDownloaded;
 import br.ufrn.dimap.pubshare.download.adapters.ArticlesDownloadedListAdapter;
-import br.ufrn.dimap.pubshare.download.mocks.ArticlesDownloadedMockFactory;
 import br.ufrn.dimap.pubshare.download.sqlite.DownloadDao;
 
 /**
@@ -65,8 +67,7 @@ public class ArticlesDownloadedActivity extends Activity {
 		setContentView(R.layout.activity_articles_downloaded);		
 		configureActionBar();	
 		DownloadDao dao = new DownloadDao(this);
-		List<ArticleDownloaded> downloads = dao.findAll();
-		//List<ArticleDownloaded> downloads = ArticlesDownloadedMockFactory.makeArticleDownloadedList();
+		List<ArticleDownloaded> downloads = dao.findAll(); 
 		configureListView(downloads);	
 	}
 	
@@ -86,10 +87,22 @@ public class ArticlesDownloadedActivity extends Activity {
 			Log.d(this.getClass().getSimpleName(), "Cant find R.layout.row_listview_article_list");
 		}
 		downloadsListView.setAdapter( adapter );
+		downloadsListView.setOnItemClickListener( new OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ArticleDownloaded articleDownloaded = (ArticleDownloaded) parent.getItemAtPosition(position);
+                Intent showArticle = new Intent( Intent.ACTION_VIEW );
+        		showArticle.setType( "application/pdf" );
+        		showArticle.setData( Uri.parse( articleDownloaded.getPathSdCard() ));
+        		startActivity( showArticle );
+            }
+            
+        });
 		registerForContextMenu( downloadsListView );
 	}
-
-
+ 
+	
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {	
 		super.onCreateContextMenu(menu, v, menuInfo);
@@ -132,10 +145,10 @@ public class ArticlesDownloadedActivity extends Activity {
 			
 			  //Ask the user if they want really remove the article
 			new AlertDialog.Builder(this)
-			.setIcon(android.R.drawable.ic_dialog_alert)
-			.setTitle("Confirmation of deletion")
-			.setMessage("Do you really want to " + articleDownloaded.getTitle() + "?")
-			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+					.setIcon(android.R.drawable.ic_dialog_alert)
+					.setTitle("Confirmation of deletion")
+					.setMessage("Do you really want to " + articleDownloaded.getTitle() + "?")
+					.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
