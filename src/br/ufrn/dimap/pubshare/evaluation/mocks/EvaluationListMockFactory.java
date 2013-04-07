@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import br.ufrn.dimap.pubshare.domain.Evaluation;
-import br.ufrn.dimap.pubshare.domain.OverallRecommendation;
 
 public class EvaluationListMockFactory 
 {
@@ -74,23 +73,6 @@ public class EvaluationListMockFactory
 			2.0f,
 			1.0f
 			};
-	private static boolean[] awardCandidate = new boolean[] 
-			{
-			true,
-			true,
-			false,
-			false,
-			false
-			};
-	private static OverallRecommendation[] overall = new OverallRecommendation[] 
-			{
-			OverallRecommendation.DEFINITELY_ACCEPT,
-			OverallRecommendation.PROBABLY_ACCEPT,
-			OverallRecommendation.PROBABLY_ACCEPT,
-			OverallRecommendation.PROBABLY_REJECT,
-			OverallRecommendation.DEFINITELY_REJECT
-			};	
-	
 	public static List<Evaluation> makeEvaluationList()
 	{
 		List<Evaluation> evaluations = new ArrayList<Evaluation>();
@@ -105,9 +87,7 @@ public class EvaluationListMockFactory
 			eval.setRelevance(relevance[i]);
 			eval.setReadability(readability[i]);
 			eval.setRelatedWorks(relatedWorks[i]);
-			eval.setFamiliarity(familiarity[i]);
-			eval.setAwardCandidate(awardCandidate[i]);
-			eval.setRecommendation(overall[i]);
+			eval.setReviewerFamiliarity(familiarity[i]);
 			eval.setEvalDate(new Date());
 			evaluations.add(eval);
 		}

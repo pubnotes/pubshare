@@ -14,9 +14,7 @@ public class Evaluation
 	public static final String KEY_INSTANCE = "br.ufrn.dimap.pubshare.evaluation.domain.Evaluation?List";
 	
 	private String reviewerNotes, reviewerName;
-	private float originality, contribution, relevance, readability, relatedWorks, familiarity;
-	private boolean awardCandidate;
-	private OverallRecommendation recommendation;
+	private float originality, contribution, relevance, readability, relatedWorks, reviewerFamiliarity;
 	private Date evalDate;
 	
 	public String getReviewerName() 
@@ -75,29 +73,13 @@ public class Evaluation
 	{
 		this.relatedWorks = relatedWorks;
 	}
-	public float getFamiliarity() 
+	public float getReviewerFamiliarity() 
 	{
-		return familiarity;
+		return reviewerFamiliarity;
 	}
-	public void setFamiliarity(float familiarity) 
+	public void setReviewerFamiliarity(float familiarity) 
 	{
-		this.familiarity = familiarity;
-	}
-	public boolean isAwardCandidate() 
-	{
-		return awardCandidate;
-	}
-	public void setAwardCandidate(boolean awardCandidate) 
-	{
-		this.awardCandidate = awardCandidate;
-	}
-	public OverallRecommendation getRecommendation() 
-	{
-		return recommendation;
-	}
-	public void setRecommendation(OverallRecommendation recommendation) 
-	{
-		this.recommendation = recommendation;
+		this.reviewerFamiliarity = familiarity;
 	}
 	public Date getEvalDate() 
 	{
@@ -110,6 +92,6 @@ public class Evaluation
 	
 	public float getOverall()
 	{
-		return (originality+contribution+relevance+readability+relatedWorks+familiarity)/6.0f;
+		return (originality+contribution+relevance+readability+relatedWorks+reviewerFamiliarity)/6.0f;
 	}
 }
