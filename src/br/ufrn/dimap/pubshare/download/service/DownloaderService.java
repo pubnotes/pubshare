@@ -66,8 +66,8 @@ public class DownloaderService  extends IntentService {
 			// Generate Menssages
 		    NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
 		   			.setSmallIcon( R.drawable.ic_menu_notifications )
-					.setContentTitle( "External storage is unavailable")
-					.setContentText(  "Check media availability"); 
+					.setContentTitle( getResources().getString(R.string.external_storage_unavailable) )
+					.setContentText( getResources().getString( R.string.check_media_availability )); 
 			Notification notification = mBuilder.build();
 			// Set the Notification as ongoing
 			notification.flags = notification.flags | Notification.FLAG_AUTO_CANCEL ;
@@ -83,15 +83,14 @@ public class DownloaderService  extends IntentService {
 		request.setAllowedNetworkTypes( Request.NETWORK_WIFI | Request.NETWORK_MOBILE );
 		request.setTitle( selectedArticle.getTitle() );
 		request.setDestinationInExternalPublicDir( Environment.DIRECTORY_DOWNLOADS	, selectedArticle.generateFileName() );
+		request.setVisibleInDownloadsUi(true);
 		
-		long enqueue = dowloadManager.enqueue(request);
-		
+		long enqueue = dowloadManager.enqueue(request);		
 		
 		Log.d( TAG, "Download enqueue..." + enqueue );
 		
 		ArticleDownloaded articleDownloaded = new ArticleDownloaded();		
 		articleDownloaded.setDownloadKey( enqueue );
-		articleDownloaded.setPathSdCard( getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS) + selectedArticle.generateFileName() );
 		
 		DownloadDao downloadDao = new DownloadDao(this);
 		downloadDao.insert(articleDownloaded);

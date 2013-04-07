@@ -109,7 +109,7 @@ public class DownloadCompleteReceiver extends BroadcastReceiver{
 		// Set the Notification UI parameters
 		Notification notification = new Notification(R.drawable.ic_menu_download,
 					"Open " + articleDownloaded.getTitle() , System.currentTimeMillis());
-		notification.setLatestEventInfo(context, articleDownloaded.getTitle() , "Download complete! Click to view the article", pi);
+		notification.setLatestEventInfo(context, articleDownloaded.getTitle() , context.getResources().getString( R.string.download_complete ) , pi);
 		// Set the Notification as ongoing
 		notification.flags = notification.flags | Notification.FLAG_AUTO_CANCEL;
 		

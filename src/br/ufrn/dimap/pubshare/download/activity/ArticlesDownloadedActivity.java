@@ -84,7 +84,7 @@ public class ArticlesDownloadedActivity extends Activity {
 		adapter = new ArticlesDownloadedListAdapter(this, R.layout.row_listview_article_downloaded_list , downloads);
 		downloadsListView = (ListView) findViewById(R.id.list_view_articles_downloaded);
 		if ( downloadsListView == null ){
-			Log.d(this.getClass().getSimpleName(), "Cant find R.layout.row_listview_article_list");
+			Log.d( TAG , "Cant find R.layout.row_listview_article_list");
 		}
 		downloadsListView.setAdapter( adapter );
 		downloadsListView.setOnItemClickListener( new OnItemClickListener() {
@@ -145,10 +145,10 @@ public class ArticlesDownloadedActivity extends Activity {
 			
 			  //Ask the user if they want really remove the article
 			new AlertDialog.Builder(this)
-					.setIcon(android.R.drawable.ic_dialog_alert)
-					.setTitle("Confirmation of deletion")
-					.setMessage("Do you really want to " + articleDownloaded.getTitle() + "?")
-					.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+					.setIcon( android.R.drawable.ic_dialog_alert )
+					.setTitle( R.string.confirmation_of_deletion )
+					.setMessage( getResources().getString(R.string.do_you_really_want_to,articleDownloaded.getTitle() ) )
+					.setPositiveButton( R.string.yes , new DialogInterface.OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -157,13 +157,15 @@ public class ArticlesDownloadedActivity extends Activity {
 					adapter.remove(articleDownloaded);
 					adapter.notifyDataSetChanged();
 					
-					Toast toast = Toast.makeText( getApplicationContext() , "Article '" + articleDownloaded.getTitle() +"' was removed", Toast.LENGTH_LONG);
-					toast.setGravity( Gravity.BOTTOM| Gravity.CENTER, 0, 0);
+					Toast toast = Toast.makeText( getApplicationContext() , 
+							getResources().getString(R.string.article_removed, articleDownloaded.getTitle() )
+							, Toast.LENGTH_LONG);
+					toast.setGravity( Gravity.BOTTOM | Gravity.CENTER, 0, 0);
 					toast.show();  
 				}
 
 			})
-			.setNegativeButton("No", null)
+			.setNegativeButton( R.string.no , null)
 			.show();	
 		}		
 	}
