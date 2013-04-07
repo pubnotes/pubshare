@@ -17,6 +17,7 @@
 
 package br.ufrn.dimap.pubshare.download.activity;
 
+import java.io.File;
 import java.util.List;
 
 import android.app.ActionBar;
@@ -46,6 +47,7 @@ import br.ufrn.dimap.pubshare.activity.R;
 import br.ufrn.dimap.pubshare.domain.ArticleDownloaded;
 import br.ufrn.dimap.pubshare.download.adapters.ArticlesDownloadedListAdapter;
 import br.ufrn.dimap.pubshare.download.sqlite.DownloadDao;
+import br.ufrn.dimap.pubshare.util.AndroidUtils;
 
 /**
  * Activity that presents articles downloaded.
@@ -61,12 +63,14 @@ public class ArticlesDownloadedActivity extends Activity {
 	
 	private ListView downloadsListView;
 	
+	private DownloadDao dao;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_articles_downloaded);		
 		configureActionBar();	
-		DownloadDao dao = new DownloadDao(this);
+		dao = new DownloadDao(this);
 		List<ArticleDownloaded> downloads = dao.findAll(); 
 		configureListView(downloads);	
 	}
@@ -152,7 +156,21 @@ public class ArticlesDownloadedActivity extends Activity {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-
+					
+					if ( ! AndroidUtils.isExternalStorageAvailable() ){
+						Toast toast = Toast.makeText( getApplicationContext() , 
+								getResources().getString(R.string.cant_remove_article )
+								, Toast.LENGTH_LONG);
+						toast.setGravity( Gravity.BOTTOM | Gravity.CENTER, 0, 0);
+						toast.show(); 
+						return;
+					}
+					
+					File fileInSd = new File( articleDownloaded.getPathSdCard() );
+					if ( fileInSd.exists() ){
+						fileInSd.delete();
+					}
+					dao.remove( articleDownloaded );
 					// Remove!
 					adapter.remove(articleDownloaded);
 					adapter.notifyDataSetChanged();

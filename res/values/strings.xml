@@ -28,5 +28,6 @@
     <string name="external_storage_unavailable">External storage is unavailable</string>
     <string name="check_media_availability">Check media availability</string>
     <string name="download_complete">Download complete! Click to view the article</string>
+    <string name="cant_remove_article">Unable to remove the article.</string>
     
 </resources>

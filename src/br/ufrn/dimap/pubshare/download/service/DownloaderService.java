@@ -34,6 +34,7 @@ import br.ufrn.dimap.pubshare.activity.R;
 import br.ufrn.dimap.pubshare.domain.Article;
 import br.ufrn.dimap.pubshare.domain.ArticleDownloaded;
 import br.ufrn.dimap.pubshare.download.sqlite.DownloadDao;
+import br.ufrn.dimap.pubshare.util.AndroidUtils;
 
 /**
  * Service responsible for downloading articles from online libraries
@@ -62,7 +63,7 @@ public class DownloaderService  extends IntentService {
 		Article selectedArticle = (Article) intent.getSerializableExtra( Article.KEY_INSTANCE );
 		
 		
-		if ( ! isExternalStorageAvailable () ){
+		if ( ! AndroidUtils.isExternalStorageAvailable () ){
 			// Generate Menssages
 		    NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
 		   			.setSmallIcon( R.drawable.ic_menu_notifications )
@@ -98,15 +99,7 @@ public class DownloaderService  extends IntentService {
 		Log.d( TAG, "Insert " + articleDownloaded + " in SqLite: OK");			
 	}	
  
-	private boolean isExternalStorageAvailable(){
-		String state = Environment.getExternalStorageState();
-
-		if (Environment.MEDIA_MOUNTED.equals(state)) {
-		    // We can read and write the media
-			return true;
-		}
-		return false;
-	}
+	 
 	
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {

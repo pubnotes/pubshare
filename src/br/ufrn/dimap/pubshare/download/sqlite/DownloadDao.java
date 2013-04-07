@@ -155,5 +155,11 @@ public class DownloadDao {
 		return articleDownloaded;
 	}
 
+	public void remove(ArticleDownloaded articleDownloaded) {		
+		database.delete( DownloadOpenHelper.DOWNLOAD_TABLE_NAME , 
+				DownloadOpenHelper.ID + " = ?", 
+				new String [] { Integer.toString( articleDownloaded.getId() ) } );
+	}
+
 	
 }
