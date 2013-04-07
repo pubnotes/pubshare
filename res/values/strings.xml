@@ -23,8 +23,8 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="confirmation_of_deletion">Confirmation of deletion</string>
-    <string name="do_you_really_want_to">Do you really want to {0}?</string>
-    <string name="article_removed">Article {0} was removed</string>
+    <string name="do_you_really_want_to">Do you really want to %s?</string>
+    <string name="article_removed">Article %s was removed</string>
     <string name="external_storage_unavailable">External storage is unavailable</string>
     <string name="check_media_availability">Check media availability</string>
     <string name="download_complete">Download complete! Click to view the article</string>

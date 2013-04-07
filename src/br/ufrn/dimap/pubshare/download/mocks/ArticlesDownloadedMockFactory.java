@@ -30,6 +30,7 @@ import br.ufrn.dimap.pubshare.mocks.ArticleMockFactory;
  * @author Lucas Farias de Oliveira <i>luksrn@gmail.com</i>
  *
  */
+@Deprecated
 public class ArticlesDownloadedMockFactory {
 
 	public static List<ArticleDownloaded> makeArticleDownloadedList(){
