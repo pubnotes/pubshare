@@ -29,5 +29,10 @@
     <string name="check_media_availability">Check media availability</string>
     <string name="download_complete">Download complete! Click to view the article</string>
     <string name="cant_remove_article">Unable to remove the article.</string>
-    
+    <string name="evaluation_originality">Originality</string>
+    <string name="evalution_contribution">Contribution</string>
+    <string name="evaluation_readability">Readability</string>
+    <string name="evalution_relatedWorks">Related works</string>
+    <string name="evalution_reviewerFamiliarity">Your familiarity with this subject</string>
+    <string name="evalution_overall">Overall</string>
 </resources>
