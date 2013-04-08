@@ -1,22 +1,29 @@
+/**
+ *    This file is part of PubShare.
+ *
+ *    PubShare is free software: you can redistribute it and/or modify
+ *    it under the terms of the GNU General Public License as published by
+ *    the Free Software Foundation, either version 3 of the License, or
+ *    (at your option) any later version.
+ *
+ *    PubShare is distributed in the hope that it will be useful,
+ *    but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *    GNU General Public License for more details.
+ *
+ *    You should have received a copy of the GNU General Public License
+ *    along with PubShare.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package br.ufrn.dimap.pubshare.download.service;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.List;
-
-import android.app.IntentService;
+import android.app.DownloadManager;
+import android.app.Notification;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
+import android.app.DownloadManager.Request;
+import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.v4.app.NotificationCompat;
@@ -25,25 +32,20 @@ import android.view.Gravity;
 import android.widget.Toast;
 import br.ufrn.dimap.pubshare.activity.R;
 import br.ufrn.dimap.pubshare.domain.Article;
+import br.ufrn.dimap.pubshare.domain.ArticleDownloaded;
+import br.ufrn.dimap.pubshare.download.sqlite.DownloadDao;
+import br.ufrn.dimap.pubshare.util.AndroidUtils;
 
 /**
  * Service responsible for downloading articles from online libraries
  * 
  *	@author Lucas Farias de Oliveira <i>luksrn@gmail.com</i>
  * 
- * @see http://developer.android.com/guide/components/services.html
- * @see http://developer.android.com/guide/topics/ui/notifiers/notifications.html Displaying a fixed-duration progress indicator 
- * @see http://stackoverflow.com/questions/3028306/download-a-file-with-android-and-showing-the-progress-in-a-progressdialog  
- * @see http://stackoverflow.com/questions/10508498/is-this-a-stock-android-notification-remoteview-layout to keep compatible with android < 3
- * 
  */
 public class DownloaderService  extends IntentService {
 	
 	private static final String TAG = DownloaderService.class.getSimpleName();
-	
-	private static final int DOWNLOADER_SERVICE_NOTIFICATION_ID = 1;
- 
-	
+		
 	public DownloaderService() {
 		super("DownloaderService");
 	}
@@ -55,127 +57,49 @@ public class DownloaderService  extends IntentService {
 	*/
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		Log.i( getClass().getSimpleName(), "onHandleIntent on DownloadService");
-			
-		NotificationManager nManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-
-		if ( !isExternalStorageAvailable() ){
-			NotificationCompat.Builder notificationBuilder = notificationBuilder("External storage is unavailable", "Check media availability" ,R.drawable.ic_menu_notifications );
-			nManager.notify(DOWNLOADER_SERVICE_NOTIFICATION_ID, notificationBuilder.build() );
-			return;
-		}
+		Log.d( TAG , "onHandleIntent on DownloadService");
 		
 
 		Article selectedArticle = (Article) intent.getSerializableExtra( Article.KEY_INSTANCE );
 		
-		NotificationCompat.Builder notificationBuilder = notificationBuilder( selectedArticle.getTitle() , "Downloading...." , R.drawable.ic_menu_download);
 		
-		try {
-			URL url = new URL( selectedArticle.getRemoteLocation() );
-			URLConnection connection = url.openConnection();
-			connection.connect();
-			// this will be useful so that you can show a typical 0-100% progress bar
-			int fileLength = connection.getContentLength();
-
-			// download the file
-			InputStream input = new BufferedInputStream(url.openStream());
-			String outputFile =  getExternalStorePath() + selectedArticle.generateFileName() ;
-			OutputStream output = new FileOutputStream(outputFile);
-
-			byte data[] = new byte[ 1024 * 8 ];
-			long total = 0;
-			int count;
-			while ((count = input.read(data)) != -1) {
-				total += count;
-				
-				output.write(data, 0, count);
-				// publishing the progress....
-				int progress = (int) (total * 100 / fileLength);				
-				notificationBuilder.setProgress(100, progress, false); 
-				
-				nManager.notify(DOWNLOADER_SERVICE_NOTIFICATION_ID, notificationBuilder.build() );			 
-			}
+		if ( ! AndroidUtils.isExternalStorageAvailable () ){
+			// Generate Menssages
+		    NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
+		   			.setSmallIcon( R.drawable.ic_menu_notifications )
+					.setContentTitle( getResources().getString(R.string.external_storage_unavailable) )
+					.setContentText( getResources().getString( R.string.check_media_availability )); 
+			Notification notification = mBuilder.build();
+			// Set the Notification as ongoing
+			notification.flags = notification.flags | Notification.FLAG_AUTO_CANCEL ;
 			
-			Log.i(getClass().getName(), "File write at " + getExternalStorePath() );
-
-			output.flush();
-			output.close();
-			input.close();
-
-			  // When the loop is finished, updates the notification
-			notificationBuilder.setContentText("Download complete!")
-                    .setProgress(0,0,false)  // Removes the progress bar
-                    .setContentText("Article '" +  selectedArticle.getTitle() + "' download from IEEE. Click to view")                    
-		        .setWhen( System.currentTimeMillis() );
-			
-			
-			// Creates an explicit intent for an Activity in your app
-			// A status bar notification should be used for any case in which a background service needs to alert 
-			//the user about an event that requires a response. A background service should never launch an activity 
-			//on its own in order to receive user interaction. The service should instead create a status bar notification 
-			//that will launch the activity when selected by the user.
-			Intent resultIntent = new Intent(Intent.ACTION_VIEW);
-			resultIntent.setType("application/pdf");
-			
-			List<ResolveInfo> resolvers = getPackageManager().queryIntentActivities(resultIntent, PackageManager.MATCH_DEFAULT_ONLY);
-			if ( !resolvers.isEmpty() ){
-				File fileInDisk = new File(outputFile);
-	            intent.setData( Uri.fromFile(fileInDisk) );
-	            
-	            PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, resultIntent, 0 ); //
-	            notificationBuilder.setContentIntent(pendingIntent);
-			}
-			
-		 
-			// publish
-	
-			nManager.notify( DOWNLOADER_SERVICE_NOTIFICATION_ID , notificationBuilder.build());
-
-		} catch (IOException e) {
-			Log.e( TAG , "Error: " + e.getMessage() );
-			notificationBuilder = notificationBuilder("An error occurred while writing the file.",
-					"Something wrong just happened" ,
-					R.drawable.ic_menu_notifications );
-			nManager.notify(DOWNLOADER_SERVICE_NOTIFICATION_ID, notificationBuilder.build() );
+			NotificationManager nManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+			nManager.notify(0, notification);
+			return;
 		}
-
-	 
-	}
-	
-	// TODO See port to 2.3.3
-	/**
-	 * Note: Except where noted, this guide refers to the NotificationCompat.Builder class 
-	 * in the version 4 Support Library. The class Notification.Builder was added in Android 3.0. 
-	 * 
-	 * @param title
-	 * @param text
-	 * @return
-	 */
-	private NotificationCompat.Builder notificationBuilder(String title, String text, int icon){
-		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
-		        .setSmallIcon( icon )
-		        .setContentTitle( title )
-		        .setContentText( text ); // TODO Add more info
-		return mBuilder;
-	}
-	
-
+		
+		DownloadManager dowloadManager = (DownloadManager) getSystemService( Context.DOWNLOAD_SERVICE ); // since API level 9
+		
+		Request request = new Request( Uri.parse( selectedArticle.getRemoteLocation() ));
+		request.setAllowedNetworkTypes( Request.NETWORK_WIFI | Request.NETWORK_MOBILE );
+		request.setTitle( selectedArticle.getTitle() );
+		request.setDestinationInExternalPublicDir( Environment.DIRECTORY_DOWNLOADS	, selectedArticle.generateFileName() );
+		request.setVisibleInDownloadsUi(true);
+		
+		long enqueue = dowloadManager.enqueue(request);		
+		
+		Log.d( TAG, "Download enqueue..." + enqueue );
+		
+		ArticleDownloaded articleDownloaded = new ArticleDownloaded();		
+		articleDownloaded.setDownloadKey( enqueue );
+		
+		DownloadDao downloadDao = new DownloadDao(this);
+		downloadDao.insert(articleDownloaded);
+		
+		Log.d( TAG, "Insert " + articleDownloaded + " in SqLite: OK");			
+	}	
  
-	private boolean isExternalStorageAvailable(){
-		String state = Environment.getExternalStorageState();
-
-		if (Environment.MEDIA_MOUNTED.equals(state)) {
-		    // We can read and write the media
-			return true;
-		}
-		return false;
-	}
-	
-	private String getExternalStorePath(){
-		File rootExternalStorage = Environment.getExternalStorageDirectory();
-		
-		return rootExternalStorage.getAbsolutePath() + File.separator + "Download" + File.separator;
-	}
+	 
 	
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {

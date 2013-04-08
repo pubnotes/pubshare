@@ -1,3 +1,20 @@
+/**
+ *    This file is part of PubShare.
+ *
+ *    PubShare is free software: you can redistribute it and/or modify
+ *    it under the terms of the GNU General Public License as published by
+ *    the Free Software Foundation, either version 3 of the License, or
+ *    (at your option) any later version.
+ *
+ *    PubShare is distributed in the hope that it will be useful,
+ *    but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *    GNU General Public License for more details.
+ *
+ *    You should have received a copy of the GNU General Public License
+ *    along with PubShare.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package br.ufrn.dimap.pubshare.download.adapters;
 
 import java.util.List;
@@ -37,10 +54,10 @@ public class ArticlesDownloadedListAdapter extends ArrayAdapter<ArticleDownloade
 		ArticleDownloaded item = getItem(position);
 		if (item!= null) {
 			TextView titleText = (TextView) view.findViewById(R.id.titleText);
-			titleText.setText( item.getArticle().getTitle() );
+			titleText.setText( item.getTitle() );
 			
 			TextView dateDownload = (TextView) view.findViewById(R.id.dateTime);
-			dateDownload.setText( DateFormat.format( item.getDownloadedAt() ) );
+			dateDownload.setText( DateFormat.iso8601Format( item.getDownloadedAt() ) );
 		}
 
 		return view;
