@@ -27,14 +27,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <activity
+            android:name="br.ufrn.dimap.pubshare.activity.ArticleEvaluationActivity"
+            android:label="@string/title_activity_article_evaluation" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
         <activity
             android:name="br.ufrn.dimap.pubshare.activity.ArticleListActivity"
             android:label="@string/title_activity_article_list" >
         </activity>
+        
         <activity
             android:name="br.ufrn.dimap.pubshare.download.activity.ArticlesDownloadedActivity"
             android:label="@string/title_activity_articles_downloaded" >
         </activity>
+        
         <activity
             android:name="br.ufrn.dimap.pubshare.evaluation.activity.ArticleEvaluationListActivity"
             android:label="@string/title_activity_evaluation_article_list" >

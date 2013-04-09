@@ -29,6 +29,7 @@
 
     <RatingBar
         android:id="@+id/ratingBar_originality"
+        style="?android:attr/ratingBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -40,6 +41,7 @@
 
     <RatingBar
         android:id="@+id/ratingBar_contribution"
+        style="?android:attr/ratingBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -51,6 +53,7 @@
 
     <RatingBar
         android:id="@+id/ratingBar_relevance"
+        style="?android:attr/ratingBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -62,6 +65,7 @@
 
     <RatingBar
         android:id="@+id/ratingBar_readability"
+        style="?android:attr/ratingBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -73,6 +77,7 @@
 
     <RatingBar
         android:id="@+id/ratingBar_relatedworks"
+        style="?android:attr/ratingBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -84,6 +89,7 @@
 
     <RatingBar
         android:id="@+id/ratingBar_reviewerfamiliarity"
+        style="?android:attr/ratingBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -95,10 +101,13 @@
 
     <RatingBar
         android:id="@+id/ratingBar_overall"
+        style="?android:attr/ratingBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:focusable="false"
-        android:focusableInTouchMode="false" />
+        android:focusableInTouchMode="false"
+        android:isIndicator="true"
+        android:stepSize="0.1" />
 
     <TextView
         android:id="@+id/textView3"
@@ -111,10 +120,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textMultiLine" >
-
-        <requestFocus />
-    </EditText>
+        android:inputType="textMultiLine" />
 
     <Button
         android:id="@+id/button_save"
