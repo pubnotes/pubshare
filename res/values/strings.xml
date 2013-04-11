@@ -35,4 +35,6 @@
     <string name="evalution_relatedWorks">Related works</string>
     <string name="evalution_reviewerFamiliarity">Your familiarity with this subject</string>
     <string name="evalution_overall">Overall</string>
+    <string name="title_activity_register">Register on Pubshare</string>
+
 </resources>

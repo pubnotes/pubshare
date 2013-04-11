@@ -8,7 +8,7 @@
         android:minSdkVersion="9"
         android:targetSdkVersion="13" />
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -42,20 +42,26 @@
 
         <service android:name="br.ufrn.dimap.pubshare.download.service.DownloaderService" />
 
-        
-       <receiver android:name="br.ufrn.dimap.pubshare.download.receiver.ClickDownloadedReceiver" >
-        	<intent-filter>            	 
-     			<action android:name="android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED" />
-            </intent-filter>   
+        <receiver android:name="br.ufrn.dimap.pubshare.download.receiver.ClickDownloadedReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED" />
+            </intent-filter>
         </receiver>
-       
-       <receiver android:name="br.ufrn.dimap.pubshare.download.receiver.DownloadCompleteReceiver" >
-	       	<intent-filter >
-	       	    <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
-	       	</intent-filter>    
-       </receiver>
-       
-    
+        <receiver android:name="br.ufrn.dimap.pubshare.download.receiver.DownloadCompleteReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="br.ufrn.dimap.pubshare.activity.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
+        </activity>
+        <activity
+            android:name="br.ufrn.dimap.pubshare.activity.RegisterActivity"
+            android:label="@string/title_activity_register" >
+        </activity>
     </application>
 
 </manifest>
