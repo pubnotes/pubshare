@@ -1,5 +1,23 @@
+/**
+ *    This file is part of PubShare.
+ *
+ *    PubShare is free software: you can redistribute it and/or modify
+ *    it under the terms of the GNU General Public License as published by
+ *    the Free Software Foundation, either version 3 of the License, or
+ *    (at your option) any later version.
+ *
+ *    PubShare is distributed in the hope that it will be useful,
+ *    but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *    GNU General Public License for more details.
+ *
+ *    You should have received a copy of the GNU General Public License
+ *    along with PubShare.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package br.ufrn.dimap.pubshare.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -8,12 +26,15 @@ import java.util.Date;
  * @author Lucas Farias de Oliveira <i>luksrn@gmail.com</i>
  *
  */
-public class ArticleDownloaded {
+public class ArticleDownloaded implements Serializable {
+ 
+	private static final long serialVersionUID = 6112191778772834685L;
+
+	private int _id;
+		
+	private String title;
 	
-	/**
-	 * Article downloaded. 
-	 */
-	private Article article;
+	private String digitalLibrary;
 	
 	private Date downloadedAt;
 	
@@ -22,28 +43,37 @@ public class ArticleDownloaded {
 	 */
 	private String pathSdCard;
 	
-	/**
-	 * Indicates if the user removed the file on the SD card.
-	 */
-	private boolean fileExistsInPathSdCard;
+	private String mimeType;
 	
+	private long size;
 	
+	private long downloadKey;
+	
+	private String urlSource;
+	 
 
-	public ArticleDownloaded(Article article, Date downloadedAt,
-			String pathSdCard, boolean fileExistsInPathSdCard) {
-		super();
-		this.article = article;
-		this.downloadedAt = downloadedAt;
-		this.pathSdCard = pathSdCard;
-		this.fileExistsInPathSdCard = fileExistsInPathSdCard;
+	public int getId() {
+		return _id;
 	}
 
-	public Article getArticle() {
-		return article;
+	public void setId(int _id) {
+		this._id = _id;
 	}
 
-	public void setArticle(Article article) {
-		this.article = article;
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getDigitalLibrary() {
+		return digitalLibrary;
+	}
+
+	public void setDigitalLibrary(String digitalLibrary) {
+		this.digitalLibrary = digitalLibrary;
 	}
 
 	public Date getDownloadedAt() {
@@ -61,13 +91,45 @@ public class ArticleDownloaded {
 	public void setPathSdCard(String pathSdCard) {
 		this.pathSdCard = pathSdCard;
 	}
-
-	public boolean isFileExistsInPathSdCard() {
-		return fileExistsInPathSdCard;
+ 
+	public long getSize() {
+		return size;
 	}
 
-	public void setFileExistsInPathSdCard(boolean fileExistsInPathSdCard) {
-		this.fileExistsInPathSdCard = fileExistsInPathSdCard;
+	public void setSize(long size) {
+		this.size = size;
 	}
-	
+
+	public String getMimeType() {
+		return mimeType;
+	}
+
+	public void setMimeType(String mimeType) {
+		this.mimeType = mimeType;
+	}
+
+	public long getDownloadKey() {
+		return downloadKey;
+	}
+
+	public void setDownloadKey(long downloadKey) {
+		this.downloadKey = downloadKey;
+	}
+
+	public String getUrlSource() {
+		return urlSource;
+	}
+
+	public void setUrlSource(String urlSource) {
+		this.urlSource = urlSource;
+	}
+
+	@Override
+	public String toString() {
+		return "ArticleDownloaded [title=" + title + ", digitalLibrary="
+				+ digitalLibrary + ", downloadedAt=" + downloadedAt
+				+ ", pathSdCard=" + pathSdCard + ", mimeType=" + mimeType
+				+ ", size=" + size + ", downloadKey=" + downloadKey
+				+ ", urlSource=" + urlSource + "]";
+	}
 }
