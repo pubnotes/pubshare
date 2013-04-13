@@ -1,4 +1,4 @@
-pubshare
+Pubshare
 ========
 
 The aim of this project is to search, download, recommendation to your friends and review national and international academics articles!
