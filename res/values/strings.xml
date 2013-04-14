@@ -3,8 +3,9 @@
 
     <string name="app_name">PubShare</string>
     <string name="title_activity_article_list">Search Results</string>
+    <string name="title_activity_article_detail">Article Detail</string>
     <string name="title_activity_articles_downloaded">My Downloads</string>
-    <string name="title_activity_evaluation_article_list">Evaluations</string>
+    <string name="title_activity_evaluation_article_detail">Evaluation Details</string>
     <string name="menu_search">Search</string>
     <string name="menu_my_downloads">Downloads</string>
     <string name="action_settings">Settings</string>

@@ -93,4 +93,18 @@ public class EvaluationListMockFactory
 		}
 		return evaluations;
 	}
+	
+	public static Evaluation singleEvaluation()
+	{
+		Evaluation eval = new Evaluation();
+		eval.setReviewerName("Daniel Costa");
+		eval.setReviewerNotes("excelent bla bla bla...");
+		eval.setOriginality(4.0f);
+		eval.setContribution(4.0f);
+		eval.setRelevance(3.5f);
+		eval.setReadability(5.0f);
+		eval.setReviewerFamiliarity(4.5f);
+		eval.setEvalDate(new Date());
+		return eval;
+	}
 }
