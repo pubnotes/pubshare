@@ -1,0 +1,73 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_article_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".ArticleDetailActivity" >
+
+    <LinearLayout
+        android:id="@+id/linear_layout_article_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/label_article_title"
+            style="@style/FontLarge.Bold"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Titulo do artigo" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/label_article_rating_final_grade"
+            style="@style/FontSmall"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Overall Rating:" />
+
+        <RatingBar
+            android:id="@+id/rating_overall_evaluation"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:rating="3.0" />
+
+        <TextView
+            android:id="@+id/label_article_abstract"
+            style="@style/FontLarge.Bold"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Abstract:" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/label_article_abstract_text"
+            style="@style/FontSmall.Gray"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="abstract content" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/label_evaluations"
+            style="@style/FontLarge.Bold"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Evaluations:" >
+        </TextView>
+    </LinearLayout>
+
+    
+    <ListView
+        android:id="@+id/list_view_article_detail_evaluations"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/linear_layout_article_details" >
+    </ListView>
+
+</RelativeLayout>

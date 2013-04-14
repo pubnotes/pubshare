@@ -1,5 +1,6 @@
 package br.ufrn.dimap.pubshare.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,11 +8,12 @@ import java.util.Date;
  * @author Daniel
  *
  */
-public class Evaluation 
+public class Evaluation implements Serializable
 {
-	public static final String KEY_LIST = "br.ufrn.dimap.pubshare.evaluation.domain.Evaluation?Instance";
+	private static final long serialVersionUID = 9042871761299411144L;
 	
-	public static final String KEY_INSTANCE = "br.ufrn.dimap.pubshare.evaluation.domain.Evaluation?List";
+	public static final String KEY_LIST = "br.ufrn.dimap.pubshare.evaluation.domain.Evaluation?List";
+	public static final String KEY_INSTANCE = "br.ufrn.dimap.pubshare.evaluation.domain.Evaluation?Instance";
 	
 	private String reviewerNotes, reviewerName;
 	private float originality, contribution, relevance, readability, relatedWorks, reviewerFamiliarity;

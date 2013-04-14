@@ -83,13 +83,18 @@ public class ArticleListActivity extends Activity {
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		
+		Intent intent = null;
+		Article selectedArticle = null;
 		switch (item.getItemId()) {
 			case R.id.contextual_menu_view:
-				// view
+				intent = new Intent(this,ArticleDetailActivity.class);
+				selectedArticle = ArticleMockFactory.singleArticle();
+				intent.putExtra(Article.KEY_INSTANCE, selectedArticle);
+				startActivity(intent);
 				return true;
 			case R.id.contextual_menu_download:
-				Intent intent = new Intent(this,  DownloaderService.class );		
-				Article selectedArticle =  ArticleMockFactory.singleArticle();
+				intent = new Intent(this,  DownloaderService.class );		
+				selectedArticle =  ArticleMockFactory.singleArticle();
 				intent.putExtra( Article.KEY_INSTANCE , selectedArticle );
 				startService(intent);				
 				return true;

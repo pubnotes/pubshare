@@ -1,32 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"> 
-       
+    android:orientation="vertical" >
+
     <TextView
-        android:id="@+id/evaluationDate"
+        android:id="@+id/label_row_evaluation_date"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:paddingLeft="8dp"
         android:paddingTop="8dp"
-        android:textStyle="bold"
-        android:textSize="16sp"
         android:text="evaluation Date"
-        android:textAppearance="?android:attr/textAppearanceLarge" />  
+		style="@style/FontLarge.Bold.Gray"
+        android:textStyle="bold" />
 
-      <RatingBar
-          android:id="@+id/overAll"
-          style="?android:attr/ratingBarStyleSmall"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_below="@+id/evaluationDate"
-          android:isIndicator="true"
-          android:numStars="5"
-          android:rating="2.5"
-          android:paddingTop="4dp" 
-          android:paddingBottom="4dp"/>
+    <TextView
+        android:id="@+id/label_row_evaluation_notes"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="8dp"
+        android:paddingTop="8dp"
+        android:text="evaluation notes summary"
+        style="@style/FontSmall.Gray"
+        android:textStyle="bold" />
 
-</RelativeLayout>
+    <RatingBar
+        android:id="@+id/rating_row_evaluation_overall"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:paddingBottom="4dp"
+        android:paddingTop="4dp"
+        android:rating="2.5" />
+
+</LinearLayout>
