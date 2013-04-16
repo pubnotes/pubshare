@@ -1,4 +1,4 @@
-package br.ufrn.dimap.pubshare.evaluation.mocks;
+package br.ufrn.dimap.pubshare.evaluation;
 
 import java.util.ArrayList;
 import java.util.Date;

@@ -1,5 +1,9 @@
-package br.ufrn.dimap.pubshare.activity;
+package br.ufrn.dimap.pubshare.evaluation;
 
+import br.ufrn.dimap.pubshare.activity.R;
+import br.ufrn.dimap.pubshare.activity.R.id;
+import br.ufrn.dimap.pubshare.activity.R.layout;
+import br.ufrn.dimap.pubshare.activity.R.menu;
 import br.ufrn.dimap.pubshare.domain.Evaluation;
 import android.os.Bundle;
 import android.app.Activity;
