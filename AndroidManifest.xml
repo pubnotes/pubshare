@@ -78,6 +78,22 @@
         </activity>
         
         
+        <activity
+            android:name="br.ufrn.dimap.pubshare.activity.MenuActivity"
+            android:label="@string/title_activity_menu" >
+        </activity>
+        <activity
+            android:name="br.ufrn.dimap.pubshare.activity.SearchPeopleActivity"
+            android:label="@string/title_activity_search_people" >
+        </activity>
+        <activity
+            android:name="br.ufrn.dimap.pubshare.activity.ShowProfileActivity"
+            android:label="@string/title_activity_show_profile" >
+        </activity>
+        <activity
+            android:name="br.ufrn.dimap.pubshare.activity.EditProfileActivity"
+            android:label="@string/title_activity_edit_profile" >
+        </activity>
     </application>
 
 </manifest>

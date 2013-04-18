@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <ScrollView
+        android:id="@+id/menu_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+        
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff" >
+
+             <LinearLayout
+                android:id="@+id/searchprincipal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+		
+                <include layout="@layout/search_android_layout" /> 	
+             
+            </LinearLayout>
+            
+            <LinearLayout
+                android:id="@+id/menu"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/searchprincipal"
+                android:orientation="vertical"
+               >
+            	<include
+                    android:layout_height="160dp"
+                    layout="@layout/menu_layout" />
+
+                <Button
+                    android:id="@+id/logout_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="50dip"
+                    android:layout_marginRight="15dip"
+                    android:layout_marginLeft="30dip"
+                    android:text="Log out" />
+            </LinearLayout>
+            
+            <!-- Footer Start -->
+	  
+	  		<LinearLayout android:id="@+id/footer"
+  				android:layout_width="fill_parent"
+  				android:layout_height="90dip"
+  				android:background="@layout/footer_repeat"
+  				android:layout_alignParentBottom="true"
+  				android:layout_below="@+id/menu"
+  				>
+                
+  		    </LinearLayout>
+	  		<!-- Footer Ends -->
+        </RelativeLayout>
+    </ScrollView>

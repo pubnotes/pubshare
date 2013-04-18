@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="1dip" >
+        
+         <TextView android:layout_width="fill_parent"
+				  		android:layout_height="wrap_content"
+				  		android:text="Institution"
+				  		android:textColor="#0b84aa"
+				  		android:textSize="20dip"/>	
+		 
+         <TextView   android:id="@+id/textinstitution"
+               			android:layout_width="fill_parent"
+				  		android:layout_height="wrap_content"
+				  		android:text="jjj"
+				  		android:textColor="#372c24"
+				  		android:textSize="20dip"
+				  		android:layout_marginLeft="60dip"/>	  
+        
+    </TableRow>
+    
+    <TableRow
+	        android:id="@+id/tableRow2"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:padding="1dip" >
+	        
+        	     
+         <TextView android:layout_width="fill_parent"
+				  		android:layout_height="wrap_content"
+				  		android:text="Degree"
+				  		android:textColor="#0b84aa"
+				  		android:textSize="20dip"
+		 />	
+		 
+         <TextView   android:id="@+id/textdegree"
+               			android:layout_width="fill_parent"
+				  		android:layout_height="wrap_content"
+				  		android:text="jjj"
+				  		android:textColor="#372c24"
+				  		android:textSize="20dip"
+				  		android:layout_marginLeft="60dip"
+		   />	   
+			         
+    </TableRow>
+    
+    <TableRow
+	        android:id="@+id/tableRow3"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:padding="1dip" >
+	        
+                 
+         	<TextView android:layout_width="fill_parent"
+				  		android:layout_height="wrap_content"
+				  		android:text="City/Country"
+				  		android:textColor="#0b84aa"
+				  		android:textSize="20dip"
+		 	/>	
+		 
+           	<TextView   android:id="@+id/textcountry"
+               			android:layout_width="fill_parent"
+				  		android:layout_height="wrap_content"
+				  		android:text="jjj"
+				  		android:textColor="#372c24"
+				  		android:textSize="20dip"
+				  		android:layout_marginLeft="60dip"
+		   	/>	
+			         
+    </TableRow>
+    
+    <TableRow
+	        android:id="@+id/tableRow4"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:padding="1dip" >
+	        
+                 
+         	<TextView android:layout_width="fill_parent"
+				  		android:layout_height="wrap_content"
+				  		android:text="Gender"
+				  		android:textColor="#0b84aa"
+				  		android:textSize="20dip"
+		 	/>	
+		 
+           	<TextView   android:id="@+id/textgender"
+               			android:layout_width="fill_parent"
+				  		android:layout_height="wrap_content"
+				  		android:text="jjj"
+				  		android:textColor="#372c24"
+				  		android:textSize="20dip"
+				  		android:layout_marginLeft="60dip"
+		   	/>	
+			         
+    </TableRow>
+</TableLayout>

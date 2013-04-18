@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="1dip" >
+
+		<LinearLayout 
+		     android:id="@+id/sl"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+		    
+		     <ImageButton
+	            android:id="@+id/imageButton1"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_marginLeft="40dip"
+	            android:layout_marginRight="60dp"
+	            android:layout_marginTop="20dip"
+	            android:padding="30dip"
+	            android:src="@drawable/ic_search" />
+	        
+	         <TextView android:id="@+id/searchtext" 
+					  		android:layout_width="fill_parent"
+					  		android:layout_height="wrap_content"
+					  		android:text="Search People"
+					  		android:gravity="center"
+					  		android:textSize="15dip"
+					  		android:paddingRight="20dip"
+			 />
+		</LinearLayout>
+        	 
+		<LinearLayout 
+		     	android:id="@+id/fl"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+	          			
+		        <ImageButton
+		            android:id="@+id/imageButton2"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_marginLeft="0dip"
+		            android:layout_marginRight="20dp"
+		            android:layout_marginTop="20dip"
+		            android:padding="30dip"
+		            android:src="@drawable/ic_menu_cc" />
+		        
+		        <TextView android:id="@+id/friendstext" 
+				  		android:layout_width="fill_parent"
+				  		android:layout_height="wrap_content"
+				  		android:text="Friends"
+				  		android:gravity="center"
+				  		android:textSize="15dip"
+				  		android:paddingRight="20dip"
+					 />
+        </LinearLayout>
+        
+    </TableRow>
+    
+       <TableRow
+	        android:id="@+id/tableRow2"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:padding="1dip" >
+	        
+       	<LinearLayout 
+		     	android:id="@+id/dl"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"> 	   
+			    <ImageButton
+			        android:id="@+id/imageButton3"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:src="@drawable/ic_menu_download"
+		            android:layout_marginLeft="40dip"
+		            android:layout_marginRight="60dp"
+		            android:layout_marginTop="20dip"
+			        android:padding="30dip"
+			     />
+			        
+			     <TextView android:id="@+id/downtext" 
+				  		android:layout_width="fill_parent"
+				  		android:layout_height="wrap_content"
+				  		android:text="Downloads"
+				  		android:gravity="center"
+				  		android:textSize="15dip"
+				  		android:paddingRight="20dip"
+				 />
+	     </LinearLayout>
+	     
+       	 <LinearLayout 
+		     	android:id="@+id/editl"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"> 	
+			    <ImageButton
+			        android:id="@+id/imageButton4"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:src="@drawable/ic_menu_star"
+		            android:layout_marginLeft="0dip"
+		            android:layout_marginRight="20dp"
+		            android:layout_marginTop="20dip"
+			        android:padding="30dip"
+			    />
+		          
+			    <TextView android:id="@+id/downtext" 
+				  		android:layout_width="fill_parent"
+				  		android:layout_height="wrap_content"
+				  		android:text="Edit Profile"
+				  		android:gravity="center"
+				  		android:textSize="15dip"
+				  		android:paddingRight="20dip"
+		 		/>
+		</LinearLayout>	         
+    </TableRow>
+    
+</TableLayout>
