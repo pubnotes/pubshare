@@ -94,6 +94,8 @@ public class LoginActivity extends Activity {
 					@Override
 					public void onClick(View view) {
 						attemptLogin();
+						Intent i = new Intent(getApplicationContext(), ShowProfileActivity.class);
+		                startActivity(i);
 					}
 				});
 	}
