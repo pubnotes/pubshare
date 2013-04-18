@@ -29,8 +29,6 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </LinearLayout>
 
-    <!-- Login form -->
-
    <!-- Login form -->
 
     <ScrollView
@@ -54,6 +52,7 @@
 	  							android:layout_marginLeft="10dip"/>
 	  				<!-- Logo Ends -->
 	  		</LinearLayout>
+	  		
 	  		<!--  Header Ends -->  
 	  		<!-- Footer Start -->
 	  
@@ -62,12 +61,11 @@
   				android:layout_height="90dip"
   				android:background="@layout/footer_repeat"
   				android:layout_alignParentBottom="true"
-  				android:layout_marginTop="400dip"
+  				android:layout_marginTop="495dip"
   				>
-  		</LinearLayout>
+  		    </LinearLayout>
 	  		<!-- Footer Ends -->
 	  		
-	  		<!-- Login Form -->
 		        <LinearLayout
 		            style="@style/LoginFormContainer"
 		            android:orientation="vertical"
@@ -86,7 +84,7 @@
 		                android:maxLines="1"
 		                android:singleLine="true"
 		                android:layout_marginTop="20dip"
-		  		android:layout_marginBottom="20dip" />
+		  				android:layout_marginBottom="20dip" />
 		
 		            <EditText
 		                android:id="@+id/password"
@@ -132,6 +130,4 @@
 		        </LinearLayout>
 		  </RelativeLayout>
     </ScrollView>
-  
-
 </merge>
