@@ -17,6 +17,7 @@
 
 package br.ufrn.dimap.pubshare.activity;
 
+import br.ufrn.dimap.pubshare.download.activity.ArticlesDownloadedActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,7 +35,7 @@ public class PubshareActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		
 		//When you develop, change this line to start your activity. (Dev Only)
-		Intent i = new Intent(this, LoginActivity.class);        	        
+		Intent i = new Intent(this, ArticlesDownloadedActivity.class);        	        
 				    
 		startActivity(i);
 		finish();

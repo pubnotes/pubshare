@@ -27,23 +27,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
         <activity
             android:name="br.ufrn.dimap.pubshare.activity.ArticleListActivity"
             android:label="@string/title_activity_article_list" >
         </activity>
-        <activity
-            android:name="br.ufrn.dimap.pubshare.activity.ArticleDetailActivity"
-            android:label="@string/title_activity_article_detail" >
-        </activity>
+        
         <activity
             android:name="br.ufrn.dimap.pubshare.download.activity.ArticlesDownloadedActivity"
             android:label="@string/title_activity_articles_downloaded" >
         </activity>
-        <activity
-            android:name="br.ufrn.dimap.pubshare.evaluation.activity.ArticleEvaluationDetailActivity"
-            android:label="@string/title_activity_evaluation_article_detail" >
-        </activity>
-
+        
         <service android:name="br.ufrn.dimap.pubshare.download.service.DownloaderService" />
 
         <receiver android:name="br.ufrn.dimap.pubshare.download.receiver.ClickDownloadedReceiver" >
@@ -66,6 +60,24 @@
             android:name="br.ufrn.dimap.pubshare.activity.RegisterActivity"
             android:label="@string/title_activity_register" >
         </activity>
+        
+        <!-- Evaluation activities -->
+        <activity
+            android:name="br.ufrn.dimap.pubshare.evaluation.ArticleEvaluationDetailActivity"
+            android:label="@string/title_activity_evaluation_article_detail" >
+        </activity>
+        
+        <activity
+            android:name="br.ufrn.dimap.pubshare.evaluation.ArticleDetailActivity"
+            android:label="@string/title_activity_article_detail" >
+        </activity>
+        
+        <activity
+            android:name="br.ufrn.dimap.pubshare.evaluation.ArticleEvaluationActivity"
+            android:label="@string/title_activity_article_evaluation" >
+        </activity>
+        
+        
         <activity
             android:name="br.ufrn.dimap.pubshare.activity.MenuActivity"
             android:label="@string/title_activity_menu" >

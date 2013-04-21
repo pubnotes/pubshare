@@ -1,4 +1,4 @@
-package br.ufrn.dimap.pubshare.evaluation.activity;
+package br.ufrn.dimap.pubshare.evaluation;
 
 import br.ufrn.dimap.pubshare.activity.R;
 import br.ufrn.dimap.pubshare.domain.Evaluation;
