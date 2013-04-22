@@ -14,6 +14,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import br.ufrn.dimap.pubshare.activity.EditProfileActivity;
 import br.ufrn.dimap.pubshare.activity.R;
 import br.ufrn.dimap.pubshare.domain.Article;
 import br.ufrn.dimap.pubshare.domain.Evaluation;
@@ -41,6 +42,16 @@ public class ArticleDetailActivity extends Activity
 		List<Evaluation> evaluations = EvaluationListMockFactory.makeEvaluationList();
 	    selectedArticle.setEvaluations(evaluations);
 		configureEvaluationsSummaryView(selectedArticle);
+		
+		findViewById(R.id.button_evaluate).setOnClickListener(
+				new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						Intent i = new Intent(getApplicationContext(), ArticleEvaluationActivity.class);
+		                startActivity(i);
+					}
+				});
+		
 	}
 	
 	/**
