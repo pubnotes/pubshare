@@ -1,5 +1,7 @@
 package br.ufrn.dimap.pubshare.activity;
 
+import br.ufrn.dimap.pubshare.restclient.LoginRestClient;
+import br.ufrn.dimap.pubshare.util.AndroidUtils;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
@@ -60,6 +62,7 @@ public class LoginActivity extends Activity {
 		registerScreen.setOnClickListener(new View.OnClickListener() {
 			 
             public void onClick(View v) {
+            	attemptLogin();
                 // Switching to Register screen
                 Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
                 startActivity(i);
@@ -94,8 +97,7 @@ public class LoginActivity extends Activity {
 					@Override
 					public void onClick(View view) {
 						attemptLogin();
-						Intent i = new Intent(getApplicationContext(), ShowProfileActivity.class);
-		                startActivity(i);
+						
 					}
 				});
 	}
@@ -212,25 +214,8 @@ public class LoginActivity extends Activity {
 	public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			// TODO: attempt authentication against a network service.
-
-			try {
-				// Simulate network access.
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				return false;
-			}
-
-			for (String credential : DUMMY_CREDENTIALS) {
-				String[] pieces = credential.split(":");
-				if (pieces[0].equals(mEmail)) {
-					// Account exists, return true if the password matches.
-					return pieces[1].equals(mPassword);
-				}
-			}
-
-			// TODO: register the new account here.
-			return true;
+			
+			return new LoginRestClient().login( LoginActivity.this.mEmail , LoginActivity.this.mPassword );			
 		}
 
 		@Override
@@ -240,6 +225,8 @@ public class LoginActivity extends Activity {
 
 			if (success) {
 				finish();
+				Intent i = new Intent(getApplicationContext(), ShowProfileActivity.class);
+                startActivity(i);
 			} else {
 				mPasswordView
 						.setError(getString(R.string.error_incorrect_password));
