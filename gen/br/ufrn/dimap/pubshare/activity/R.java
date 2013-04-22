@@ -21,24 +21,27 @@ public final class R {
         public static final int activity_vertical_margin=0x7f040001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
-        public static final int ic_menu_archive=0x7f020001;
-        public static final int ic_menu_cc=0x7f020002;
-        public static final int ic_menu_delete=0x7f020003;
-        public static final int ic_menu_download=0x7f020004;
-        public static final int ic_menu_friendslist=0x7f020005;
-        public static final int ic_menu_invite=0x7f020006;
-        public static final int ic_menu_notifications=0x7f020007;
-        public static final int ic_menu_search=0x7f020008;
-        public static final int ic_menu_share=0x7f020009;
-        public static final int ic_menu_star=0x7f02000a;
-        public static final int ic_navigation_next_item=0x7f02000b;
-        public static final int ic_navigation_refresh=0x7f02000c;
-        public static final int ic_rating_good=0x7f02000d;
-        public static final int ic_search=0x7f02000e;
-        public static final int logo=0x7f02000f;
-        public static final int photos_selected=0x7f020010;
-        public static final int repeat_bg=0x7f020011;
+        public static final int edit1=0x7f020000;
+        public static final int folder_search=0x7f020001;
+        public static final int ic_launcher=0x7f020002;
+        public static final int ic_menu_archive=0x7f020003;
+        public static final int ic_menu_cc=0x7f020004;
+        public static final int ic_menu_delete=0x7f020005;
+        public static final int ic_menu_download=0x7f020006;
+        public static final int ic_menu_friendslist=0x7f020007;
+        public static final int ic_menu_invite=0x7f020008;
+        public static final int ic_menu_notifications=0x7f020009;
+        public static final int ic_menu_search=0x7f02000a;
+        public static final int ic_menu_share=0x7f02000b;
+        public static final int ic_menu_star=0x7f02000c;
+        public static final int ic_navigation_next_item=0x7f02000d;
+        public static final int ic_navigation_refresh=0x7f02000e;
+        public static final int ic_rating_good=0x7f02000f;
+        public static final int ic_search=0x7f020010;
+        public static final int logo=0x7f020011;
+        public static final int photos_selected=0x7f020012;
+        public static final int repeat_bg=0x7f020013;
+        public static final int userprofile=0x7f020014;
     }
     public static final class id {
         public static final int ManterLogado=0x7f080041;
