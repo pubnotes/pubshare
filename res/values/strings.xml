@@ -37,5 +37,7 @@
     <string name="evalution_reviewerFamiliarity">Your familiarity with this subject</string>
     <string name="evalution_overall">Overall</string>
     <string name="title_activity_register">Register on Pubshare</string>
+    <string name="title_activity_article_search">ArticleSearchActivity</string>
+    <string name="menu_settings">Settings</string>
 
 </resources>
