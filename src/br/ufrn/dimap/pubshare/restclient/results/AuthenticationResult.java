@@ -14,25 +14,5 @@ public class AuthenticationResult {
 	public void setSuccess(boolean success) {
 		this.success = success;
 	}
-
-	/*
-	public JSONObject jsonObject;
-	
-	public AuthenticationResult(String json){
-		try{
-			jsonObject = new JSONObject(json);
-		}catch(Exception e){
-			// 
-		}
-	}
-	
-	public boolean isSuccessful(){
-		try {
-			return jsonObject.has("success") && jsonObject.getBoolean("success");
-		} catch (JSONException e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-*/
+ 
 }
