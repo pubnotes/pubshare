@@ -1,6 +1,5 @@
 package br.ufrn.dimap.pubshare.restclient;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,13 +12,15 @@ import org.springframework.http.converter.json.MappingJacksonHttpMessageConverte
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import android.util.Log;
+import br.ufrn.dimap.pubshare.restclient.results.AuthenticationResult;
 import br.ufrn.dimap.pubshare.util.Constants;
 
 public class LoginRestClient {
 
-	public boolean login(String login, String senha) {
+	public AuthenticationResult login(String login, String senha) {
 		try {
-			HttpHeaders requestHeaders = new HttpHeaders();
+			HttpHeaders requestHeaders = new HttpHeaders(); 
 			requestHeaders.setContentType(MediaType.APPLICATION_JSON);						 
 			
 			Map<String, String> body = new HashMap<String, String>();     			
@@ -28,17 +29,22 @@ public class LoginRestClient {
 			 
 			RestTemplate restTemplate = new RestTemplate();
  	
-			restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());			
-			ResponseEntity<String> response = restTemplate.exchange(  
+			restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
+			 
+			ResponseEntity<AuthenticationResult> response = restTemplate.exchange(  
 					Constants.URL_SERVER + "/user/login", 
 					HttpMethod.POST, 
-					new HttpEntity<Object>(body, requestHeaders), String.class);
+					new HttpEntity<Object>(body, requestHeaders), AuthenticationResult.class);
 			
-			return response.getStatusCode().ordinal() == 200; // && what?
+			Log.d("LoginRestClient", "ResponseEntity " + response.getBody() );
 			
- 		} catch (HttpClientErrorException e) {			
+			
+			return response.getBody();
+			
+ 		} catch (HttpClientErrorException e) {		
+ 			Log.d("LoginRestClient", "Erro ao tentar realizar login: " + e.getMessage() );
  			e.printStackTrace();
-			return false;
+			return new AuthenticationResult();
 		} 
 	}
 }

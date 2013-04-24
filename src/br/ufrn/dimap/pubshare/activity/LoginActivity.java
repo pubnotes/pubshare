@@ -1,6 +1,7 @@
 package br.ufrn.dimap.pubshare.activity;
 
 import br.ufrn.dimap.pubshare.restclient.LoginRestClient;
+import br.ufrn.dimap.pubshare.restclient.results.AuthenticationResult;
 import br.ufrn.dimap.pubshare.util.AndroidUtils;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -214,8 +215,13 @@ public class LoginActivity extends Activity {
 	public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 		@Override
 		protected Boolean doInBackground(Void... params) {
+			LoginRestClient restClient = new LoginRestClient();
 			
-			return new LoginRestClient().login( LoginActivity.this.mEmail , LoginActivity.this.mPassword );			
+			AuthenticationResult authenticationResult = restClient.login( LoginActivity.this.mEmail , LoginActivity.this.mPassword );
+			
+			// TODO store/process preferences
+			
+			return authenticationResult.isSuccess();
 		}
 
 		@Override
