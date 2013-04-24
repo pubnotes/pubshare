@@ -41,5 +41,5 @@
     <string name="title_activity_search_people">SearchPeopleActivity</string>
     <string name="title_activity_show_profile">ShowProfileActivity</string>
     <string name="title_activity_edit_profile">EditProfileActivity</string>
-
+    
 </resources>
