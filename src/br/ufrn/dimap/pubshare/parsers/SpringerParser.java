@@ -32,7 +32,7 @@ public class SpringerParser extends Parser{
 	}
 
 	@Override
-	protected String retirarTextoEspecial(String text) {
+	protected String replaceSpecialText(String text) {
 		// TODO Auto-generated method stub
 		return null;
 	}

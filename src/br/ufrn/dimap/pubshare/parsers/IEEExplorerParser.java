@@ -51,7 +51,7 @@ public class IEEExplorerParser extends Parser {
 
 			Article article = new Article();
 			String title = link.getElementsByTag("input").attr("title");
-			title = retirarTextoEspecial(title);
+			title = replaceSpecialText(title);
 			article.setTitle(title);
 			
 			Elements nomesAutores = link.getElementsByTag("a");
@@ -66,11 +66,11 @@ public class IEEExplorerParser extends Parser {
 		}
 	}
 	
-	protected String retirarTextoEspecial(String tituloArtigo) {
-		tituloArtigo = tituloArtigo.replace("<span class=\'snippet\'>", "");
-		tituloArtigo = tituloArtigo.replace("</span>", "");
-		tituloArtigo = tituloArtigo.replace("Select this article: ", "");
-		return tituloArtigo;
+	protected String replaceSpecialText(String text) {
+		text = text.replace("<span class=\'snippet\'>", "");
+		text = text.replace("</span>", "");
+		text = text.replace("Select this article: ", "");
+		return text;
 	}
 
 

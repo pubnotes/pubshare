@@ -41,7 +41,7 @@ public abstract class Parser {
 	 * @param tituloArtigo
 	 * @return
 	 */
-	protected abstract String retirarTextoEspecial(String text);
+	protected abstract String replaceSpecialText(String text);
 	
 	
 	/**
