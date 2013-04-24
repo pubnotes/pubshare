@@ -50,10 +50,13 @@ public class IEEExplorerParser extends Parser {
 		for (Element link : links) {
 
 			Article article = new Article();
+			
+			//title
 			String title = link.getElementsByTag("input").attr("title");
 			title = replaceSpecialText(title);
 			article.setTitle(title);
 			
+			//authors
 			Elements nomesAutores = link.getElementsByTag("a");
 			for (Element element : nomesAutores) {
 				if (element.getElementById("preferredName") != null) {
@@ -61,6 +64,27 @@ public class IEEExplorerParser extends Parser {
 					article.getAuthors().add(author);
 				}
 			}
+			
+			//abstract
+			Elements abstracts =  link.getElementsByClass("RevealContent");
+			for (Element element : abstracts) {
+			  article.setAbztract(element.text());
+			}
+
+			
+			Elements conferenciaAnoLinks = link.getElementsByTag("a");
+			for (Element element : conferenciaAnoLinks) {
+				String linkHref = element.attr("href");
+				// conference
+				if (linkHref.contains("mostRecentIssue")) {
+					article.setEventInformation(element.text());
+				}
+				//download link
+				if (linkHref.contains("stamp")) {
+					article.setDownloadLink("http://ieeexplore.ieee.org"+element.attr("href"));
+				}
+			}
+			
 			
 			articles.add(article);
 		}
