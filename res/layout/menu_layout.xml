@@ -104,7 +104,7 @@
 			        android:id="@+id/imageButton4"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:src="@drawable/ic_menu_star"
+			        android:src="@drawable/edit1"
 		            android:layout_marginLeft="0dip"
 		            android:layout_marginRight="20dp"
 		            android:layout_marginTop="20dip"

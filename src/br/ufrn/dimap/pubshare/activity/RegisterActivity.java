@@ -20,6 +20,7 @@ public class RegisterActivity extends Activity {
 						Toast.makeText(RegisterActivity	.this,
 								"Registered account successfully!", Toast.LENGTH_SHORT).show();
 						Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+						i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		                startActivity(i);
 					}
 				}); 
