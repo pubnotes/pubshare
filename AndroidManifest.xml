@@ -25,18 +25,15 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        
+        </activity>        
         <activity
             android:name="br.ufrn.dimap.pubshare.activity.ArticleListActivity"
             android:label="@string/title_activity_article_list" >
-        </activity>
-        
+        </activity>        
         <activity
             android:name="br.ufrn.dimap.pubshare.download.activity.ArticlesDownloadedActivity"
             android:label="@string/title_activity_articles_downloaded" >
-        </activity>
-        
+        </activity>        
         <service android:name="br.ufrn.dimap.pubshare.download.service.DownloaderService" />
 
         <receiver android:name="br.ufrn.dimap.pubshare.download.receiver.ClickDownloadedReceiver" >
@@ -58,8 +55,7 @@
         <activity
             android:name="br.ufrn.dimap.pubshare.activity.RegisterActivity"
             android:label="@string/title_activity_register" >
-        </activity>
-        
+        </activity>        
         <!-- Evaluation activities -->
         <activity
             android:name="br.ufrn.dimap.pubshare.evaluation.ArticleEvaluationDetailActivity"
