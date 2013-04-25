@@ -41,17 +41,16 @@
                     android:text="Log out" />
             </LinearLayout>
             
-            <!-- Footer Start -->
-	  
-	  		<LinearLayout android:id="@+id/footer"
+         <!-- Footer Start -->
+  		<LinearLayout android:id="@+id/footer"
   				android:layout_width="fill_parent"
   				android:layout_height="90dip"
   				android:background="@layout/footer_repeat"
   				android:layout_alignParentBottom="true"
-  				android:layout_below="@+id/menu"
+  				android:layout_below="@id/menu"
   				>
-                
-  		    </LinearLayout>
-	  		<!-- Footer Ends -->
+  		</LinearLayout>
+  		<!-- Footer Ends --> 
+            
         </RelativeLayout>
     </ScrollView>

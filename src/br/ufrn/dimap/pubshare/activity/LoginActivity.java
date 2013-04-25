@@ -1,8 +1,8 @@
 package br.ufrn.dimap.pubshare.activity;
 
-import br.ufrn.dimap.pubshare.restclient.LoginRestClient;
-import br.ufrn.dimap.pubshare.restclient.results.AuthenticationResult;
-import br.ufrn.dimap.pubshare.util.AndroidUtils;
+import java.util.HashMap;
+
+import br.ufrn.dimap.pubshare.util.SessionManager;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
@@ -12,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -24,6 +25,10 @@ import android.widget.TextView;
  * well.
  */
 public class LoginActivity extends Activity {
+	
+	// Session Manager Class
+    SessionManager session;
+	
 	/**
 	 * A dummy authentication store containing known user names and passwords.
 	 * TODO: remove after connecting to a real authentication system.
@@ -57,6 +62,9 @@ public class LoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_login);
+		
+		   // Session Manager
+        session = new SessionManager(getApplicationContext()); 
 		
 		TextView registerScreen = (TextView) findViewById(R.id.link_to_register);
 		
@@ -215,13 +223,15 @@ public class LoginActivity extends Activity {
 	public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			LoginRestClient restClient = new LoginRestClient();
+			//PROBLEMA
+			//LoginRestClient restClient = new LoginRestClient();
 			
-			AuthenticationResult authenticationResult = restClient.login( LoginActivity.this.mEmail , LoginActivity.this.mPassword );
+			//AuthenticationResult authenticationResult = restClient.login( LoginActivity.this.mEmail , LoginActivity.this.mPassword );
 			
 			// TODO store/process preferences
 			
-			return authenticationResult.isSuccess();
+			//return authenticationResult.isSuccess();
+			return true;
 		}
 
 		@Override
@@ -230,9 +240,23 @@ public class LoginActivity extends Activity {
 			showProgress(false);
 
 			if (success) {
-				finish();
+				
+				//Aqui eu seto os dados do usuario, dado que ele conseguiu se logar com sucesso
+				// Creating user login session
+				session.createLoginSession(LoginActivity.this.mEmail, LoginActivity.this.mPassword);
+				//a partir de agora os dados de login do usuario podem ser acessados pelas outras activities
+				// get user data from session
+		        HashMap<String, String> user = session.getUserDetails();
+		        // name
+		        String username = user.get(SessionManager.KEY_USERNAME);
+		        // email
+		        String password = user.get(SessionManager.KEY_PASSWORD);
+				Log.d("User logged", "Email " + username +  " Password " + password );
+				
+				//O Profile serah exibido vazio ateh que o usuario edite o profile
 				Intent i = new Intent(getApplicationContext(), ShowProfileActivity.class);
                 startActivity(i);
+                finish();
 			} else {
 				mPasswordView
 						.setError(getString(R.string.error_incorrect_password));

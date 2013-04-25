@@ -13,6 +13,10 @@ public class ShowProfileActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_show_profile);
+		
+		//Aqui eu devo pegar a ref do User, fazer uma busca no banco
+		//pegar o Profile do user e setar os campos da activity
+		
 		Button btnMenu = (Button) findViewById(R.id.btnMainMenu);
 				btnMenu.setOnClickListener(
 						new View.OnClickListener() {
