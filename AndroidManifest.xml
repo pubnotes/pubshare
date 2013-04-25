@@ -14,7 +14,6 @@
 
     <application
         android:allowBackup="true"
-        android:debuggable="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
@@ -76,8 +75,7 @@
             android:name="br.ufrn.dimap.pubshare.evaluation.ArticleEvaluationActivity"
             android:label="@string/title_activity_article_evaluation" >
         </activity>
-        
-        
+                
         <activity
             android:name="br.ufrn.dimap.pubshare.activity.MenuActivity"
             android:label="@string/title_activity_menu" >
