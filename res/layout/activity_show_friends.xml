@@ -9,7 +9,7 @@
   		android:layout_height="wrap_content" android:background="#fff">
   		
         <LinearLayout
-                android:id="@+id/searchpeople"
+                android:id="@+id/showfriends"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/include1"
@@ -19,21 +19,20 @@
               <TextView android:layout_width="fill_parent"
 		  		android:layout_height="wrap_content"
 		  		android:textColor="#372c24"
-		  		android:text="Search people on Pubshare..."
+		  		android:text="Friends on Pubshare..."
 		  		android:textSize="15sp"
 		  		android:gravity="center"
 		  		android:layout_marginTop="15dip"
 			   />
-                
-               <include layout="@layout/search_android_layout" /> 	
-             
          </LinearLayout>
         
     <ListView
-        android:id="@+id/list_view_people_detail"
+        android:id="@+id/list_view_friends_detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/searchpeople" >
+        android:layout_below="@+id/searchpeople" 
+        android:layout_marginTop="40dip"
+        >
     </ListView>
      
   		

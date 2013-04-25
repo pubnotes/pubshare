@@ -13,8 +13,30 @@ public class User implements Serializable  {
 	private boolean onSigned;
 	private String[] friends;
 	private String[] tags;
-	private static  HashMap<String, List<String>> tagToUsers = new HashMap<String, List<String>>();
+	private HashMap<String, List<String>> tagToUsers;
+	
+	public HashMap<String, List<String>> getTagToUsers() {
+		return tagToUsers;
+	}
+
+
+	public void setTagToUsers(HashMap<String, List<String>> tagToUsers) {
+		this.tagToUsers = tagToUsers;
+	}
+
 	private Profile userprofile;
+	
+	public User(){
+		this.ID = 0;
+		this.username = "";
+		this.useremail = "";
+		this.password = "";
+		this.onSigned = false;
+		this.friends = null;
+		this.tags = null;
+		this.tagToUsers = new HashMap<String, List<String>>();
+		this.userprofile = new Profile();
+	}
 	
 	
 	public List<String> getUsersFromTag(String tag) {
@@ -59,8 +81,6 @@ public class User implements Serializable  {
 	public void setUserprofile(Profile userprofile) {
 		this.userprofile = userprofile;
 	}
-
-
 
 	public String[] getFriends() {
 		return friends;

@@ -1,10 +1,13 @@
 package br.ufrn.dimap.pubshare.activity;
 
+import br.ufrn.dimap.pubshare.domain.User;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class RegisterActivity extends Activity {
@@ -13,6 +16,21 @@ public class RegisterActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
+		
+		//Aqui devo pegar as informacoes, criar um User 
+		
+		EditText nameText = (EditText) findViewById(R.id.reg_fullname);
+		EditText mailText = (EditText) findViewById(R.id.reg_email);
+		EditText passwordText = (EditText) findViewById(R.id.reg_password);
+		
+		//User estah se registrando, ainda com profile vazio, tags e amigos vazios
+		User user = new User();
+		user.setUsername(nameText.getText().toString());
+		user.setUseremail(mailText.getText().toString());
+		user.setPassword(passwordText.getText().toString());
+		
+		//e mandar pra o servidor
+		
 		findViewById(R.id.btnRegister).setOnClickListener(
 				new View.OnClickListener() {
 					@Override
