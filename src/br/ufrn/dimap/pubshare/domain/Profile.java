@@ -17,6 +17,18 @@ public class Profile implements Serializable {
 	private String email;
 	private String phone;
 	
+	public Profile(){
+		this.institution = "";
+		this.degree = "";
+		this.location = "";
+		this.gender = "";
+		this.birthday = "";
+		this.aboutme = "";
+		this.facebook = "";
+		this.email = "";
+		this.phone = "";
+	}
+	
 	
 	public String getInstitution() {
 		return institution;

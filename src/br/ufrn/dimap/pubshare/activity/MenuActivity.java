@@ -1,6 +1,7 @@
 package br.ufrn.dimap.pubshare.activity;
 
 
+import br.ufrn.dimap.pubshare.util.SessionManager;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -15,19 +16,53 @@ import android.view.View;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class MenuActivity extends Activity {
+	
+	// Session Manager Class
+	//usar sempre que precisar pegar info do usuario logado atualmente
+	SessionManager session;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_menu);
 		
-
+		 // Session class instance
+        session = new SessionManager(getApplicationContext());
+		
+		findViewById(R.id.imageButton1).setOnClickListener(
+				new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						Intent i = new Intent(getApplicationContext(), SearchPeopleActivity.class);
+		                startActivity(i);
+					}
+				});
+		
+		findViewById(R.id.imageButton2).setOnClickListener(
+				new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						Intent i = new Intent(getApplicationContext(), ShowFriendsActivity.class);
+		                startActivity(i);
+					}
+				});
+		
 		findViewById(R.id.imageButton4).setOnClickListener(
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
 						Intent i = new Intent(getApplicationContext(), EditProfileActivity.class);
 		                startActivity(i);
+					}
+				});
+		
+		
+		
+		findViewById(R.id.logout_button).setOnClickListener(
+				new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						session.logoutUser();
 					}
 				});
 	}
