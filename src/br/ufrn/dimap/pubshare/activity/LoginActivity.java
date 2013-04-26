@@ -251,7 +251,7 @@ public class LoginActivity extends Activity {
 		        String username = user.get(SessionManager.KEY_USERNAME);
 		        // email
 		        String password = user.get(SessionManager.KEY_PASSWORD);
-				Log.d("User logged", "Email " + username +  " Password " + password );
+				Log.d("User logged", "E-mail " + username +  " Password " + password );
 				
 				//O Profile serah exibido vazio ateh que o usuario edite o profile
 				Intent i = new Intent(getApplicationContext(), ShowProfileActivity.class);
