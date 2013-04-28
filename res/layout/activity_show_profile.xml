@@ -57,7 +57,7 @@
 		                android:paddingRight="32dp"
 		  				android:text="Main Menu"/>
 		          	    
-			</LinearLayout>            
+			</LinearLayout>   
 		  
 	</RelativeLayout>
 </ScrollView>    

@@ -1,5 +1,8 @@
 package br.ufrn.dimap.pubshare.activity;
 
+import java.util.HashMap;
+
+import br.ufrn.dimap.pubshare.util.SessionManager;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
@@ -9,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -21,6 +25,10 @@ import android.widget.TextView;
  * well.
  */
 public class LoginActivity extends Activity {
+	
+	// Session Manager Class
+    SessionManager session;
+	
 	/**
 	 * A dummy authentication store containing known user names and passwords.
 	 * TODO: remove after connecting to a real authentication system.
@@ -55,11 +63,15 @@ public class LoginActivity extends Activity {
 
 		setContentView(R.layout.activity_login);
 		
+		   // Session Manager
+        session = new SessionManager(getApplicationContext()); 
+		
 		TextView registerScreen = (TextView) findViewById(R.id.link_to_register);
 		
 		registerScreen.setOnClickListener(new View.OnClickListener() {
 			 
             public void onClick(View v) {
+            	attemptLogin();
                 // Switching to Register screen
                 Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
                 startActivity(i);
@@ -94,8 +106,7 @@ public class LoginActivity extends Activity {
 					@Override
 					public void onClick(View view) {
 						attemptLogin();
-						Intent i = new Intent(getApplicationContext(), ShowProfileActivity.class);
-		                startActivity(i);
+						
 					}
 				});
 	}
@@ -212,24 +223,14 @@ public class LoginActivity extends Activity {
 	public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			// TODO: attempt authentication against a network service.
-
-			try {
-				// Simulate network access.
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				return false;
-			}
-
-			for (String credential : DUMMY_CREDENTIALS) {
-				String[] pieces = credential.split(":");
-				if (pieces[0].equals(mEmail)) {
-					// Account exists, return true if the password matches.
-					return pieces[1].equals(mPassword);
-				}
-			}
-
-			// TODO: register the new account here.
+			//PROBLEMA
+			//LoginRestClient restClient = new LoginRestClient();
+			
+			//AuthenticationResult authenticationResult = restClient.login( LoginActivity.this.mEmail , LoginActivity.this.mPassword );
+			
+			// TODO store/process preferences
+			
+			//return authenticationResult.isSuccess();
 			return true;
 		}
 
@@ -239,7 +240,23 @@ public class LoginActivity extends Activity {
 			showProgress(false);
 
 			if (success) {
-				finish();
+				
+				//Aqui eu seto os dados do usuario, dado que ele conseguiu se logar com sucesso
+				// Creating user login session
+				session.createLoginSession(LoginActivity.this.mEmail, LoginActivity.this.mPassword);
+				//a partir de agora os dados de login do usuario podem ser acessados pelas outras activities
+				// get user data from session
+		        HashMap<String, String> user = session.getUserDetails();
+		        // name
+		        String username = user.get(SessionManager.KEY_USERNAME);
+		        // email
+		        String password = user.get(SessionManager.KEY_PASSWORD);
+				Log.d("User logged", "Email " + username +  " Password " + password );
+				
+				//O Profile serah exibido vazio ateh que o usuario edite o profile
+				Intent i = new Intent(getApplicationContext(), ShowProfileActivity.class);
+                startActivity(i);
+                finish();
 			} else {
 				mPasswordView
 						.setError(getString(R.string.error_incorrect_password));
