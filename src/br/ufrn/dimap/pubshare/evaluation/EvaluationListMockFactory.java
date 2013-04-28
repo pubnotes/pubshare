@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import br.ufrn.dimap.pubshare.domain.Evaluation;
+import br.ufrn.dimap.pubshare.mocks.UserMockFactory;
 
 public class EvaluationListMockFactory 
 {
@@ -15,14 +16,6 @@ public class EvaluationListMockFactory
 			"not bad bla bla bla...",
 			"poor bla bla bla...",
 			"really poor bla bla bla..."
-			};
-	private static String[] reviewerNames = new String[] 
-			{
-			"Alice",
-			"Bob",
-			"Clair",
-			"David",
-			"Tom"
 			};
 	
 	private static float[] originality = new float[] 
@@ -80,7 +73,7 @@ public class EvaluationListMockFactory
 		for(int i = 0; i < 5; i++)
 		{
 			Evaluation eval = new Evaluation();
-			eval.setReviewerName(reviewerNames[i]);
+			eval.setUser(UserMockFactory.makeUserList().get(i));
 			eval.setReviewerNotes(reviewerNotes[i]);
 			eval.setOriginality(originality[i]);
 			eval.setContribution(contribution[i]);
@@ -97,7 +90,7 @@ public class EvaluationListMockFactory
 	public static Evaluation singleEvaluation()
 	{
 		Evaluation eval = new Evaluation();
-		eval.setReviewerName("Daniel Costa");
+		eval.setUser(UserMockFactory.makeUserList().get(0));
 		eval.setReviewerNotes("excelent bla bla bla...");
 		eval.setOriginality(4.0f);
 		eval.setContribution(4.0f);
