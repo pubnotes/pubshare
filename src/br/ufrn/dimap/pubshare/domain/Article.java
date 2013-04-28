@@ -34,6 +34,9 @@ public class Article implements Serializable {
 	
 	public static final String KEY_INSTANCE = "br.ufrn.dimap.pubshare.domain.Article?List";
  
+	/** daniel - added the id in order to get the evaluations from the article via rest **/
+	private long id;
+	
 	private String title;
 
 	private String remoteLocation;
@@ -72,6 +75,16 @@ public class Article implements Serializable {
 	public void setEvaluations(List<Evaluation> evaluations) 
 	{
 		this.evaluations = evaluations;
+	}
+	
+	public long getId() 
+	{
+		return id;
+	}
+
+	public void setId(long id) 
+	{
+		this.id = id;
 	}
 	
 }
