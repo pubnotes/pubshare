@@ -5,6 +5,7 @@ import br.ufrn.dimap.pubshare.activity.R.id;
 import br.ufrn.dimap.pubshare.activity.R.layout;
 import br.ufrn.dimap.pubshare.activity.R.menu;
 import br.ufrn.dimap.pubshare.domain.Evaluation;
+import br.ufrn.dimap.pubshare.restclient.SaveEvaluationRestClient;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -65,7 +66,12 @@ public class ArticleEvaluationActivity extends Activity {
 		OnClickListener save_listener = new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(getApplicationContext(),  "Implement this...", Toast.LENGTH_LONG).show();
+				
+				SaveEvaluationRestClient rest = new SaveEvaluationRestClient();
+				
+				rest.execute(ArticleEvaluationActivity.this.evaluation);
+				
+				Toast.makeText(getApplicationContext(),  "Evaluation Saved...", Toast.LENGTH_LONG).show();
 			}
 		};
 		
