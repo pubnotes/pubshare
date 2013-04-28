@@ -19,6 +19,15 @@ public class Evaluation implements Serializable
 	private float originality, contribution, relevance, readability, relatedWorks, reviewerFamiliarity;
 	private Date evalDate;
 	
+	private int id;
+	
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getReviewerName() 
 	{
 		return reviewerName;
