@@ -34,6 +34,8 @@ public class Article implements Serializable {
 	
 	public static final String KEY_INSTANCE = "br.ufrn.dimap.pubshare.domain.Article?List";
  
+	private int id;
+	
 	private String title;
 
 	private String remoteLocation;
@@ -43,6 +45,14 @@ public class Article implements Serializable {
 	 */
 	private List<Evaluation> evaluations;
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getTitle() {
 		return title;
 	}

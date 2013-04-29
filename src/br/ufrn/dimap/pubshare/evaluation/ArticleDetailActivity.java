@@ -21,6 +21,7 @@ import br.ufrn.dimap.pubshare.domain.Evaluation;
 import br.ufrn.dimap.pubshare.evaluation.ArticleEvaluationDetailActivity;
 import br.ufrn.dimap.pubshare.evaluation.EvaluationListAdapter;
 import br.ufrn.dimap.pubshare.evaluation.EvaluationListMockFactory;
+import br.ufrn.dimap.pubshare.mocks.ArticleMockFactory;
 
 /**
  * Class for detailing a specific Article
@@ -47,8 +48,10 @@ public class ArticleDetailActivity extends Activity
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						Intent i = new Intent(getApplicationContext(), ArticleEvaluationActivity.class);
-		                startActivity(i);
+						Intent intent = new Intent(ArticleDetailActivity.this, ArticleEvaluationActivity.class);
+						Article selectedArticle = ArticleMockFactory.singleArticle();
+						intent.putExtra(Article.KEY_INSTANCE, selectedArticle);
+						startActivity(intent);
 					}
 				});
 		

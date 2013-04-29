@@ -15,17 +15,33 @@ public class Evaluation implements Serializable
 	public static final String KEY_LIST = "br.ufrn.dimap.pubshare.evaluation.domain.Evaluation?List";
 	public static final String KEY_INSTANCE = "br.ufrn.dimap.pubshare.evaluation.domain.Evaluation?Instance";
 	
-	private String reviewerNotes, reviewerName;
+	private User user;
+	private Article article;
+	
+	private String reviewerNotes;
+	
 	private float originality, contribution, relevance, readability, relatedWorks, reviewerFamiliarity;
 	private Date evalDate;
 	
-	public String getReviewerName() 
-	{
-		return reviewerName;
+	private int id;
+	
+	public User getUser() {
+		return user;
 	}
-	public void setReviewerName(String reviewerName) 
-	{
-		this.reviewerName = reviewerName;
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public Article getArticle() {
+		return article;
+	}
+	public void setArticle(Article article) {
+		this.article = article;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getReviewerNotes() 
 	{
