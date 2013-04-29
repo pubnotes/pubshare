@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 
+ * This class represents the evaluations made for articles
  * @author Daniel
  *
  */
@@ -21,6 +21,8 @@ public class Evaluation implements Serializable
 	
 	private int id;
 	
+	/** this flag indicates that the evaluation will be visible to other users**/
+	private boolean published;
 	
 	public int getId() {
 		return id;
@@ -99,6 +101,15 @@ public class Evaluation implements Serializable
 	public void setEvalDate(Date evalDate) 
 	{
 		this.evalDate = evalDate;
+	}
+	
+	public boolean isPublished() 
+	{
+		return published;
+	}
+	public void setPublished(boolean published)
+	{
+		this.published = published;
 	}
 	
 	public float getOverall()
