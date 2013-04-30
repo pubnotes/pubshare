@@ -76,7 +76,7 @@ public class LoginActivity extends PubnotesActivity {
 			public void onClick(View v) {
 				attemptLogin();
 				// Switching to Register screen
-				Intent i = new Intent(getApplicationContext(),
+				Intent i = new Intent(LoginActivity.this,
 						RegisterActivity.class);
 				startActivity(i);
 			}
