@@ -1,11 +1,17 @@
 package br.ufrn.dimap.pubshare.evaluation;
 
+import java.util.List;
+
 import br.ufrn.dimap.pubshare.activity.R;
 import br.ufrn.dimap.pubshare.activity.R.id;
 import br.ufrn.dimap.pubshare.activity.R.layout;
 import br.ufrn.dimap.pubshare.activity.R.menu;
+import br.ufrn.dimap.pubshare.domain.Article;
 import br.ufrn.dimap.pubshare.domain.Evaluation;
+import br.ufrn.dimap.pubshare.domain.User;
+import br.ufrn.dimap.pubshare.mocks.UserMockFactory;
 import br.ufrn.dimap.pubshare.restclient.SaveEvaluationRestClient;
+import br.ufrn.dimap.pubshare.util.SessionManager;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -20,6 +26,7 @@ import android.widget.Toast;
 public class ArticleEvaluationActivity extends Activity {
 
 	private Evaluation evaluation;
+	private SessionManager session;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +34,15 @@ public class ArticleEvaluationActivity extends Activity {
 		setContentView(R.layout.activity_article_evaluation);
 		this.configureUI();
 		
+		session = new SessionManager(getApplicationContext());
+		
 		this.evaluation = new Evaluation();
+		
+		List<User> users = UserMockFactory.makeUserList();
+		Article selectedArticle = (Article) getIntent().getSerializableExtra(Article.KEY_INSTANCE);
+		
+		this.evaluation.setUser( users.get(0) ); 
+		this.evaluation.setArticle(selectedArticle); 
 	}
 
 	@Override

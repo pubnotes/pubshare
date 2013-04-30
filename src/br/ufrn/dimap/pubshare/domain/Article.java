@@ -20,10 +20,10 @@ package br.ufrn.dimap.pubshare.domain;
 import java.io.Serializable;
 import java.util.List;
 
-
  
 /**
- *
+ * Domain class that represents an article.
+ * @author Itamir de Morais Barroca Filho <i>itamir.filho@gmail.com</i>
  * @author Lucas Farias de Oliveira <i>luksrn@gmail.com</i>
  */
 public class Article implements Serializable {
@@ -39,13 +39,25 @@ public class Article implements Serializable {
 	
 	private String title;
 
+	private String abztract;
+	
+	private List<String> authors;
+	
+	private String downloadLink;
+	
+	private String eventInformation;
+	
 	private String remoteLocation;
 	
 	/**
 	 * The evaluations made for the article
 	 */
 	private List<Evaluation> evaluations;
-	
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -67,13 +79,11 @@ public class Article implements Serializable {
 	}
 
 
-	public List<Evaluation> getEvaluations() 
-	{
+	public List<Evaluation> getEvaluations() {
 		return evaluations;
 	}
 
-	public void setEvaluations(List<Evaluation> evaluations) 
-	{
+	public void setEvaluations(List<Evaluation> evaluations) {
 		this.evaluations = evaluations;
 	}
 	
@@ -86,5 +96,36 @@ public class Article implements Serializable {
 	{
 		this.id = id;
 	}
-	
+
+	public String getAbztract() {
+		return abztract;
+	}
+
+	public void setAbztract(String abztract) {
+		this.abztract = abztract;
+	}
+
+	public List<String> getAuthors() {
+		return authors;
+	}
+
+	public void setAuthors(List<String> authors) {
+		this.authors = authors;
+	}
+
+	public String getDownloadLink() {
+		return downloadLink;
+	}
+
+	public void setDownloadLink(String downloadLink) {
+		this.downloadLink = downloadLink;
+	}
+
+	public String getEventInformation() {
+		return eventInformation;
+	}
+
+	public void setEventInformation(String eventInformation) {
+		this.eventInformation = eventInformation;
+	}
 }
