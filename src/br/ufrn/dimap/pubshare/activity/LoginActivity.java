@@ -2,6 +2,9 @@ package br.ufrn.dimap.pubshare.activity;
 
 import java.util.HashMap;
 
+import br.ufrn.dimap.pubshare.PubnotesApplication;
+import br.ufrn.dimap.pubshare.restclient.LoginRestClient;
+import br.ufrn.dimap.pubshare.restclient.results.AuthenticationResult;
 import br.ufrn.dimap.pubshare.util.SessionManager;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -24,11 +27,11 @@ import android.widget.TextView;
  * Activity which displays a login screen to the user, offering registration as
  * well.
  */
-public class LoginActivity extends Activity {
-	
+public class LoginActivity extends PubnotesActivity {
+
 	// Session Manager Class
-    SessionManager session;
-	
+	SessionManager session;
+
 	/**
 	 * A dummy authentication store containing known user names and passwords.
 	 * TODO: remove after connecting to a real authentication system.
@@ -62,21 +65,22 @@ public class LoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_login);
-		
-		   // Session Manager
-        session = new SessionManager(getApplicationContext()); 
-		
+
+		// Session Manager
+		session = new SessionManager(getApplicationContext());
+
 		TextView registerScreen = (TextView) findViewById(R.id.link_to_register);
-		
+
 		registerScreen.setOnClickListener(new View.OnClickListener() {
-			 
-            public void onClick(View v) {
-            	attemptLogin();
-                // Switching to Register screen
-                Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
-                startActivity(i);
-            }
-        });
+
+			public void onClick(View v) {
+				attemptLogin();
+				// Switching to Register screen
+				Intent i = new Intent(LoginActivity.this,
+						RegisterActivity.class);
+				startActivity(i);
+			}
+		});
 
 		// Set up the login form.
 		mEmail = getIntent().getStringExtra(EXTRA_EMAIL);
@@ -106,7 +110,7 @@ public class LoginActivity extends Activity {
 					@Override
 					public void onClick(View view) {
 						attemptLogin();
-						
+
 					}
 				});
 	}
@@ -218,45 +222,60 @@ public class LoginActivity extends Activity {
 
 	/**
 	 * Represents an asynchronous login/registration task used to authenticate
-	 * the user.
+	 * the user.evaluationevaluation
 	 */
 	public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+		
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			//PROBLEMA
-			//LoginRestClient restClient = new LoginRestClient();
-			
-			//AuthenticationResult authenticationResult = restClient.login( LoginActivity.this.mEmail , LoginActivity.this.mPassword );
-			
+			// Receber User e passar como ref pra onPostExecute
+			LoginRestClient restClient = new LoginRestClient();
+
+			AuthenticationResult authenticationResult = restClient.login(
+					LoginActivity.this.mEmail, LoginActivity.this.mPassword);
+
 			// TODO store/process preferences
-			
-			//return authenticationResult.isSuccess();
-			return true;
+
+			return authenticationResult.isSuccess();
+			// return true;
+		}
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
 		}
 
 		@Override
 		protected void onPostExecute(final Boolean success) {
 			mAuthTask = null;
 			showProgress(false);
+			
 
 			if (success) {
-				
-				//Aqui eu seto os dados do usuario, dado que ele conseguiu se logar com sucesso
+
+				// Aqui eu seto os dados do usuario, dado que ele conseguiu se
+				// logar com sucesso
 				// Creating user login session
-				session.createLoginSession(LoginActivity.this.mEmail, LoginActivity.this.mPassword);
-				//a partir de agora os dados de login do usuario podem ser acessados pelas outras activities
+				session.createLoginSession(LoginActivity.this.mEmail,
+						LoginActivity.this.mPassword);
+
+				// a partir de agora os dados de login do usuario podem ser
+				// acessados pelas outras activities
 				// get user data from session
-		        HashMap<String, String> user = session.getUserDetails();
-		        // name
-		        String username = user.get(SessionManager.KEY_USERNAME);
-		        // email
-		        String password = user.get(SessionManager.KEY_PASSWORD);
-				Log.d("User logged", "Email " + username +  " Password " + password );
-				
-				//O Profile serah exibido vazio ateh que o usuario edite o profile
-				Intent i = new Intent(getApplicationContext(), ShowProfileActivity.class);
-                startActivity(i);
-                finish();
+				HashMap<String, String> user = session.getUserDetails();
+				// name
+				String username = user.get(SessionManager.KEY_USERNAME);
+				// email
+				String password = user.get(SessionManager.KEY_PASSWORD);
+				Log.d("User logged", "E-mail " + username + " Password "
+						+ password);
+
+				// O Profile serah exibido vazio ateh que o usuario edite o
+				// profile
+				Intent i = new Intent(LoginActivity.this,
+						ShowProfileActivity.class);
+				startActivity(i);
+				finish();
 			} else {
 				mPasswordView
 						.setError(getString(R.string.error_incorrect_password));

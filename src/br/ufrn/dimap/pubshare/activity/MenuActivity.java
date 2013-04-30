@@ -33,7 +33,7 @@ public class MenuActivity extends Activity {
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						Intent i = new Intent(getApplicationContext(), SearchPeopleActivity.class);
+						Intent i = new Intent(MenuActivity.this, SearchPeopleActivity.class);
 		                startActivity(i);
 					}
 				});
@@ -42,7 +42,7 @@ public class MenuActivity extends Activity {
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						Intent i = new Intent(getApplicationContext(), ShowFriendsActivity.class);
+						Intent i = new Intent(MenuActivity.this, ShowFriendsActivity.class);
 		                startActivity(i);
 					}
 				});
@@ -51,7 +51,7 @@ public class MenuActivity extends Activity {
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						Intent i = new Intent(getApplicationContext(), EditProfileActivity.class);
+						Intent i = new Intent(MenuActivity.this, EditProfileActivity.class);
 		                startActivity(i);
 					}
 				});

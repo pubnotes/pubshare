@@ -60,29 +60,17 @@ public class EditProfileActivity extends Activity {
          * logged in
          * */
         session.checkLogin();
-        
-        // get user data from session
-        HashMap<String, String> user = session.getUserDetails();
-         
-        // name
-        String username = user.get(SessionManager.KEY_USERNAME);
-         
-        // email
-        String password = user.get(SessionManager.KEY_PASSWORD);
 		
 		//acessar o servidor atraves do (username) e atualizar o Profile do user lah
 		//Por enquanto usando mock...
         
-        Log.d("User logged em outra atividade", "Email " + username +  " Password " + password );
-
-		
 		findViewById(R.id.btnEditDone).setOnClickListener(
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
 						Toast.makeText(EditProfileActivity.this,
 								"Updated profile!", Toast.LENGTH_SHORT).show();
-						Intent i = new Intent(getApplicationContext(), ShowProfileActivity.class);
+						Intent i = new Intent(EditProfileActivity.this, ShowProfileActivity.class);
 						i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		                startActivity(i);
 					}
