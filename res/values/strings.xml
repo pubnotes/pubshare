@@ -14,7 +14,6 @@
     <string name="contextual_menu_download">Get this article</string>
     <string name="contextual_menu_view">View details</string>
     <string name="title_activity_article_evaluation">ArticleEvaluationActivity</string>
-    <string name="hello_world">Hello world!</string>
     <string name="article_evaluation">Article Evaluation</string>
     <string name="innovation">Innovation</string>
     <string name="write">Write</string>
@@ -37,10 +36,14 @@
     <string name="evalution_reviewerFamiliarity">Your familiarity with this subject</string>
     <string name="evalution_overall">Overall</string>
     <string name="title_activity_register">Register on Pubshare</string>
-    <string name="title_activity_menu">MenuActivity</string>
+    <string name="title_activity_article_search">Search Article</string>
+	<string name="title">Title</string>
+	<string name="author">Author</string>
+	<string name="search">Search</string>
+    <string name="libraries">Libraries</string>
+ 	<string name="title_activity_menu">MenuActivity</string>
     <string name="title_activity_search_people">SearchPeopleActivity</string>
     <string name="title_activity_show_profile">ShowProfileActivity</string>
     <string name="title_activity_edit_profile">EditProfileActivity</string>
     <string name="title_activity_show_friends">ShowFriendsActivity</string>
-
 </resources>
