@@ -1,20 +1,12 @@
-package br.ufrn.dimap.pubshare.activity;
+package br.ufrn.dimap.pubshare.evaluation;
 
 import java.util.List;
 
-import br.ufrn.dimap.pubshare.domain.Article;
-import br.ufrn.dimap.pubshare.domain.Evaluation;
-import br.ufrn.dimap.pubshare.evaluation.activity.ArticleEvaluationDetailActivity;
-import br.ufrn.dimap.pubshare.evaluation.adapters.EvaluationListAdapter;
-import br.ufrn.dimap.pubshare.evaluation.mocks.EvaluationListMockFactory;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -22,6 +14,14 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import br.ufrn.dimap.pubshare.activity.EditProfileActivity;
+import br.ufrn.dimap.pubshare.activity.R;
+import br.ufrn.dimap.pubshare.domain.Article;
+import br.ufrn.dimap.pubshare.domain.Evaluation;
+import br.ufrn.dimap.pubshare.evaluation.ArticleEvaluationDetailActivity;
+import br.ufrn.dimap.pubshare.evaluation.EvaluationListAdapter;
+import br.ufrn.dimap.pubshare.evaluation.EvaluationListMockFactory;
+import br.ufrn.dimap.pubshare.mocks.ArticleMockFactory;
 
 /**
  * Class for detailing a specific Article
@@ -43,6 +43,18 @@ public class ArticleDetailActivity extends Activity
 		List<Evaluation> evaluations = EvaluationListMockFactory.makeEvaluationList();
 	    selectedArticle.setEvaluations(evaluations);
 		configureEvaluationsSummaryView(selectedArticle);
+		
+		findViewById(R.id.button_evaluate).setOnClickListener(
+				new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						Intent intent = new Intent(ArticleDetailActivity.this, ArticleEvaluationActivity.class);
+						Article selectedArticle = ArticleMockFactory.singleArticle();
+						intent.putExtra(Article.KEY_INSTANCE, selectedArticle);
+						startActivity(intent);
+					}
+				});
+		
 	}
 	
 	/**

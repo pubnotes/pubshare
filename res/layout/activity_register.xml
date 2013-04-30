@@ -75,14 +75,14 @@
 		  
 		  <!-- Register Button -->		
 		  <Button android:id="@+id/btnRegister" 
-		  		android:layout_width="wrap_content"
-		                android:layout_height="wrap_content"
-		                android:layout_gravity="right"
-		                android:layout_marginTop="10dip"
-		                android:paddingLeft="32dp"
-		                android:paddingRight="32dp"
-		  		android:text="Register on Pubshare"/>
-		  
+		  		  android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_gravity="right"
+	                android:layout_marginTop="10dip"
+	                android:paddingLeft="32dp"
+	                android:paddingRight="32dp"
+	  				android:text="Register on Pubshare"/>
+	  
 		    
 		</LinearLayout>
   		<!-- Registration Form Ends -->

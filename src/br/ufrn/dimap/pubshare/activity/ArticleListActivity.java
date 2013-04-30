@@ -34,6 +34,7 @@ import br.ufrn.dimap.pubshare.adapters.ArticleListAdapter;
 import br.ufrn.dimap.pubshare.domain.Article;
 import br.ufrn.dimap.pubshare.download.activity.ArticlesDownloadedActivity;
 import br.ufrn.dimap.pubshare.download.service.DownloaderService;
+import br.ufrn.dimap.pubshare.evaluation.ArticleDetailActivity;
 import br.ufrn.dimap.pubshare.mocks.ArticleMockFactory;
  
 

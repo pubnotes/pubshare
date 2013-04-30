@@ -17,6 +17,7 @@
 
 package br.ufrn.dimap.pubshare.activity;
 
+import br.ufrn.dimap.pubshare.download.activity.ArticlesDownloadedActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

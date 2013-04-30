@@ -54,6 +54,7 @@ public class ArticleMockFactory {
 		
 		for( int i = 0; i < amount ; i++ ){
 			Article article = new Article();
+			article.setId(i+1);
 			article.setTitle( articlesTittles[i] );
 			
 			articles.add(article);
@@ -69,6 +70,7 @@ public class ArticleMockFactory {
 	
 	public static Article singleArticle(){
 		Article article = new Article();
+		article.setId(1);
 		article.setTitle("GTMV: Virtual Museum Authoring Systems");
 		article.setRemoteLocation("http://www.natalnet.br/~luksrn/05068879.pdf");
 		return article;
