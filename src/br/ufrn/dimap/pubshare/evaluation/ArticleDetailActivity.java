@@ -1,9 +1,20 @@
 package br.ufrn.dimap.pubshare.evaluation;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +26,7 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import br.ufrn.dimap.pubshare.activity.EditProfileActivity;
+import br.ufrn.dimap.pubshare.activity.PubnotesActivity;
 import br.ufrn.dimap.pubshare.activity.R;
 import br.ufrn.dimap.pubshare.domain.Article;
 import br.ufrn.dimap.pubshare.domain.Evaluation;
@@ -22,30 +34,48 @@ import br.ufrn.dimap.pubshare.evaluation.ArticleEvaluationDetailActivity;
 import br.ufrn.dimap.pubshare.evaluation.EvaluationListAdapter;
 import br.ufrn.dimap.pubshare.evaluation.EvaluationListMockFactory;
 import br.ufrn.dimap.pubshare.mocks.ArticleMockFactory;
+import br.ufrn.dimap.pubshare.util.Constants;
 
 /**
  * Class for detailing a specific Article
  * @author Daniel
  *
  */
-public class ArticleDetailActivity extends Activity
+public class ArticleDetailActivity extends PubnotesActivity
 {
+	/**
+	 * 1. prepare the content view
+	 * 2. prepare the title
+	 * 3. get the selected article from  the previous activity  
+	 * 4. use async-task to get the evaluations of this article from the server
+	 * 5. register the button 'evaluate' to an listener
+	 */
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		
 		setContentView(R.layout.activity_article_detail);
 		setTitle(R.string.title_activity_article_detail);
-		
-		Article selectedArticle = (Article) getIntent().getSerializableExtra(Article.KEY_INSTANCE);
+		final Article selectedArticle = (Article) getIntent().getSerializableExtra(Article.KEY_INSTANCE);
 		configureMainView(selectedArticle);
 		
-		List<Evaluation> evaluations = EvaluationListMockFactory.makeEvaluationList();
-	    selectedArticle.setEvaluations(evaluations);
-		configureEvaluationsSummaryView(selectedArticle);
+		/** getting evaluations from the server using the async task**/
+		AsyncTask<Article, Void, Evaluation[]> async = new AsyncTask<Article, Void, Evaluation[]>(){
+			protected Evaluation[] doInBackground(Article... article) {
+				return retrieveEvaluations(article[0]);
+			}
+			
+			/** now lets update the interface **/
+			protected void onPostExecute(Evaluation[] result) {
+				selectedArticle.setEvaluations(Arrays.asList(result));
+				configureEvaluationsSummaryView(selectedArticle);
+			}
+		};
+		/** done **/
 		
+		/** giving life to the evaluation button **/
 		findViewById(R.id.button_evaluate).setOnClickListener(
-				new View.OnClickListener() {
+				new View.OnClickListener() 
+				{
 					@Override
 					public void onClick(View view) {
 						Intent intent = new Intent(ArticleDetailActivity.this, ArticleEvaluationActivity.class);
@@ -54,7 +84,6 @@ public class ArticleDetailActivity extends Activity
 						startActivity(intent);
 					}
 				});
-		
 	}
 	
 	/**
@@ -120,15 +149,29 @@ public class ArticleDetailActivity extends Activity
 	};
 	
 	/**
-	 * Listener to handle the click on evaluations
+	 * Here we are going to the pubnotes server in order to get the 
+	 * evaluations from the article selected in the previous activity
+	 * @param article
+	 * @return
 	 */
-	private OnClickListener onClickEvaluationCreate = new OnClickListener()
+	private Evaluation[] retrieveEvaluations(Article article)
 	{
-		@Override
-		public void onClick(View v) 
-		{
-			// TODO Auto-generated method stub
-			/** put the logic for register evaluation view*/
-		}
-	};
+		HttpHeaders headers = new HttpHeaders();
+		Map<String, String> body = new HashMap<String,String>();
+		body.put("article", String.valueOf(article.getId()));
+		
+		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
+		
+		String url = "/evaluation/";
+		ResponseEntity<Evaluation[]> entity = restTemplate.exchange(
+				Constants.URL_SERVER_DANIEL + url, 
+				HttpMethod.GET, 
+				new HttpEntity<Object>(body, headers), 
+				Evaluation[].class);
+		
+		Evaluation[] evaluationsFromUser = entity.getBody();
+				
+		return evaluationsFromUser;
+	}
 }
