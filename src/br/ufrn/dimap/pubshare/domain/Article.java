@@ -121,4 +121,9 @@ public class Article implements Serializable {
 	public void setEventInformation(String eventInformation) {
 		this.eventInformation = eventInformation;
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		return title.equals(((Article) o).getTitle());
+	}
 }

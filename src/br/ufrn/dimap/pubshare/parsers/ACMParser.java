@@ -21,7 +21,7 @@ public class ACMParser extends Parser{
 	public List<Article> findArticlesByTitle(String title) {
 		List<Article> articles = new ArrayList<Article>();
 		try {
-			URL url = new URL("http://dl.acm.org/results.cfm?query=android&querydisp="+title+"&source_query=&start=11&srt=score%20dsc" +
+			URL url = new URL("http://dl.acm.org/results.cfm?query="+title+"&querydisp="+title+"&source_query=&start=11&srt=score%20dsc" +
 					"&short=0&source_disp=&since_month=&since_year=&before_month=&before_year=&coll=DL&dl=GUIDE&termshow=matchall");
 			parseUrl(articles, url);
 		} catch (IOException e) {
@@ -60,17 +60,22 @@ public class ACMParser extends Parser{
 		String linha = input.readLine();
 		
 	    //processando artigos
+		Article article = new Article();
+		article.setAuthors(new ArrayList<String>());
+		
 		boolean chegouAoFim = false;
 		while(!chegouAoFim) {
-			
-			Article article = new Article();
 			
 			linha = input.readLine();
 			
 			//titulo
-			if(linha.contains("citation.cfm?")) 
-				article.setTitle(replaceSpecialText(linha.trim()));
-			
+			if(linha.contains("citation.cfm?"))  {
+				String title = replaceSpecialText(linha.trim());
+				article = new Article();
+				article.setTitle(title);
+				article.setAuthors(new ArrayList<String>());
+			} 
+				
 			//autores
 			if(linha.contains("author_page.cfm?")) 
 				article.getAuthors().add(replaceSpecialText(linha.trim()));
@@ -102,16 +107,24 @@ public class ACMParser extends Parser{
 			if(linha.contains("addinfo")) {
 				linha = input.readLine();
 				event = replaceSpecialText(linha.trim()) + event;
+				article.setEventInformation(event);
 			}
-			article.setEventInformation(event);
+			
 			
 			//link para download
 			if(linha.contains("ft_gateway.cfm")) {
 				article.setDownloadLink(urlDownloadExtract("http://dl.acm.org/"+linha.trim()));
 			}
 
-			articles.add(article);
-			
+			if(article.getTitle() != null) {
+				if(!articles.contains(article))
+					articles.add(article);
+				else {
+					int index = articles.indexOf(article);
+					articles.remove(article);
+					articles.add(index, article);
+				}
+			}
 			if(linha.contains("</html>"))
 				chegouAoFim=true;
 		}

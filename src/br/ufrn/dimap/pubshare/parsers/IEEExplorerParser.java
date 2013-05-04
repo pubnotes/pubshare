@@ -23,7 +23,7 @@ public class IEEExplorerParser extends Parser {
 
 		List<Article> articles = new ArrayList<Article>();
 		try {
-			URL url = new URL("http://ieeexplore.ieee.org/search/searchresult.jsp?newsearch=true&rowsPerPage=100&queryText=" + title);
+			URL url = new URL("http://ieeexplore.ieee.org/search/searchresult.jsp?newsearch=true&rowsPerPage=20&queryText=" + title);
 			parseUrl(articles, url);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -50,6 +50,7 @@ public class IEEExplorerParser extends Parser {
 		for (Element link : links) {
 
 			Article article = new Article();
+			article.setAuthors(new ArrayList<String>());
 			
 			//title
 			String title = link.getElementsByTag("input").attr("title");

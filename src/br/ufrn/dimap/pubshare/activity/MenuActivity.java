@@ -1,6 +1,8 @@
 package br.ufrn.dimap.pubshare.activity;
 
 
+import java.util.List;
+
 import br.ufrn.dimap.pubshare.util.SessionManager;
 import android.os.Bundle;
 import android.app.Activity;
@@ -9,8 +11,10 @@ import android.view.Menu;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View;
 import android.widget.AdapterView.OnItemClickListener;
@@ -29,7 +33,25 @@ public class MenuActivity extends Activity {
 		 // Session class instance
         session = new SessionManager(getApplicationContext());
 		
-		findViewById(R.id.imageButton1).setOnClickListener(
+
+        findViewById(R.id.imageButtonsearch).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				EditText campoConsulta = (EditText) findViewById(R.id.search);
+				String textoConsulta = campoConsulta.getText().toString(); 
+				if(!textoConsulta.trim().equals("")) {
+					//Intent i = new Intent(MenuActivity.this, ArticleSearchActivity.class);
+					Intent i = new Intent(MenuActivity.this, ArticleListActivity.class);
+					i.putExtra("textoConsulta", textoConsulta);
+					startActivity(i);
+				} else {
+					campoConsulta.setError("Demanded field.");
+				}
+				
+			}
+		});
+        
+        findViewById(R.id.imageButton1).setOnClickListener(
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
