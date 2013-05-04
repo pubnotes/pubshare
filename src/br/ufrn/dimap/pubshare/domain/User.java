@@ -14,6 +14,7 @@ public class User implements Serializable  {
 	private String[] friends;
 	private String[] tags;
 	private HashMap<String, List<String>> tagToUsers;
+	private Profile userprofile;
 	
 	public HashMap<String, List<String>> getTagToUsers() {
 		return tagToUsers;
@@ -24,7 +25,6 @@ public class User implements Serializable  {
 		this.tagToUsers = tagToUsers;
 	}
 
-	private Profile userprofile;
 	
 	public User(){
 		this.ID = 0;

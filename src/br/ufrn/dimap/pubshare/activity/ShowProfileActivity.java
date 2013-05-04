@@ -22,7 +22,7 @@ public class ShowProfileActivity extends Activity {
 						new View.OnClickListener() {
 							@Override
 							public void onClick(View view) {
-								Intent i = new Intent(getApplicationContext(), MenuActivity.class);
+								Intent i = new Intent(ShowProfileActivity.this, MenuActivity.class);
 				                startActivity(i);
 							}
 						});

@@ -37,7 +37,7 @@ public class RegisterActivity extends Activity {
 					public void onClick(View view) {
 						Toast.makeText(RegisterActivity	.this,
 								"Registered account successfully!", Toast.LENGTH_SHORT).show();
-						Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+						Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
 						i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		                startActivity(i);
 					}
