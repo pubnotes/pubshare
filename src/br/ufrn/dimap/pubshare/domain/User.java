@@ -4,16 +4,34 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User implements Serializable  {
 	
-	private int ID;
+	@JsonProperty
+	private int id;
+	
+	@JsonProperty
 	private String username;
+	
+	@JsonProperty
 	private String useremail;
+	
+	@JsonProperty
 	private String password;
+	
+	@JsonIgnore
 	private boolean onSigned;
+	@JsonIgnore
 	private String[] friends;
+	@JsonIgnore
 	private String[] tags;
+	@JsonIgnore
 	private HashMap<String, List<String>> tagToUsers;
+	@JsonIgnore
 	private Profile userprofile;
 	
 	public HashMap<String, List<String>> getTagToUsers() {
@@ -27,7 +45,7 @@ public class User implements Serializable  {
 
 	
 	public User(){
-		this.ID = 0;
+		this.id = 0;
 		this.username = "";
 		this.useremail = "";
 		this.password = "";
@@ -44,11 +62,11 @@ public class User implements Serializable  {
 	}
 	
 	
-	public int getID() {
-		return ID;
+	public int getId() {
+		return id;
 	}
-	public void setID(int iD) {
-		ID = iD;
+	public void setID(int id) {
+		this.id = id;
 	}
 	public String getUsername() {
 		return username;

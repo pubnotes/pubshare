@@ -38,6 +38,7 @@ import br.ufrn.dimap.pubshare.evaluation.ArticleDetailActivity;
 import br.ufrn.dimap.pubshare.mocks.ArticleMockFactory;
  
 
+
 /**
  * Responsible for managing the activity of displaying articles available.
  * 
