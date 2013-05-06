@@ -35,8 +35,8 @@ public class SaveEvaluationRestClient extends AsyncTask<Evaluation, Void, Evalua
 			body.put("readability", Float.toString(evaluation.getReadability()));
 			body.put("relatedWorks", Float.toString(evaluation.getRelatedWorks()));
 			body.put("reviewerFamiliarity", Float.toString(evaluation.getReviewerFamiliarity()));
-			body.put("id_user", Integer.toString(evaluation.getUser().getID()));
-			body.put("id_article", Integer.toString(evaluation.getArticle().getId()));
+			body.put("user", String.valueOf(evaluation.getUser().getId()));
+			body.put("article", String.valueOf(evaluation.getArticle().getId()));
 			//body.put("evalDate", ???);
 			 
 			RestTemplate restTemplate = new RestTemplate();
