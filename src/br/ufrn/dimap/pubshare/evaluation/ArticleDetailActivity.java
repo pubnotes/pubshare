@@ -13,6 +13,7 @@ import org.springframework.http.converter.json.MappingJacksonHttpMessageConverte
 import org.springframework.web.client.RestTemplate;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -43,6 +44,7 @@ import br.ufrn.dimap.pubshare.util.Constants;
  */
 public class ArticleDetailActivity extends PubnotesActivity
 {
+	private ProgressDialog dialog; 
 	/**
 	 * 1. prepare the content view
 	 * 2. prepare the title
@@ -60,16 +62,31 @@ public class ArticleDetailActivity extends PubnotesActivity
 		
 		/** getting evaluations from the server using the async task**/
 		AsyncTask<Article, Void, Evaluation[]> async = new AsyncTask<Article, Void, Evaluation[]>(){
+			
+			
+			protected void onPreExecute() {
+				dialog = new ProgressDialog(ArticleDetailActivity.this);
+				super.onPreExecute();
+				dialog.setMessage("Retrieving the evaluations...");
+				dialog.show();
+			}
+			
 			protected Evaluation[] doInBackground(Article... article) {
 				return retrieveEvaluations(article[0]);
+				
 			}
 			
 			/** now lets update the interface **/
 			protected void onPostExecute(Evaluation[] result) {
+				if(dialog.isShowing())
+				{
+					dialog.dismiss();
+				}
 				selectedArticle.setEvaluations(Arrays.asList(result));
 				configureEvaluationsSummaryView(selectedArticle);
 			}
 		};
+		async.execute(new Article[]{selectedArticle});
 		/** done **/
 		
 		/** giving life to the evaluation button **/
@@ -158,15 +175,16 @@ public class ArticleDetailActivity extends PubnotesActivity
 	{
 		HttpHeaders headers = new HttpHeaders();
 		Map<String, String> body = new HashMap<String,String>();
-		body.put("article", String.valueOf(article.getId()));
+		/** FASE DE TESTE, USAR O ID REAL DEPOIS! **/
+		body.put("article", String.valueOf(1));
 		
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
 		
-		String url = "/evaluation/";
+		String url = "/evaluation/evaluationsFromArticle";
 		ResponseEntity<Evaluation[]> entity = restTemplate.exchange(
 				Constants.URL_SERVER_DANIEL + url, 
-				HttpMethod.GET, 
+				HttpMethod.POST, 
 				new HttpEntity<Object>(body, headers), 
 				Evaluation[].class);
 		

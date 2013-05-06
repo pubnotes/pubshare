@@ -35,7 +35,7 @@ public class SaveEvaluationRestClient extends AsyncTask<Evaluation, Void, Evalua
 			body.put("readability", Float.toString(evaluation.getReadability()));
 			body.put("relatedWorks", Float.toString(evaluation.getRelatedWorks()));
 			body.put("reviewerFamiliarity", Float.toString(evaluation.getReviewerFamiliarity()));
-			body.put("user", String.valueOf(evaluation.getUser().getID()));
+			body.put("user", String.valueOf(evaluation.getUser().getId()));
 			body.put("article", String.valueOf(evaluation.getArticle().getId()));
 			//body.put("evalDate", ???);
 			 
