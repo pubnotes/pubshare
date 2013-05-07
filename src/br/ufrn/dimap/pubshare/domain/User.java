@@ -1,6 +1,7 @@
 package br.ufrn.dimap.pubshare.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -26,9 +27,9 @@ public class User implements Serializable  {
 	@JsonIgnore
 	private boolean onSigned;
 	@JsonIgnore
-	private String[] friends;
+	private List<String> friends;
 	@JsonIgnore
-	private String[] tags;
+	private List<String> tags;
 	@JsonIgnore
 	private HashMap<String, List<String>> tagToUsers;
 	@JsonIgnore
@@ -50,8 +51,8 @@ public class User implements Serializable  {
 		this.useremail = "";
 		this.password = "";
 		this.onSigned = false;
-		this.friends = null;
-		this.tags = null;
+		this.friends = new ArrayList<String>();
+		this.tags = new ArrayList<String>();
 		this.tagToUsers = new HashMap<String, List<String>>();
 		this.userprofile = new Profile();
 	}
@@ -100,19 +101,19 @@ public class User implements Serializable  {
 		this.userprofile = userprofile;
 	}
 
-	public String[] getFriends() {
+	public List<String> getFriends() {
 		return friends;
 	}
 
-	public void setFriends(String[] friends) {
+	public void setFriends(List<String> friends) {
 		this.friends = friends;
 	}
 
-	public String[] getTags() {
+	public List<String> getTags() {
 		return tags;
 	}
 
-	public void setTags(String[] tags) {
+	public void setTags(List<String> tags) {
 		this.tags = tags;
 	}
 }
