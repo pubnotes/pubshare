@@ -2,7 +2,10 @@ package br.ufrn.dimap.pubshare.adapters;
 
 import java.util.List;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.nfc.Tag;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -10,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -45,7 +49,7 @@ public class FriendsListAdapter extends ArrayAdapter<User> {
 			adapter_tag
 					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			spinner2.setAdapter(adapter_tag);*/
-			List<String> tags = item.getTags();
+			final List<String> tags = item.getTags();
 			final PopupMenu popupMenu;
 			popupMenu = new PopupMenu(this.getContext(), view.findViewById(R.id.addtag));
 			popupMenu.getMenu().add(Menu.NONE, tags.size()+ 1, Menu.NONE, "Create New Tag");
@@ -66,6 +70,7 @@ public class FriendsListAdapter extends ArrayAdapter<User> {
 	               new PopupMenu.OnMenuItemClickListener() {
 	           @Override
 	       		public boolean onMenuItemClick(MenuItem item) {
+	        	   
 	    	       switch (item.getItemId()) {
 	    	       case 0:
 	    	    	   Toast.makeText(FriendsListAdapter.this.getContext(),
@@ -78,6 +83,46 @@ public class FriendsListAdapter extends ArrayAdapter<User> {
 	    	       case 2:
 	    	    	   Toast.makeText(FriendsListAdapter.this.getContext(),
 	    						"Click!", Toast.LENGTH_SHORT).show();
+	    	           break;
+	    	       case 6:
+		    	    	    LayoutInflater li = LayoutInflater.from(FriendsListAdapter.this.getContext());
+		   				    View promptsView = li.inflate(R.layout.tags, null);
+		    	    	    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+		   					FriendsListAdapter.this.getContext());
+	    
+			   				// set prompts.xml to alertdialog builder
+			   				alertDialogBuilder.setView(promptsView);
+			    
+			   				final EditText userInput = (EditText) promptsView
+			   						.findViewById(R.id.editTextDialogUserInput);
+			    
+			   				// set dialog message
+			   				alertDialogBuilder
+			   					.setCancelable(false)
+			   					.setPositiveButton("OK",
+			   					  new DialogInterface.OnClickListener() {
+			   					    public void onClick(DialogInterface dialog,int id) {
+			   						// get user input and set it to result
+			   						// edit text
+			   					    	String tag = userInput.getText().toString();
+			   					    	int newid = tags.size() + 1;
+			   					    	popupMenu.getMenu().add(Menu.NONE, newid++, Menu.NONE, tag);
+			   					    
+			   					    }
+			   					  })
+			   					.setNegativeButton("Cancel",
+			   					  new DialogInterface.OnClickListener() {
+			   					    public void onClick(DialogInterface dialog,int id) {
+			   						dialog.cancel();
+			   					    }
+			   					  });
+			    
+			   				// create alert dialog
+			   				AlertDialog alertDialog = alertDialogBuilder.create();
+			    
+			   				// show it
+			   				alertDialog.show();
+			    
 	    	           break;
 	    	       }
 	    	       return false;
