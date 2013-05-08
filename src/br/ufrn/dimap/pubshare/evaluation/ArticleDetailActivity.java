@@ -2,7 +2,6 @@ package br.ufrn.dimap.pubshare.evaluation;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.HttpEntity;
@@ -12,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -20,20 +18,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import br.ufrn.dimap.pubshare.activity.EditProfileActivity;
 import br.ufrn.dimap.pubshare.activity.PubnotesActivity;
 import br.ufrn.dimap.pubshare.activity.R;
 import br.ufrn.dimap.pubshare.domain.Article;
 import br.ufrn.dimap.pubshare.domain.Evaluation;
-import br.ufrn.dimap.pubshare.evaluation.ArticleEvaluationDetailActivity;
-import br.ufrn.dimap.pubshare.evaluation.EvaluationListAdapter;
-import br.ufrn.dimap.pubshare.evaluation.EvaluationListMockFactory;
 import br.ufrn.dimap.pubshare.mocks.ArticleMockFactory;
 import br.ufrn.dimap.pubshare.util.Constants;
 
@@ -175,8 +168,7 @@ public class ArticleDetailActivity extends PubnotesActivity
 	{
 		HttpHeaders headers = new HttpHeaders();
 		Map<String, String> body = new HashMap<String,String>();
-		/** FASE DE TESTE, USAR O ID REAL DEPOIS! **/
-		body.put("article", String.valueOf(1));
+		body.put("article", article.getTitle());
 		
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
