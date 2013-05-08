@@ -25,16 +25,24 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import br.ufrn.dimap.pubshare.adapters.ArticleListAdapter;
 import br.ufrn.dimap.pubshare.domain.Article;
+import br.ufrn.dimap.pubshare.domain.Evaluation;
 import br.ufrn.dimap.pubshare.download.activity.ArticlesDownloadedActivity;
 import br.ufrn.dimap.pubshare.download.service.DownloaderService;
 import br.ufrn.dimap.pubshare.evaluation.ArticleDetailActivity;
+import br.ufrn.dimap.pubshare.evaluation.ArticleEvaluationActivity;
+import br.ufrn.dimap.pubshare.evaluation.ArticleEvaluationDetailActivity;
 import br.ufrn.dimap.pubshare.mocks.ArticleMockFactory;
  
 
@@ -48,8 +56,29 @@ public class ArticleListActivity extends Activity {
 	
 	private static final String TAG = ArticleListActivity.class.getSimpleName();
 
+	private Article selectedArticle;
 	private ListView articlesListView;
 	private ArticleListAdapter adapter;
+	
+	
+	/**
+	 * @author daniel.costa
+	 * Listener to get the selected article
+	 */
+	private OnItemLongClickListener onArticleClick = new OnItemLongClickListener()
+	{
+		public boolean onItemLongClick(AdapterView adapter, View v, int position, long id) 
+		{
+			View view = v;
+			if(view == null)
+			{
+				LayoutInflater inflater = getLayoutInflater();
+				inflater.inflate(R.layout.activity_article_list, null);
+			}
+			selectedArticle = (Article) adapter.getItemAtPosition(position); 
+			return false;
+		}
+	};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +99,8 @@ public class ArticleListActivity extends Activity {
 		}
 		articlesListView.setAdapter( adapter );
 		registerForContextMenu(articlesListView);
+		articlesListView.setOnItemLongClickListener(onArticleClick);
+
 	}
 
 	@Override
@@ -77,20 +108,18 @@ public class ArticleListActivity extends Activity {
 		super.onCreateContextMenu(menu, v, menuInfo);
 	    MenuInflater inflater = getMenuInflater();
 	    inflater.inflate(R.menu.menu_long_press_article_list, menu);
-
 	    MenuItem menuItem = (MenuItem)menu.findItem(R.id.contextual_menu_delete);
 	    menuItem.setVisible(false);
 	}
+	
 	
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		
 		Intent intent = null;
-		Article selectedArticle = null;
 		switch (item.getItemId()) {
 			case R.id.contextual_menu_view:
 				intent = new Intent(this,ArticleDetailActivity.class);
-				selectedArticle = ArticleMockFactory.singleArticle();
 				intent.putExtra(Article.KEY_INSTANCE, selectedArticle);
 				startActivity(intent);
 				return true;
