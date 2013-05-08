@@ -5,6 +5,7 @@ import java.util.List;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.nfc.Tag;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import br.ufrn.dimap.pubshare.activity.R;
+import br.ufrn.dimap.pubshare.activity.ShowFriendsActivity;
 import br.ufrn.dimap.pubshare.domain.User;
 import br.ufrn.dimap.pubshare.mocks.UserMockFactory;
 
@@ -49,7 +51,8 @@ public class FriendsListAdapter extends ArrayAdapter<User> {
 			adapter_tag
 					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			spinner2.setAdapter(adapter_tag);*/
-			final List<String> tags = item.getTags();
+			User user = UserMockFactory.makeSingleUser();
+			final List<String> tags = user.getTags();
 			final PopupMenu popupMenu;
 			popupMenu = new PopupMenu(this.getContext(), view.findViewById(R.id.addtag));
 			popupMenu.getMenu().add(Menu.NONE, tags.size()+ 1, Menu.NONE, "Create New Tag");
@@ -105,9 +108,11 @@ public class FriendsListAdapter extends ArrayAdapter<User> {
 			   						// get user input and set it to result
 			   						// edit text
 			   					    	String tag = userInput.getText().toString();
+			   					    	//adicionando nova tag a lista de tags do user
+			   					    	tags.add(tag);
 			   					    	int newid = tags.size() + 1;
 			   					    	popupMenu.getMenu().add(Menu.NONE, newid++, Menu.NONE, tag);
-			   					    
+			   					    	FriendsListAdapter.this.notifyDataSetChanged();
 			   					    }
 			   					  })
 			   					.setNegativeButton("Cancel",
