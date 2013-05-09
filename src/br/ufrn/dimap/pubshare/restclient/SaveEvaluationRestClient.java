@@ -47,7 +47,7 @@ public class SaveEvaluationRestClient extends AsyncTask<Evaluation, Void, Evalua
 			}
 			
 			ResponseEntity<EvaluationResult> response = restTemplate.exchange(  
-					Constants.URL_SERVER_DANIEL + url, 
+					Constants.URL_SERVER + url, 
 					HttpMethod.POST, 
 					new HttpEntity<Object>(evaluation, requestHeaders), EvaluationResult.class);
 			

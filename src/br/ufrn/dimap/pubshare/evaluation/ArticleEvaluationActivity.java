@@ -42,7 +42,7 @@ public class ArticleEvaluationActivity extends PubnotesActivity {
 		//List<User> users = UserMockFactory.makeUserList();
 		
 		Article selectedArticle = (Article) getIntent().getSerializableExtra(Article.KEY_INSTANCE);
-		User user = getCurrentUser();
+		User user = UserMockFactory.makeSingleUser(); //getCurrentUser();
 		this.evaluation.setUser(user); 
 		this.evaluation.setArticle(selectedArticle); 
 	}
