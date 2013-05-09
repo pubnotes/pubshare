@@ -240,10 +240,10 @@ public final class R {
         public static final int show_profile=0x7f070009;
     }
     public static final class string {
-        public static final int action_forgot_password=0x7f050032;
+        public static final int action_forgot_password=0x7f050033;
         public static final int action_settings=0x7f050007;
-        public static final int action_sign_in_register=0x7f050030;
-        public static final int action_sign_in_short=0x7f050031;
+        public static final int action_sign_in_register=0x7f050031;
+        public static final int action_sign_in_short=0x7f050032;
         public static final int app_name=0x7f050000;
         public static final int article_evaluation=0x7f05000d;
         public static final int article_removed=0x7f050017;
@@ -258,10 +258,10 @@ public final class R {
         public static final int contextual_menu_view=0x7f05000b;
         public static final int do_you_really_want_to=0x7f050016;
         public static final int download_complete=0x7f05001a;
-        public static final int error_field_required=0x7f050037;
-        public static final int error_incorrect_password=0x7f050036;
-        public static final int error_invalid_email=0x7f050034;
-        public static final int error_invalid_password=0x7f050035;
+        public static final int error_field_required=0x7f050038;
+        public static final int error_incorrect_password=0x7f050037;
+        public static final int error_invalid_email=0x7f050035;
+        public static final int error_invalid_password=0x7f050036;
         public static final int evaluation_originality=0x7f05001c;
         public static final int evaluation_readability=0x7f05001e;
         public static final int evalution_contribution=0x7f05001d;
@@ -271,17 +271,18 @@ public final class R {
         public static final int external_storage_unavailable=0x7f050018;
         public static final int innovation=0x7f05000e;
         public static final int libraries=0x7f050027;
-        public static final int login_progress_signing_in=0x7f050033;
+        public static final int login_progress_signing_in=0x7f050034;
         public static final int menu_my_downloads=0x7f050006;
         public static final int menu_search=0x7f050005;
         public static final int no=0x7f050014;
         /**  Strings related to login 
          */
-        public static final int prompt_email=0x7f05002e;
-        public static final int prompt_password=0x7f05002f;
+        public static final int prompt_email=0x7f05002f;
+        public static final int prompt_password=0x7f050030;
         public static final int relevance=0x7f050010;
         public static final int save=0x7f050012;
         public static final int search=0x7f050026;
+        public static final int searching=0x7f05002d;
         public static final int title=0x7f050024;
         public static final int title_activity_article_detail=0x7f050002;
         public static final int title_activity_article_evaluation=0x7f05000c;
@@ -290,7 +291,7 @@ public final class R {
         public static final int title_activity_articles_downloaded=0x7f050003;
         public static final int title_activity_edit_profile=0x7f05002b;
         public static final int title_activity_evaluation_article_detail=0x7f050004;
-        public static final int title_activity_login=0x7f05002d;
+        public static final int title_activity_login=0x7f05002e;
         public static final int title_activity_menu=0x7f050028;
         public static final int title_activity_register=0x7f050022;
         public static final int title_activity_search_people=0x7f050029;
