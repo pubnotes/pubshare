@@ -174,7 +174,7 @@ public class ArticleDetailActivity extends PubnotesActivity
 		
 		String url = "/evaluation/evaluationsFromArticle";
 		ResponseEntity<Evaluation[]> entity = restTemplate.exchange(
-				Constants.URL_SERVER_DANIEL + url, 
+				Constants.URL_SERVER + url, 
 				HttpMethod.POST, 
 				new HttpEntity<Object>(body, headers), 
 				Evaluation[].class);
