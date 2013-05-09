@@ -57,7 +57,7 @@ public class UserMockFactory {
 		for( int i = 0; i < 5 ; i++ ){
 			User user = new User();
 			user.setID(i+1);
-			user.setOnSigned(true);
+			user.setOnsigned(true);
 			user.setUsername(usersNames[i]);
 			user.setUseremail(usersMails[i]);
 			user.setPassword(usersPasswords[i]);
@@ -117,7 +117,7 @@ public class UserMockFactory {
 		
 		u.setFriends(getUsersFriends());
 		u.setID(0);
-		u.setOnSigned(true);
+		u.setOnsigned(true);
 		u.setPassword("1234");
 		u.setTags(getUsersTags());
 		u.setTagToUsers(makeHash());

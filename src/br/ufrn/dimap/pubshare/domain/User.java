@@ -13,27 +13,34 @@ import org.codehaus.jackson.annotate.JsonProperty;
 public class User implements Serializable  {
 	
 	@JsonProperty
-	private int id;
+	private long id;
 	
 	@JsonProperty
 	private String username;
-	
 	@JsonProperty
 	private String useremail;
-	
 	@JsonProperty
 	private String password;
-	
-	@JsonIgnore
-	private boolean onSigned;
-	@JsonIgnore
+	@JsonProperty
+	private boolean onsigned;
+	@JsonProperty
 	private List<String> friends;
-	@JsonIgnore
+	@JsonProperty
 	private List<String> tags;
-	@JsonIgnore
+	@JsonProperty
 	private HashMap<String, List<String>> tagToUsers;
-	@JsonIgnore
+	@JsonProperty
 	private Profile userprofile;
+	
+	public User(){
+		this.id = 0;
+		this.onsigned = false;
+		this.friends = new ArrayList<String>();
+		this.tags = new ArrayList<String>();
+		this.tagToUsers = new HashMap<String, List<String>>();
+		this.userprofile = new Profile();
+	}
+	
 	
 	public HashMap<String, List<String>> getTagToUsers() {
 		return tagToUsers;
@@ -44,29 +51,15 @@ public class User implements Serializable  {
 		this.tagToUsers = tagToUsers;
 	}
 
-	
-	public User(){
-		this.id = 0;
-		this.username = "";
-		this.useremail = "";
-		this.password = "";
-		this.onSigned = false;
-		this.friends = new ArrayList<String>();
-		this.tags = new ArrayList<String>();
-		this.tagToUsers = new HashMap<String, List<String>>();
-		this.userprofile = new Profile();
-	}
-	
-	
 	public List<String> getUsersFromTag(String tag) {
 		return tagToUsers.get(tag);
 	}
 	
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setID(int id) {
+	public void setID(long id) {
 		this.id = id;
 	}
 	public String getUsername() {
@@ -87,11 +80,11 @@ public class User implements Serializable  {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public boolean isOnSigned() {
-		return onSigned;
+	public boolean isOnsigned() {
+		return onsigned;
 	}
-	public void setOnSigned(boolean onSigned) {
-		this.onSigned = onSigned;
+	public void setOnsigned(boolean onSigned) {
+		this.onsigned = onSigned;
 	}
 	
 	public Profile getUserprofile() {

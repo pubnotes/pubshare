@@ -12,7 +12,7 @@
                 android:id="@+id/searchpeople"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/include1"
+				android:layout_below="@+id/include1"	                
                 android:orientation="vertical"
                 >
 				
