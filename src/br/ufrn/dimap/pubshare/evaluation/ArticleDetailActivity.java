@@ -89,7 +89,6 @@ public class ArticleDetailActivity extends PubnotesActivity
 					@Override
 					public void onClick(View view) {
 						Intent intent = new Intent(ArticleDetailActivity.this, ArticleEvaluationActivity.class);
-						Article selectedArticle = ArticleMockFactory.singleArticle();
 						intent.putExtra(Article.KEY_INSTANCE, selectedArticle);
 						startActivity(intent);
 					}

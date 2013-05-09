@@ -26,18 +26,13 @@ public class SaveEvaluationRestClient extends AsyncTask<Evaluation, Void, Evalua
 		
 		try {
 			HttpHeaders requestHeaders = new HttpHeaders(); 
-			requestHeaders.setContentType(MediaType.APPLICATION_JSON);						 
+			requestHeaders.setContentType(MediaType.APPLICATION_JSON);
+			//articleBody.
 			
-			Map<String, String> body = new HashMap<String, String>();     			
-			body.put("originality", Float.toString(evaluation.getOriginality()));
-			body.put("contribution", Float.toString(evaluation.getContribution()));
-			body.put("relevance", Float.toString(evaluation.getRelevance()));
-			body.put("readability", Float.toString(evaluation.getReadability()));
-			body.put("relatedWorks", Float.toString(evaluation.getRelatedWorks()));
-			body.put("reviewerFamiliarity", Float.toString(evaluation.getReviewerFamiliarity()));
-			body.put("user", String.valueOf(evaluation.getUser().getId()));
-			body.put("article", String.valueOf(evaluation.getArticle().getId()));
-			//body.put("evalDate", ???);
+			//evaluationBody.put("user", String.valueOf(evaluation.getUser().getId()));
+			//evaluationBody.put("article", String.valueOf(evaluation.getArticle().getId()));
+			//apenas testando
+			//evaluationBody.put("evalDate", 1367722800000L+"");
 			 
 			RestTemplate restTemplate = new RestTemplate();
  	
@@ -45,15 +40,16 @@ public class SaveEvaluationRestClient extends AsyncTask<Evaluation, Void, Evalua
 			
 			String url = "";
 			if (evaluation.getId()==0){
-				url = "/evaluation/new";
+				//url = "/evaluation/new";
+				url = "/evaluation/";
 			}else{
 				url = "/evaluation/" + evaluation.getId()+ "/edit";
 			}
 			
 			ResponseEntity<EvaluationResult> response = restTemplate.exchange(  
-					Constants.URL_SERVER + url, 
+					Constants.URL_SERVER_DANIEL + url, 
 					HttpMethod.POST, 
-					new HttpEntity<Object>(body, requestHeaders), EvaluationResult.class);
+					new HttpEntity<Object>(evaluation, requestHeaders), EvaluationResult.class);
 			
 			Log.d("SaveEvaluationRestClient", "ResponseEntity " + response.getBody() );
 			

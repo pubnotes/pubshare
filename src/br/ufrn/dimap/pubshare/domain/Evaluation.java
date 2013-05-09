@@ -15,15 +15,15 @@ import org.codehaus.jackson.annotate.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Evaluation implements Serializable
 {
-	private static final long serialVersionUID = 9042871761299411144L;
-	
+	@JsonIgnore
 	public static final String KEY_LIST = "br.ufrn.dimap.pubshare.evaluation.domain.Evaluation?List";
+	@JsonIgnore
 	public static final String KEY_INSTANCE = "br.ufrn.dimap.pubshare.evaluation.domain.Evaluation?Instance";
 	
 	@JsonProperty
 	private User user;
 	
-	@JsonIgnore
+	@JsonProperty
 	private Article article;
 	
 	@JsonProperty
@@ -135,6 +135,7 @@ public class Evaluation implements Serializable
 		this.published = published;
 	}
 	
+	@JsonIgnore
 	public float getOverall()
 	{
 		return (originality+contribution+relevance+readability+relatedWorks+reviewerFamiliarity)/6.0f;
