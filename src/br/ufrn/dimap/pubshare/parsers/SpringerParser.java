@@ -53,7 +53,8 @@ public class SpringerParser extends Parser{
 		for (Element link : links) {
 
 			Article article = new Article();
-				
+			article.setAuthors(new ArrayList<String>());
+			
 			//Titulo
 			Elements e = link.getElementsByClass("title");
 			String tituloArtigo = e.get(0).text();

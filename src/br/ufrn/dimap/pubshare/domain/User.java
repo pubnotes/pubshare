@@ -110,3 +110,4 @@ public class User implements Serializable  {
 		this.tags = tags;
 	}
 }
+

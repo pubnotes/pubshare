@@ -23,7 +23,6 @@ import java.util.List;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
-
  
 /**
  * Domain class that represents an article.
@@ -65,7 +64,7 @@ public class Article implements Serializable {
 	 */
 	@JsonIgnore
 	private List<Evaluation> evaluations;
-
+	
 	public String getTitle() {
 		return title;
 	}
@@ -94,7 +93,7 @@ public class Article implements Serializable {
 	public void setEvaluations(List<Evaluation> evaluations) {
 		this.evaluations = evaluations;
 	}
-	
+
 	public long getId() 
 	{
 		return id;
@@ -135,5 +134,10 @@ public class Article implements Serializable {
 
 	public void setEventInformation(String eventInformation) {
 		this.eventInformation = eventInformation;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		return title.equals(((Article) o).getTitle());
 	}
 }
