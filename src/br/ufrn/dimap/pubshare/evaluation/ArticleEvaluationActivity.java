@@ -2,6 +2,8 @@ package br.ufrn.dimap.pubshare.evaluation;
 
 import java.util.List;
 
+import br.ufrn.dimap.pubshare.activity.PubnotesActivity;
+import br.ufrn.dimap.pubshare.activity.PubshareActivity;
 import br.ufrn.dimap.pubshare.activity.R;
 import br.ufrn.dimap.pubshare.activity.R.id;
 import br.ufrn.dimap.pubshare.activity.R.layout;
@@ -23,7 +25,7 @@ import android.widget.RatingBar;
 import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.Toast;
 
-public class ArticleEvaluationActivity extends Activity {
+public class ArticleEvaluationActivity extends PubnotesActivity {
 
 	private Evaluation evaluation;
 	private SessionManager session;
@@ -37,11 +39,11 @@ public class ArticleEvaluationActivity extends Activity {
 		session = new SessionManager(getApplicationContext());
 		
 		this.evaluation = new Evaluation();
+		//List<User> users = UserMockFactory.makeUserList();
 		
-		List<User> users = UserMockFactory.makeUserList();
 		Article selectedArticle = (Article) getIntent().getSerializableExtra(Article.KEY_INSTANCE);
-		
-		this.evaluation.setUser( users.get(0) ); 
+		User user = getCurrentUser();
+		this.evaluation.setUser(user); 
 		this.evaluation.setArticle(selectedArticle); 
 	}
 

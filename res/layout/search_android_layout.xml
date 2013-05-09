@@ -4,9 +4,62 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
      >
+     
+    <TableRow
+	        android:id="@+id/tableRow1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:padding="1dip" >
+	       
+        	<RelativeLayout 
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:padding="10dip"
+			    android:orientation="vertical" >
+			   
+			    <TextView
+			      android:id="@+id/articletext"  
+			      android:layout_width="fill_parent"
+			      android:layout_height="wrap_content"
+			      android:text="Search Articles on PubShare:"/>
+			
+			    <Spinner
+			        android:id="@+id/spinner"
+			        android:layout_below="@+id/articletext"
+			        android:layout_width="152dp"
+			        android:layout_height="wrap_content"
+			        android:drawSelectorOnTop="true"
+			        android:entries="@array/source"
+			        android:prompt="@string/spinner_title" />
+			    
+			    <RadioGroup
+			        android:id="@+id/radioSearchop"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_below="@+id/spinner"
+			        >
+			        <RadioButton
+			            android:id="@+id/radioAuthor"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:text="Author" 
+			            android:checked="true" />
+			 
+			        <RadioButton
+			            android:id="@+id/radioTitle"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:text="Title" />
+ 
+    			</RadioGroup>
+
+			</RelativeLayout>
+        	 
+      
+    </TableRow>  	
     
       <TableRow
-	        android:id="@+id/tableRow1"
+	        android:id="@+id/tableRow2"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:padding="1dip" >

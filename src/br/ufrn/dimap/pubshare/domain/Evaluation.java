@@ -3,27 +3,44 @@ package br.ufrn.dimap.pubshare.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
+
 /**
- * 
+ * This class represents the evaluations made for articles
  * @author Daniel
  *
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Evaluation implements Serializable
 {
-	private static final long serialVersionUID = 9042871761299411144L;
-	
+	@JsonIgnore
 	public static final String KEY_LIST = "br.ufrn.dimap.pubshare.evaluation.domain.Evaluation?List";
+	@JsonIgnore
 	public static final String KEY_INSTANCE = "br.ufrn.dimap.pubshare.evaluation.domain.Evaluation?Instance";
 	
+	@JsonProperty
 	private User user;
+	
+	@JsonProperty
 	private Article article;
 	
+	@JsonProperty
 	private String reviewerNotes;
 	
+	@JsonProperty
 	private float originality, contribution, relevance, readability, relatedWorks, reviewerFamiliarity;
+	
+	@JsonProperty
 	private Date evalDate;
 	
+	@JsonProperty
 	private int id;
+	
+	/** this flag indicates that the evaluation will be visible to other users**/
+	@JsonProperty
+	private boolean published;
 	
 	public User getUser() {
 		return user;
@@ -37,6 +54,7 @@ public class Evaluation implements Serializable
 	public void setArticle(Article article) {
 		this.article = article;
 	}
+
 	public int getId() {
 		return id;
 	}
@@ -108,6 +126,16 @@ public class Evaluation implements Serializable
 		this.evalDate = evalDate;
 	}
 	
+	public boolean getPublished() 
+	{
+		return published;
+	}
+	public void setPublished(boolean published)
+	{
+		this.published = published;
+	}
+	
+	@JsonIgnore
 	public float getOverall()
 	{
 		return (originality+contribution+relevance+readability+relatedWorks+reviewerFamiliarity)/6.0f;

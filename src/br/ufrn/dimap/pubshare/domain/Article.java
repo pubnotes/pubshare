@@ -20,47 +20,51 @@ package br.ufrn.dimap.pubshare.domain;
 import java.io.Serializable;
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
  
 /**
  * Domain class that represents an article.
  * @author Itamir de Morais Barroca Filho <i>itamir.filho@gmail.com</i>
  * @author Lucas Farias de Oliveira <i>luksrn@gmail.com</i>
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Article implements Serializable {
 	
-	private static final long serialVersionUID = 8780135162419459741L;
-
+	@JsonIgnore
 	public static final String KEY_LIST = "br.ufrn.dimap.pubshare.domain.Article?Instance";
-	
+	@JsonIgnore
 	public static final String KEY_INSTANCE = "br.ufrn.dimap.pubshare.domain.Article?List";
  
-	private int id;
+	/** daniel - added the id in order to get the evaluations from the article via rest **/
+	@JsonProperty
+	private long id;
 	
+	@JsonProperty
 	private String title;
 
+	@JsonProperty
 	private String abztract;
 	
+	@JsonIgnore
 	private List<String> authors;
 	
+	@JsonProperty
 	private String downloadLink;
 	
+	@JsonProperty
 	private String eventInformation;
 	
+	@JsonProperty
 	private String remoteLocation;
 	
 	/**
 	 * The evaluations made for the article
 	 */
+	@JsonIgnore
 	private List<Evaluation> evaluations;
 	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public String getTitle() {
 		return title;
 	}
@@ -88,6 +92,16 @@ public class Article implements Serializable {
 
 	public void setEvaluations(List<Evaluation> evaluations) {
 		this.evaluations = evaluations;
+	}
+
+	public long getId() 
+	{
+		return id;
+	}
+
+	public void setId(long id) 
+	{
+		this.id = id;
 	}
 
 	public String getAbztract() {

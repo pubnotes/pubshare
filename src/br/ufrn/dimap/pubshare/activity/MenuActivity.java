@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Spinner;
 import android.widget.Toast;
 import android.view.View;
 import android.widget.AdapterView.OnItemClickListener;
@@ -24,6 +25,7 @@ public class MenuActivity extends Activity {
 	// Session Manager Class
 	//usar sempre que precisar pegar info do usuario logado atualmente
 	SessionManager session;
+	private Spinner spinner;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,8 @@ public class MenuActivity extends Activity {
 		 // Session class instance
         session = new SessionManager(getApplicationContext());
 		
-
+		spinner = (Spinner) findViewById(R.id.spinner);
+		
         findViewById(R.id.imageButtonsearch).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
