@@ -47,4 +47,5 @@
     <string name="title_activity_edit_profile">EditProfileActivity</string>
     <string name="title_activity_show_friends">ShowFriendsActivity</string>
     <string name="spinner_title">Search Articles on PubShare</string>
+    <string name="searching">Searching</string>
 </resources>
