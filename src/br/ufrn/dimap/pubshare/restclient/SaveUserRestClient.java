@@ -42,6 +42,10 @@ public class SaveUserRestClient extends AsyncTask<User, Void,UserResult >{
 		 	
 			restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
 			
+			Log.d("JSON USER", "username " + user.getUsername() );
+			Log.d("JSON USER", "email " + user.getUseremail());
+			Log.d("JSON USER", "password " + user.getPassword() );
+			
 			ResponseEntity<UserResult> response = restTemplate.exchange(  
 					Constants.URL_SERVER + "/user/save", 
 					HttpMethod.POST, 
