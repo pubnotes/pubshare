@@ -6,7 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import br.ufrn.dimap.pubshare.adapters.FriendsListAdapter;
+import br.ufrn.dimap.pubshare.domain.Friend;
 import br.ufrn.dimap.pubshare.domain.Profile;
+import br.ufrn.dimap.pubshare.domain.Tag;
 import br.ufrn.dimap.pubshare.domain.User;
 
 public class UserMockFactory {
@@ -46,8 +48,15 @@ public class UserMockFactory {
 	public static List<String> usersTags = new ArrayList<String>(
 		    Arrays.asList("Family", "University", "work", "colleagues","research group" ));
 	
-	public static List<String> getUsersTags() {
-		return usersTags;
+	public static List<Tag> getUsersTags(List<String> usersTags) {
+		List<Tag> tags = new ArrayList<Tag>();
+		for(String userTag : usersTags)
+		{
+			Tag tag = new Tag();
+			tag.setDescription(userTag);
+			tags.add(tag);
+		}
+		return tags;
 	}
 
 	public static List<User> makeUserList(){
@@ -56,44 +65,62 @@ public class UserMockFactory {
 
 		for( int i = 0; i < 5 ; i++ ){
 			User user = new User();
-			user.setID(i+1);
+			user.setId(i+1);
 			user.setOnsigned(true);
 			user.setUsername(usersNames[i]);
 			user.setUseremail(usersMails[i]);
 			user.setPassword(usersPasswords[i]);
-			user.setFriends(getUsersFriends());
-			user.setTags(getUsersTags());
+			user.setFriends(makeFriendList());
+			user.setTags(getUsersTags(usersTags));
 			user.setUserprofile(p);
-			user.setTagToUsers(makeHash());
+			associateFriendsWithTags(user.getFriends(), user.getTags());
 			
 			users.add(user);
 		}
 		return users;
 	}
 	
-	public static List<User> getFriends (User user){
-		List<User> u = new ArrayList<User>();
-		for (int i = 0; i < user.getFriends().size(); i++) {
-			//neste caso, pra cada amigo, deve-se pegar o aboutme do profile
-			User us = new User();
-			us.setUsername(user.getFriends().get(i));
-			us.getUserprofile().setAboutme("Algo sobre mim...");
-			u.add(us);
+	public static List<Friend> makeFriendList(){
+		List<Friend> friends = new ArrayList<Friend>();
+		Profile p = makeSingleProfile();
+
+		for( int i = 0; i < 5 ; i++ ){
+			Friend friend = new Friend();
+			friend.setId(i+1);
+			friend.setOnsigned(true);
+			friend.setUsername(usersNames[i]);
+			friend.setUseremail(usersMails[i]);
+			friend.setPassword(usersPasswords[i]);
+			//friend.setFriends(getFriends(usersFriends));
+			//friend.setTags(getUsersTags(usersTags));
+			friend.setUserprofile(p);
+			//associateFriendsWithTags(user.getFriends(), user.getTags());
+			
+			friends.add(friend);
 		}
-		return u;
+		return friends;
 	}
 	
-	public static HashMap<String, List<String>> makeHash(){
-		HashMap<String, List<String>> h = new HashMap<String, List<String>>();
-		
-		for (String tag : getUsersTags()) {
-			h.put(tag, new ArrayList<String>());
-			
-			for(String user : getUsersFriends()){
-				h.get(tag).add(user);
-			}
+	public static List<Friend> getFriends (List<String> usersFriends){
+		List<Friend> friends = new ArrayList<Friend>();
+		for (int i = 0; i < usersFriends.size(); i++) {
+			//neste caso, pra cada amigo, deve-se pegar o aboutme do profile
+			Friend friend = new Friend();
+			friend.setUsername(usersFriends.get(i));
+			friend.getUserprofile().setAboutme("Algo sobre mim...");
+			friends.add(friend);
 		}
-		return h;
+		return friends;
+	}
+	
+	public static void associateFriendsWithTags(List<Friend> friends ,List<Tag> tags){
+		
+		for(int i = 0; i < 5; i++)
+		{
+			Friend friend = friends.get(i);
+			Tag tag = tags.get(i);
+			friend.setTag(tag);
+		}
 	}
 	
 	
@@ -115,12 +142,12 @@ public class UserMockFactory {
 	public static User makeSingleUser(){
 		User u = new User();
 
-		u.setFriends(getUsersFriends());
-		u.setID(0);
+		//u.setFriends(getUsersFriends());
+		u.setId(0);
 		u.setOnsigned(true);
 		u.setPassword("1234");
-		u.setTags(getUsersTags());
-		u.setTagToUsers(makeHash());
+		//u.setTags(getUsersTags());
+		//u.setTagToUsers(makeHash());
 		u.setUseremail("xy@gmail.com");
 		u.setUsername("Usuario");
 		u.setUserprofile(makeSingleProfile());

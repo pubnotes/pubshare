@@ -52,13 +52,13 @@ public class FriendsListAdapter extends ArrayAdapter<User> {
 					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			spinner2.setAdapter(adapter_tag);*/
 			User user = UserMockFactory.makeSingleUser();
-			final List<String> tags = user.getTags();
+			final List<br.ufrn.dimap.pubshare.domain.Tag> tags = user.getTags();
 			final PopupMenu popupMenu;
 			popupMenu = new PopupMenu(this.getContext(), view.findViewById(R.id.addtag));
 			popupMenu.getMenu().add(Menu.NONE, tags.size()+ 1, Menu.NONE, "Create New Tag");
 			
 			for (int i = 0; i < tags.size(); i++) {
-				popupMenu.getMenu().add(Menu.NONE, i, Menu.NONE, tags.get(i));
+				popupMenu.getMenu().add(Menu.NONE, i, Menu.NONE, tags.get(i).getDescription());
 			}
 		
 			view.findViewById(R.id.addtag).setOnClickListener(new View.OnClickListener() {
@@ -107,11 +107,12 @@ public class FriendsListAdapter extends ArrayAdapter<User> {
 			   					    public void onClick(DialogInterface dialog,int id) {
 			   						// get user input and set it to result
 			   						// edit text
-			   					    	String tag = userInput.getText().toString();
+			   					    	br.ufrn.dimap.pubshare.domain.Tag tag = new br.ufrn.dimap.pubshare.domain.Tag();
+			   					    	tag.setDescription(userInput.getText().toString());
 			   					    	//adicionando nova tag a lista de tags do user
 			   					    	tags.add(tag);
 			   					    	int newid = tags.size() + 1;
-			   					    	popupMenu.getMenu().add(Menu.NONE, newid++, Menu.NONE, tag);
+			   					    	popupMenu.getMenu().add(Menu.NONE, newid++, Menu.NONE, tag.getDescription());
 			   					    	FriendsListAdapter.this.notifyDataSetChanged();
 			   					    }
 			   					  })
