@@ -93,7 +93,7 @@ public class RegisterActivity extends PubnotesActivity {
 			}
 			
 			/** now lets update the interface **/
-			protected void onPostExecute(User result) {
+			protected void onPostExecute(UserResult result) {
 				if(dialog.isShowing())
 				{
 					dialog.dismiss();
