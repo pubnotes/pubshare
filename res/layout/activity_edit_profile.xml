@@ -23,14 +23,14 @@
 				  		android:text="Basic Information"
 				  		android:background="@layout/profile_background"
 				  		android:layout_marginTop="60dip"
-				  		android:textSize="15dip"/>	
+				  		android:textSize="15sp"/>	
 		 	
 		   <TextView android:layout_width="fill_parent"
 				  		android:layout_height="wrap_content"
 				  		android:textColor="#372c24"
 				  		android:layout_marginTop="10dip"
 				  		android:text="  Institution"
-				  		android:textSize="15dip"/>	
+				  		android:textSize="15sp"/>	
 		    <EditText
 		                android:id="@+id/einstitution"
 		                android:layout_width="match_parent"
@@ -45,7 +45,7 @@
 				  		android:layout_height="wrap_content"
 				  		android:textColor="#372c24"
 				  		android:text="  Degree"
-				  		android:textSize="15dip" />	
+				  		android:textSize="15sp" />	
 			<EditText
 		                android:id="@+id/edegree"
 		                android:layout_width="match_parent"
@@ -60,7 +60,7 @@
 				  		android:layout_height="wrap_content"
 				  		android:textColor="#372c24"
 				  		android:text="  City/Country"
-				  		android:textSize="15dip" />	
+				  		android:textSize="15sp" />	
 			 <EditText
 		                android:id="@+id/ecountry"
 		                android:layout_width="match_parent"
@@ -75,7 +75,7 @@
 				  		android:layout_height="wrap_content"
 				  		android:textColor="#372c24"
 				  		android:text="  Gender"
-				  		android:textSize="15dip" />	
+				  		android:textSize="15sp" />	
 			 <EditText
 		                android:id="@+id/egender"
 		                android:layout_width="match_parent"
@@ -91,14 +91,14 @@
 				  		android:textColor="#372c24"
 				  		android:text="Personal Information"
 				  		android:background="@layout/profile_background"
-				  		android:textSize="15dip" />	 
+				  		android:textSize="15sp" />	 
 		    
       		 <TextView android:layout_width="fill_parent"
 				  		android:layout_height="wrap_content"
 				  		android:textColor="#372c24"
 				  		android:layout_marginTop="10dip"
 				  		android:text="  Birthday"
-				  		android:textSize="15dip" />	
+				  		android:textSize="15sp" />	
 			 <EditText
 		                android:id="@+id/ebirthday"
 		                android:layout_width="match_parent"
@@ -113,7 +113,7 @@
 				  		android:layout_height="wrap_content"
 				  		android:textColor="#372c24"
 				  		android:text="  About Me"
-				  		android:textSize="15dip" />	
+				  		android:textSize="15sp" />	
 			 <EditText
 		                android:id="@+id/eaboutme"
 		                android:layout_width="match_parent"
@@ -129,14 +129,14 @@
 				  		android:textColor="#372c24"
 				  		android:text="Contact Information"
 				  		android:background="@layout/profile_background"
-				  		android:textSize="15dip" />		
+				  		android:textSize="15sp" />		
 		 	      
 			 <TextView android:layout_width="fill_parent"
 				  		android:layout_height="wrap_content"
 				  		android:textColor="#372c24"
 				  		android:layout_marginTop="10dip"
 				  		android:text="  Facebook"
-				  		android:textSize="15dip" />	
+				  		android:textSize="15sp" />	
 			 <EditText
 		                android:id="@+id/efacebook"
 		                android:layout_width="match_parent"
@@ -151,12 +151,12 @@
 				  		android:layout_height="wrap_content"
 				  		android:textColor="#372c24"
 				  		android:text="  E-mail"
-				  		android:textSize="15dip" />	
+				  		android:textSize="15sp" />	
 			 <EditText
 		                android:id="@+id/eemail"
 		                android:layout_width="match_parent"
 		                android:layout_height="wrap_content"
-		                android:inputType="text"
+		                android:inputType="textEmailAddress"
 		                android:maxLines="1"
 		                android:singleLine="true"
 		                android:layout_marginTop="5dip"
@@ -166,12 +166,12 @@
 				  		android:layout_height="wrap_content"
 				  		android:textColor="#372c24"
 				  		android:text="  Phone"
-				  		android:textSize="15dip" />	
+				  		android:textSize="15sp" />	
 				 	
 			 <EditText android:id="@+id/ephone"
 		                android:layout_width="match_parent"
 		                android:layout_height="wrap_content"
-		                android:inputType="text"
+		                android:inputType="phone"
 		                android:maxLines="1"
 		                android:singleLine="true"
 		                android:layout_marginTop="5dip"

@@ -48,15 +48,33 @@
         android:layout_toRightOf="@+id/friendrow"
         android:text="DIMAp-UFRN ..." />
     
-     <TextView
+       <!--  <Spinner
+             android:id="@+id/spinner2"
+             android:layout_width="152dp"
+             android:layout_height="wrap_content"
+             android:layout_below="@+id/friendaboutme"
+             android:layout_toRightOf="@+id/friendrow"
+             android:prompt="@string/spinner_title2" />-->
+    	 <TextView
         android:id="@+id/addtag"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/friendaboutme"
         android:textColor="#FF8C00"
-        android:textSize="12dip"
+        android:textSize="10dip"
+        android:layout_marginTop="1dip"
         android:layout_toRightOf="@+id/friendrow"
-        android:text="Add tag +" />
-    
+        android:text="Add tag +" />    
+        
+    	  <!--  <Button
+        android:id="@+id/buttonShowDropDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_below="@id/friendaboutme"
+        android:layout_toRightOf="@+id/friendrow"
+        android:text="Add tag +" />-->
+   	            
  
 </RelativeLayout>
