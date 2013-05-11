@@ -24,42 +24,24 @@ public class User implements Serializable  {
 	@JsonProperty
 	private boolean onsigned;
 	@JsonProperty
-	private List<String> friends;
+	private List<Friend> friends;
 	@JsonProperty
-	private List<String> tags;
-	@JsonProperty
-	private HashMap<String, List<String>> tagToUsers;
+	private List<Tag> tags;
 	@JsonProperty
 	private Profile userprofile;
 	
 	public User(){
 		this.id = 0;
 		this.onsigned = false;
-		this.friends = new ArrayList<String>();
-		this.tags = new ArrayList<String>();
-		this.tagToUsers = new HashMap<String, List<String>>();
+		this.friends = new ArrayList<Friend>();
+		this.tags = new ArrayList<Tag>();
 		this.userprofile = new Profile();
-	}
-	
-	
-	public HashMap<String, List<String>> getTagToUsers() {
-		return tagToUsers;
-	}
-
-
-	public void setTagToUsers(HashMap<String, List<String>> tagToUsers) {
-		this.tagToUsers = tagToUsers;
-	}
-
-	public List<String> getUsersFromTag(String tag) {
-		return tagToUsers.get(tag);
-	}
-	
+	}	
 	
 	public long getId() {
 		return id;
 	}
-	public void setID(long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getUsername() {
@@ -94,19 +76,19 @@ public class User implements Serializable  {
 		this.userprofile = userprofile;
 	}
 
-	public List<String> getFriends() {
+	public List<Friend> getFriends() {
 		return friends;
 	}
 
-	public void setFriends(List<String> friends) {
+	public void setFriends(List<Friend> friends) {
 		this.friends = friends;
 	}
 
-	public List<String> getTags() {
+	public List<Tag> getTags() {
 		return tags;
 	}
 
-	public void setTags(List<String> tags) {
+	public void setTags(List<Tag> tags) {
 		this.tags = tags;
 	}
 }
