@@ -135,15 +135,47 @@ public class UserMockFactory {
 		 profile.setInstitution("UFRN");
 		 profile.setLocation("Rua...");
 		 profile.setPhone("222-3333");
+		 //adicionando um id no mock
+		 profile.setId(1L);
 		 
 		 return profile;
 	}
+	
+	/**public static Profile makeSingleProfile(){
+		Profile profile = new Profile();
+		 profile.setAboutme("Algo sobre mim");
+		 profile.setBirthday("23 de dezembro de 1989");
+		 profile.setDegree("master");
+		 profile.setEmail("xyz@gmail.com");
+		 profile.setFacebook("Userfacebook");
+		 profile.setGender("...");
+		 profile.setInstitution("UFRN");
+		 profile.setLocation("Rua...");
+		 profile.setPhone("222-3333");
+		 return profile;
+	}**/
+	
+	/**public static User makeSingleUser(){
+		User u = new User();
+
+		//u.setFriends(getUsersFriends());
+		u.setId(0);
+		u.setOnsigned(true);
+		u.setPassword("1234");
+		//u.setTags(getUsersTags());
+		//u.setTagToUsers(makeHash());
+		u.setUseremail("xy@gmail.com");
+		u.setUsername("Usuario");
+		u.setUserprofile(makeSingleProfile());
+		
+		return u;
+	}**/
 	
 	public static User makeSingleUser(){
 		User u = new User();
 
 		//u.setFriends(getUsersFriends());
-		u.setId(0);
+		u.setId(1L);
 		u.setOnsigned(true);
 		u.setPassword("1234");
 		//u.setTags(getUsersTags());
