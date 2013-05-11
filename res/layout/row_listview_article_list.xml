@@ -18,6 +18,7 @@
         android:text="IEEE Conference Publications "         
         android:drawableRight="@drawable/ic_navigation_next_item" />
     
+    <!--  
     <TextView
         android:id="@+id/publicationYear"
         style="@style/FontSmall.Gray"        
@@ -32,6 +33,7 @@
         android:layout_toRightOf="@+id/publicationYear"        
         android:paddingBottom="4dp"         
         android:text="Page(s): 8"  />
+	-->
 
       <RatingBar
           android:id="@+id/ratingBar"

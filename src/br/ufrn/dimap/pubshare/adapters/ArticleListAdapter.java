@@ -33,6 +33,7 @@ import br.ufrn.dimap.pubshare.domain.Article;
  * ListAdapter that manages a ListView backed by an array of Articles found in previous consult.
  * 
  * @author Lucas Farias de Oliveira <i>luksrn@gmail.com</i>
+ * @author Itamir Filho <i>itamir.filho@gmail.com</i>
  * 
  * @see ArticleListActivity
  */
@@ -53,6 +54,9 @@ public class ArticleListAdapter extends ArrayAdapter<Article>{
 		if (item!= null) {
 			TextView titleText = (TextView) view.findViewById(R.id.titleText);
 			titleText.setText( item.getTitle() );
+			TextView confText = (TextView) view.findViewById(R.id.conferenceText);
+			confText.setText(item.getEventInformation());
+			
 		}
 
 		return view;
