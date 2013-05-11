@@ -22,7 +22,7 @@ public class SearchPeopleActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_search_people);
 		
-		//A partir da entrada fornaceda no campo de busca
+		//A partir da entrada fornecida no campo de busca
 		//quando clicar no botao de busca, fazer busca no servidor
 		//deve pegar os usuarios (username, aboutme) do servidor numa lista
 		//e adicionar a listview

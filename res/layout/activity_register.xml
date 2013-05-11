@@ -48,6 +48,7 @@
 		  		android:layout_width="fill_parent"
 		  		android:layout_height="wrap_content"
 		  		android:layout_marginTop="5dip"
+		  		android:inputType="text"
 		  		android:singleLine="true"
 		  		android:layout_marginBottom="20dip"/>
 		  <!--  Email Label -->
@@ -60,6 +61,7 @@
 		  		android:layout_height="wrap_content"
 		  		android:layout_marginTop="5dip"
 		  		android:singleLine="true"
+		  		android:inputType="textEmailAddress"
 		  		android:layout_marginBottom="20dip"/>
 		  <!-- Password Label -->
 		  <TextView android:layout_width="fill_parent"
@@ -70,6 +72,7 @@
 		        android:layout_width="fill_parent"
 		  		android:layout_height="wrap_content"
 		  		android:password="true"
+		  		android:inputType="text"
 		  		android:singleLine="true"
 		  		android:layout_marginTop="5dip"/>
 		  

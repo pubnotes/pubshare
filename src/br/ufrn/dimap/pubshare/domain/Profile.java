@@ -2,33 +2,35 @@ package br.ufrn.dimap.pubshare.domain;
 
 import java.io.Serializable;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Profile implements Serializable {
 
+	@JsonProperty
+	private long id;
 	//basic information
+	@JsonProperty
 	private String institution;
+	@JsonProperty
 	private String degree;
+	@JsonProperty
 	private String location;
+	@JsonProperty
 	private String gender;
 	//personal information
+	@JsonProperty
 	private String birthday;
+	@JsonProperty
 	private String aboutme;
 	//contact information
+	@JsonProperty
 	private String facebook;
+	@JsonProperty
 	private String email;
+	@JsonProperty
 	private String phone;
-	
-	public Profile(){
-		this.institution = "";
-		this.degree = "";
-		this.location = "";
-		this.gender = "";
-		this.birthday = "";
-		this.aboutme = "";
-		this.facebook = "";
-		this.email = "";
-		this.phone = "";
-	}
-	
 	
 	public String getInstitution() {
 		return institution;
@@ -83,6 +85,16 @@ public class Profile implements Serializable {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+
+	public long getId() {
+		return id;
+	}
+
+
+	public void setId(long id) {
+		this.id = id;
 	}
 	
 }
