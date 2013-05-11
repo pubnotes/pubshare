@@ -38,6 +38,9 @@ import br.ufrn.dimap.pubshare.util.Constants;
 public class ArticleDetailActivity extends PubnotesActivity
 {
 	private ProgressDialog dialog; 
+	AsyncTask<Article, Void, Evaluation[]> async;
+	Article selectedArticle;
+	
 	/**
 	 * 1. prepare the content view
 	 * 2. prepare the title
@@ -50,11 +53,11 @@ public class ArticleDetailActivity extends PubnotesActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_article_detail);
 		setTitle(R.string.title_activity_article_detail);
-		final Article selectedArticle = (Article) getIntent().getSerializableExtra(Article.KEY_INSTANCE);
+		selectedArticle = (Article) getIntent().getSerializableExtra(Article.KEY_INSTANCE);
 		configureMainView(selectedArticle);
 		
 		/** getting evaluations from the server using the async task**/
-		AsyncTask<Article, Void, Evaluation[]> async = new AsyncTask<Article, Void, Evaluation[]>(){
+		async = new AsyncTask<Article, Void, Evaluation[]>(){
 			
 			
 			protected void onPreExecute() {
@@ -79,7 +82,7 @@ public class ArticleDetailActivity extends PubnotesActivity
 				configureEvaluationsSummaryView(selectedArticle);
 			}
 		};
-		async.execute(new Article[]{selectedArticle});
+		async.execute(selectedArticle);
 		/** done **/
 		
 		/** giving life to the evaluation button **/
@@ -93,7 +96,9 @@ public class ArticleDetailActivity extends PubnotesActivity
 						startActivity(intent);
 					}
 				});
-	}
+	}	
+	
+	
 	
 	/**
 	 * Configure the main view of the activity

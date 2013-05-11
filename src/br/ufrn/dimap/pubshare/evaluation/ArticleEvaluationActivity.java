@@ -1,34 +1,46 @@
 package br.ufrn.dimap.pubshare.evaluation;
 
-import java.util.List;
+import java.util.Arrays;
 
-import br.ufrn.dimap.pubshare.activity.PubnotesActivity;
-import br.ufrn.dimap.pubshare.activity.PubshareActivity;
-import br.ufrn.dimap.pubshare.activity.R;
-import br.ufrn.dimap.pubshare.activity.R.id;
-import br.ufrn.dimap.pubshare.activity.R.layout;
-import br.ufrn.dimap.pubshare.activity.R.menu;
-import br.ufrn.dimap.pubshare.domain.Article;
-import br.ufrn.dimap.pubshare.domain.Evaluation;
-import br.ufrn.dimap.pubshare.domain.User;
-import br.ufrn.dimap.pubshare.mocks.UserMockFactory;
-import br.ufrn.dimap.pubshare.restclient.SaveEvaluationRestClient;
-import br.ufrn.dimap.pubshare.util.SessionManager;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestTemplate;
+
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Activity;
-import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.RatingBar.OnRatingBarChangeListener;
+import android.widget.TextView;
 import android.widget.Toast;
+import br.ufrn.dimap.pubshare.activity.PubnotesActivity;
+import br.ufrn.dimap.pubshare.activity.R;
+import br.ufrn.dimap.pubshare.domain.Article;
+import br.ufrn.dimap.pubshare.domain.Evaluation;
+import br.ufrn.dimap.pubshare.domain.User;
+import br.ufrn.dimap.pubshare.mocks.UserMockFactory;
+import br.ufrn.dimap.pubshare.restclient.results.EvaluationResult;
+import br.ufrn.dimap.pubshare.util.Constants;
+import br.ufrn.dimap.pubshare.util.SessionManager;
 
 public class ArticleEvaluationActivity extends PubnotesActivity {
 
 	private Evaluation evaluation;
 	private SessionManager session;
+	private ProgressDialog dialog;
+	private Article selectedArticle;
+	private User user;
+	AsyncTask<Evaluation, Void, EvaluationResult> async;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +51,33 @@ public class ArticleEvaluationActivity extends PubnotesActivity {
 		session = new SessionManager(getApplicationContext());
 		
 		this.evaluation = new Evaluation();
-		//List<User> users = UserMockFactory.makeUserList();
-		
-		Article selectedArticle = (Article) getIntent().getSerializableExtra(Article.KEY_INSTANCE);
-		User user = UserMockFactory.makeSingleUser(); //getCurrentUser();
+		selectedArticle = (Article) getIntent().getSerializableExtra(Article.KEY_INSTANCE);
+		user = UserMockFactory.makeSingleUser(); //getCurrentUser();
 		this.evaluation.setUser(user); 
-		this.evaluation.setArticle(selectedArticle); 
+		this.evaluation.setArticle(selectedArticle);
+		async = new AsyncTask<Evaluation, Void, EvaluationResult>(){
+			
+			
+			protected void onPreExecute() {
+				dialog = new ProgressDialog(ArticleEvaluationActivity.this);
+				super.onPreExecute();
+				dialog.setMessage("Saving Evaluation...");
+				dialog.show();
+			}
+			
+			protected EvaluationResult doInBackground(Evaluation... evaluation) {
+				return saveEvaluation(evaluation[0]);
+			}
+			
+			/** now lets update the interface **/
+			protected void onPostExecute(EvaluationResult result) {
+				if(dialog.isShowing())
+				{
+					dialog.dismiss();
+				}
+				Toast.makeText(getApplicationContext(),  "Evaluation Saved...", Toast.LENGTH_LONG).show();
+			}
+		};
 	}
 
 	@Override
@@ -78,20 +111,51 @@ public class ArticleEvaluationActivity extends PubnotesActivity {
 		((RatingBar)findViewById(R.id.ratingBar_relatedworks)).setOnRatingBarChangeListener((OnRatingBarChangeListener) listener);
 		((RatingBar)findViewById(R.id.ratingBar_reviewerfamiliarity)).setOnRatingBarChangeListener((OnRatingBarChangeListener) listener);
 		
-		
-		
 		OnClickListener save_listener = new OnClickListener(){
 			@Override
 			public void onClick(View v) {
 				
-				SaveEvaluationRestClient rest = new SaveEvaluationRestClient();
-				
-				rest.execute(ArticleEvaluationActivity.this.evaluation);
-				
-				Toast.makeText(getApplicationContext(),  "Evaluation Saved...", Toast.LENGTH_LONG).show();
+				TextView notes = (TextView) findViewById(R.id.editText_comments);
+				ArticleEvaluationActivity.this.evaluation.setReviewerNotes(notes.getText().toString());
+				async.execute(evaluation);
+				//Toast.makeText(getApplicationContext(),  "Evaluation Saved...", Toast.LENGTH_LONG).show();
 			}
 		};
 		
 		((Button)findViewById(R.id.button_save)).setOnClickListener(save_listener);
 	}
+	
+	private EvaluationResult saveEvaluation(Evaluation evaluation)
+	{
+		try {
+			HttpHeaders requestHeaders = new HttpHeaders(); 
+			requestHeaders.setContentType(MediaType.APPLICATION_JSON);
+			 
+			RestTemplate restTemplate = new RestTemplate();
+ 	
+			restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
+			
+			String url = "";
+			if (evaluation.getId()==0){
+				//url = "/evaluation/new";
+				url = "/evaluation/";
+			}else{
+				url = "/evaluation/" + evaluation.getId()+ "/edit";
+			}
+			
+			ResponseEntity<EvaluationResult> response = restTemplate.exchange(  
+					Constants.URL_SERVER + url, 
+					HttpMethod.POST, 
+					new HttpEntity<Object>(evaluation, requestHeaders), EvaluationResult.class);
+			
+			Log.d("SaveEvaluationRestClient", "ResponseEntity " + response.getBody() );
+			return response.getBody();
+			
+ 		} catch (HttpClientErrorException e) {		
+ 			Log.d("SaveEvaluationRestClient", "Erro ao tentar editar avaliação: " + e.getMessage() );
+ 			e.printStackTrace();
+			return new EvaluationResult();
+		}
+	}
+	
 }

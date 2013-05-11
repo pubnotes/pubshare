@@ -116,7 +116,7 @@ public class UserMockFactory {
 		User u = new User();
 		
 		u.setFriends(usersFriends);
-		u.setID(0);
+		u.setID(88);
 		u.setOnSigned(true);
 		u.setPassword("1234");
 		u.setTags(usersTags);
