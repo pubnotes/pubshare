@@ -3,6 +3,7 @@ package br.ufrn.dimap.pubshare.activity;
 import java.util.HashMap;
 
 import br.ufrn.dimap.pubshare.PubnotesApplication;
+import br.ufrn.dimap.pubshare.domain.User;
 import br.ufrn.dimap.pubshare.restclient.LoginRestClient;
 import br.ufrn.dimap.pubshare.restclient.results.AuthenticationResult;
 import br.ufrn.dimap.pubshare.util.SessionManager;
@@ -10,6 +11,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -32,6 +34,7 @@ public class LoginActivity extends PubnotesActivity {
 
 	// Session Manager Class
 	SessionManager session;
+	private ProgressDialog dialog;
 
 	/**
 	 * A dummy authentication store containing known user names and passwords.
@@ -227,52 +230,46 @@ public class LoginActivity extends PubnotesActivity {
 	 * Represents an asynchronous login/registration task used to authenticate
 	 * the user.evaluationevaluation
 	 */
-	public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+	public class UserLoginTask extends AsyncTask<Void, Void, User> {
 		
 		@Override
-		protected Boolean doInBackground(Void... params) {
+		protected User doInBackground(Void... params) {
 			// Receber User e passar como ref pra onPostExecute
 			LoginRestClient restClient = new LoginRestClient();
-
-			AuthenticationResult authenticationResult = restClient.login(
+			User userlogado = restClient.login(
 					LoginActivity.this.mEmail, LoginActivity.this.mPassword);
 
-			// TODO store/process preferences
-
-			return authenticationResult.isSuccess();
-			// return true;
+			return userlogado;
 		}
 		@Override
 		protected void onPreExecute() {
-			// TODO Auto-generated method stub
 			super.onPreExecute();
 		}
 
 		@Override
-		protected void onPostExecute(final Boolean success) {
+		protected void onPostExecute(final User u) {
 			mAuthTask = null;
 			showProgress(false);
 			
 
-			if (success) {
+			if (u != null) {
 
-				// Aqui eu seto os dados do usuario, dado que ele conseguiu se
-				// logar com sucesso
 				// Creating user login session
 				session.createLoginSession(LoginActivity.this.mEmail,
 						LoginActivity.this.mPassword);
-
-				// a partir de agora os dados de login do usuario podem ser
-				// acessados pelas outras activities
 				// get user data from session
 				HashMap<String, String> user = session.getUserDetails();
 				// name
 				String username = user.get(SessionManager.KEY_USERNAME);
 				// email
 				String password = user.get(SessionManager.KEY_PASSWORD);
-				Log.d("User logged", "E-mail " + username + " Password "
-						+ password);
 
+				// Aqui eu seto os dados do usuario, dado que ele conseguiu se
+				// logar com sucesso
+				// a partir de agora os dados de login do usuario podem ser
+				// acessados pelas outras activities
+				LoginActivity.this.setCurrentUser(u);
+				
 				// O Profile serah exibido vazio ateh que o usuario edite o
 				// profile
 				Intent i = new Intent(LoginActivity.this,

@@ -35,7 +35,7 @@ public class PubshareActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		
 		//When you develop, change this line to start your activity. (Dev Only)
-		Intent i = new Intent(this, ArticleListActivity.class);        	        
+		Intent i = new Intent(this, LoginActivity.class);        	        
 				    
 		startActivity(i);
 		finish();
