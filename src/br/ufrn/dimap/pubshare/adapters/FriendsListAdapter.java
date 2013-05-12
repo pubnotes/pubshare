@@ -41,16 +41,6 @@ public class FriendsListAdapter extends ArrayAdapter<User> {
 
 		User item = getItem(position);
 		if (item!= null) {
-			/*Spinner spinner2;
-			spinner2 = (Spinner) view.findViewById(R.id.spinner2);
-			
-			//User u = UserMockFactory.makeSingleUser();
-			List<String> tags = item.getTags();
-			tags.add("Create New Tag");			
-			ArrayAdapter<String> adapter_tag = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_spinner_item, tags);
-			adapter_tag
-					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-			spinner2.setAdapter(adapter_tag);*/
 			User user = UserMockFactory.makeSingleUser();
 			final List<br.ufrn.dimap.pubshare.domain.Tag> tags = user.getTags();
 			final PopupMenu popupMenu;

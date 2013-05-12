@@ -47,10 +47,6 @@ public class RegisterActivity extends PubnotesActivity {
 						mailText = (EditText) findViewById(R.id.reg_email);
 						passwordText = (EditText) findViewById(R.id.reg_password);
 						
-						Log.d("INFO USER", "username " + nameText.getText() );
-						Log.d("INFO USER", "email " + mailText.getText());
-						Log.d("INFO USER", "password " + passwordText.getText() );
-						
 						//User estah se registrando, ainda com profile vazio, tags e amigos vazios
 						
 						String name = nameText.getText().toString();
@@ -59,20 +55,8 @@ public class RegisterActivity extends PubnotesActivity {
 						user.setUseremail(mailText.getText().toString());
 						user.setPassword(passwordText.getText().toString());
 						
-						Log.d("USER", "username " + user.getUsername() );
-						Log.d("USER", "email " + user.getUseremail());
-						Log.d("USER", "password " + user.getPassword() );
-						
 						//e mandar pra o servidor
 						async.execute(user);
-						
-						//SaveUserRestClient rest = new SaveUserRestClient();
-						//rest.execute(RegisterActivity.this.user);
-						//Toast.makeText(RegisterActivity	.this,
-						//	"Registered account successfully!", Toast.LENGTH_SHORT).show();
-						//Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
-						//i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		                //startActivity(i);
 					}
 				}); 
 		
@@ -129,13 +113,7 @@ public class RegisterActivity extends PubnotesActivity {
  	
 			restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
 			
-			String url = "";
-			if (user.getId()==0){
-				//url = "/evaluation/new";
-				url = "/user/";
-			}else{
-				url = "/user/" + user.getId()+ "/edit";
-			}
+			String url = "/user/register";
 			
 			ResponseEntity<UserResult> response = restTemplate.exchange(  
 					Constants.URL_SERVER + url, 
