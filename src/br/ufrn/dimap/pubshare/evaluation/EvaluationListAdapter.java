@@ -1,5 +1,6 @@
 package br.ufrn.dimap.pubshare.evaluation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -20,6 +21,8 @@ import br.ufrn.dimap.pubshare.util.DateFormat;
  */
 public class EvaluationListAdapter extends ArrayAdapter<Evaluation> 
 {
+	private List<Evaluation> evaluations = new ArrayList<Evaluation>();
+	
 	public EvaluationListAdapter(Context context, int textViewResourceId, List<Evaluation> objects)
 	{
 		super(context,textViewResourceId,objects);
@@ -53,7 +56,19 @@ public class EvaluationListAdapter extends ArrayAdapter<Evaluation>
 			
 			RatingBar ratingBar = (RatingBar) view.findViewById(R.id.rating_row_evaluation_overall);
 			ratingBar.setRating(item.getOverall());
+			
+			evaluations.add(item);
 		}
 		return view;
+	}
+	
+	public List<Evaluation> getEvaluations() 
+	{
+		return evaluations;
+	}
+
+	public void setEvaluations(List<Evaluation> evaluations) 
+	{
+		this.evaluations = evaluations;
 	}
 }
