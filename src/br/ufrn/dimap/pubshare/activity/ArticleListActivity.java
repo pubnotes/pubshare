@@ -17,6 +17,7 @@
 
 package br.ufrn.dimap.pubshare.activity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -31,20 +32,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import br.ufrn.dimap.pubshare.adapters.ArticleListAdapter;
 import br.ufrn.dimap.pubshare.domain.Article;
-import br.ufrn.dimap.pubshare.domain.Evaluation;
 import br.ufrn.dimap.pubshare.download.activity.ArticlesDownloadedActivity;
 import br.ufrn.dimap.pubshare.download.service.DownloaderService;
 import br.ufrn.dimap.pubshare.evaluation.ArticleDetailActivity;
-import br.ufrn.dimap.pubshare.evaluation.ArticleEvaluationActivity;
-import br.ufrn.dimap.pubshare.evaluation.ArticleEvaluationDetailActivity;
 import br.ufrn.dimap.pubshare.mocks.ArticleMockFactory;
 import br.ufrn.dimap.pubshare.parsers.ACMParser;
 import br.ufrn.dimap.pubshare.parsers.IEEExplorerParser;
@@ -65,6 +60,7 @@ public class ArticleListActivity extends Activity {
 	private ListView articlesListView;
 	private ArticleListAdapter adapter;
 //	private ProgressBar progressBar;
+	private View searchingView;
 
 	
 	/**
@@ -98,10 +94,15 @@ public class ArticleListActivity extends Activity {
 					"Não foi possível encontrar R.layout.row_listview_article_list");
 		}
 		
+		searchingView = findViewById(R.id.search_status);
+		
 		String texto = getIntent().getStringExtra("textoConsulta");
+		String tipoBusca = getIntent().getStringExtra("searchType");
+		String fonte = getIntent().getStringExtra("library");
 
 		// List<Article> articles = ArticleMockFactory.makeArticleList();
-		new ListagemTask().execute(texto);
+		
+		new ListagemTask().execute(new String[] {texto, tipoBusca, fonte});
 
 	}
 
@@ -109,11 +110,25 @@ public class ArticleListActivity extends Activity {
 
 		@Override
 		protected List<Article> doInBackground(String... urls) {
-			//Parser parser = new ACMParser();
-//			Parser parser = new IEEExplorerParser();
-			Parser parser = new SpringerParser();
+			Parser parser;
+			List<Article> articles = new ArrayList<Article>();
+			
+			if(urls[2].equals("Springer"))
+				parser = new SpringerParser();
+			else if(urls[2].equals("ACM"))
+				parser = new ACMParser();
+			else
+				parser = new IEEExplorerParser();
+			
+			if(urls[1].equals("Title")) 
+				articles = parser.findArticlesByTitle(urls[0]);
+			else 
+				articles = parser.findArticleByAuthor(urls[0]);
+			
+			
 			publishProgress(10);
-			return parser.findArticlesByTitle(urls[0]);
+			
+			return articles;
 		}
 
 		@Override
@@ -121,6 +136,7 @@ public class ArticleListActivity extends Activity {
 			super.onPostExecute(result);
 			publishProgress(70);
 			configureListView(result);
+			searchingView.setVisibility(View.GONE);
 		}
 
 		@Override
@@ -133,6 +149,7 @@ public class ArticleListActivity extends Activity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			publishProgress(10);
+			searchingView.setVisibility(View.VISIBLE);
 		}
 
 	}

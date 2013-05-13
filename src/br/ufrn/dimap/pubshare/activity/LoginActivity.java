@@ -234,12 +234,12 @@ public class LoginActivity extends PubnotesActivity {
 		
 		@Override
 		protected User doInBackground(Void... params) {
-			// Receber User e passar como ref pra onPostExecute
+				// Receber User e passar como ref pra onPostExecute
 			LoginRestClient restClient = new LoginRestClient();
 			User userlogado = restClient.login(
 					LoginActivity.this.mEmail, LoginActivity.this.mPassword);
 
-			return userlogado;
+			return userlogado;	
 		}
 		@Override
 		protected void onPreExecute() {
