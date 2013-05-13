@@ -1,5 +1,6 @@
 package br.ufrn.dimap.pubshare.adapters;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -17,9 +18,19 @@ import br.ufrn.dimap.pubshare.activity.RegisterActivity;
 import br.ufrn.dimap.pubshare.activity.SearchPeopleActivity;
 import br.ufrn.dimap.pubshare.activity.ShowProfileActivity;
 import br.ufrn.dimap.pubshare.domain.Article;
+import br.ufrn.dimap.pubshare.domain.Evaluation;
 import br.ufrn.dimap.pubshare.domain.User;
 
 public class UserListAdapter extends ArrayAdapter<User> {
+
+	private List<User> users = new ArrayList<User>();
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
 
 	public UserListAdapter(Context context, int textViewResourceId,
 			List<User> objects) {
@@ -54,6 +65,7 @@ public class UserListAdapter extends ArrayAdapter<User> {
 					});
 			
 			//Falta tratar imagem do usuario
+			users.add(item);
 		}
 
 		return view;

@@ -63,8 +63,8 @@ public class ShowProfileActivity extends PubnotesActivity {
 		email = (TextView) findViewById(R.id.textemail);
 		phone = (TextView) findViewById(R.id.textphone);
 		
-		Log.d("INFO USER", "useremail " + ShowProfileActivity.this.getCurrentUser().getUseremail());
-		Log.d("INFO USER", "password " + ShowProfileActivity.this.getCurrentUser().getPassword());
+		//Log.d("INFO USER", "useremail " + ShowProfileActivity.this.getCurrentUser().getUseremail());
+		//Log.d("INFO USER", "password " + ShowProfileActivity.this.getCurrentUser().getPassword());
 		//Aqui eu devo pegar a ref do User, fazer uma busca no banco
 		//pegar o Profile do user e setar os campos da activity
 		User userlogado = ShowProfileActivity.this.getCurrentUser(); 

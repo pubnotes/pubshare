@@ -45,6 +45,8 @@ public class EditProfileActivity extends PubnotesActivity {
 	EditText e8;
 	EditText e9;
 
+	Profile profile;
+	User userlogado;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -66,7 +68,10 @@ public class EditProfileActivity extends PubnotesActivity {
 		e8 = (EditText) findViewById(R.id.eemail);
 		e9 = (EditText) findViewById(R.id.ephone);
 		
-		final User userlogado = EditProfileActivity.this.getCurrentUser(); 
+		userlogado = EditProfileActivity.this.getCurrentUser();
+		
+		Log.d("INFO USER ATUAL", "useremail " + EditProfileActivity.this.getCurrentUser().getUseremail());
+		Log.d("INFO USER ATUAL", "password " + EditProfileActivity.this.getCurrentUser().getPassword());
 		
 		findViewById(R.id.btnEditDone).setOnClickListener(
 				new View.OnClickListener() {
@@ -74,7 +79,7 @@ public class EditProfileActivity extends PubnotesActivity {
 					public void onClick(View view) {
 						
 						//Aqui devo pegar todas as informacoes, criar um Profile
-						Profile profile = new Profile();
+						profile = new Profile();
 						
 						profile.setInstitution(e1.getText().toString());
 						profile.setDegree(e2.getText().toString());
@@ -88,9 +93,8 @@ public class EditProfileActivity extends PubnotesActivity {
 						
 						userlogado.setUserprofile(profile);
 						
-						//usuario atualizado
 						EditProfileActivity.this.setCurrentUser(userlogado);
-							
+						
 						//acessar o servidor atraves do (id) e atualizar o user lah
 						async.execute(userlogado);
 					}
@@ -108,6 +112,7 @@ public class EditProfileActivity extends PubnotesActivity {
 			}
 			
 			protected UserResult doInBackground(User... user) {
+				Log.d("USER ATUAL ID", "useremail " + user[0].getId());
 				return saveProfile(user[0]);
 				
 			}
