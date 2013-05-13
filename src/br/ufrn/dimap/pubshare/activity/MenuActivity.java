@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import br.ufrn.dimap.pubshare.download.activity.ArticlesDownloadedActivity;
 import br.ufrn.dimap.pubshare.util.SessionManager;
 
 public class MenuActivity extends Activity {
@@ -78,6 +79,18 @@ public class MenuActivity extends Activity {
 		                startActivity(i);
 					}
 				});
+		
+		
+		findViewById(R.id.imageButton3).setOnClickListener(
+				new View.OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						Intent i = new Intent(MenuActivity.this, ArticlesDownloadedActivity.class);
+						startActivity(i);						
+					}
+				});
+		
 		
 		findViewById(R.id.imageButton4).setOnClickListener(
 				new View.OnClickListener() {
