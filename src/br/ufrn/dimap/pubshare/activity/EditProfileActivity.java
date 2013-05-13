@@ -80,7 +80,7 @@ public class EditProfileActivity extends PubnotesActivity {
 						
 						//Aqui devo pegar todas as informacoes, criar um Profile
 						profile = new Profile();
-						
+						profile.setId(userlogado.getUserprofile().getId());
 						profile.setInstitution(e1.getText().toString());
 						profile.setDegree(e2.getText().toString());
 						profile.setLocation(e3.getText().toString());
@@ -105,10 +105,10 @@ public class EditProfileActivity extends PubnotesActivity {
 			
 			
 			protected void onPreExecute() {
-				dialog = new ProgressDialog(EditProfileActivity.this);
+				//dialog = new ProgressDialog(EditProfileActivity.this);
 				super.onPreExecute();
-				dialog.setMessage("Updating profile...");
-				dialog.show();
+				//dialog.setMessage("Updating profile...");
+				//dialog.show();
 			}
 			
 			protected UserResult doInBackground(User... user) {
@@ -119,10 +119,10 @@ public class EditProfileActivity extends PubnotesActivity {
 			
 			/** now lets update the interface **/
 			protected void onPostExecute(UserResult result) {
-				if(dialog.isShowing())
+				/*if(dialog.isShowing())
 				{
 					dialog.dismiss();
-				}
+				}*/
 				Toast.makeText(EditProfileActivity.this,
 						"Updated profile!", Toast.LENGTH_SHORT).show();
 				Intent i = new Intent(EditProfileActivity.this, ShowProfileActivity.class);

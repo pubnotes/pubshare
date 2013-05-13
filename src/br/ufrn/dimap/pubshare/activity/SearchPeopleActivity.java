@@ -93,8 +93,13 @@ public class SearchPeopleActivity extends PubnotesActivity {
 									if(contains(users, result[i].getUsername()) == false)	
 										users.add(result[i]);
 									else{
-										Toast.makeText(SearchPeopleActivity.this,
-												"Usuario já foi buscado!", Toast.LENGTH_SHORT).show();
+										if(result[i].getUsername().equals(userlogado.getUsername())){
+											Toast.makeText(SearchPeopleActivity.this,
+													"Usuário está logado neste dispositivo!", Toast.LENGTH_SHORT).show();	
+										}else{
+											Toast.makeText(SearchPeopleActivity.this,
+													"Usuario já foi buscado!", Toast.LENGTH_SHORT).show();
+										}
 									}
 								}
 								configureListView(users);
