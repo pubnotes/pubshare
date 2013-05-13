@@ -1,32 +1,28 @@
 package br.ufrn.dimap.pubshare.activity;
 
 
-import java.util.List;
-
-import br.ufrn.dimap.pubshare.util.SessionManager;
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
-import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.GridView;
-import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.Spinner;
-import android.widget.Toast;
 import android.view.View;
-import android.widget.AdapterView.OnItemClickListener;
+import android.view.View.OnClickListener;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
+import br.ufrn.dimap.pubshare.util.SessionManager;
 
 public class MenuActivity extends Activity {
 	
 	// Session Manager Class
 	//usar sempre que precisar pegar info do usuario logado atualmente
 	SessionManager session;
-	private Spinner spinner;
-
+	Spinner spinner;
+	RadioGroup option;
+	String searchType;
+	EditText campoConsulta;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -35,17 +31,27 @@ public class MenuActivity extends Activity {
 		 // Session class instance
         session = new SessionManager(getApplicationContext());
 		
-		spinner = (Spinner) findViewById(R.id.spinner);
+		spinner = (Spinner) findViewById(R.id.sprinnerLibraries);
+		campoConsulta = (EditText) findViewById(R.id.search);		
+
+		option = (RadioGroup) findViewById(R.id.radioSearchop);
+		option.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(RadioGroup rGroup, int checkedId) {
+				RadioButton checkedRadioButton = (RadioButton) rGroup.findViewById(checkedId);
+				searchType = checkedRadioButton.getText().toString();
+			}
+		});
 		
         findViewById(R.id.imageButtonsearch).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				EditText campoConsulta = (EditText) findViewById(R.id.search);
 				String textoConsulta = campoConsulta.getText().toString(); 
 				if(!textoConsulta.trim().equals("")) {
-					//Intent i = new Intent(MenuActivity.this, ArticleSearchActivity.class);
 					Intent i = new Intent(MenuActivity.this, ArticleListActivity.class);
 					i.putExtra("textoConsulta", textoConsulta);
+					i.putExtra("library", spinner.getSelectedItem().toString());
+					i.putExtra("searchType", searchType);
 					startActivity(i);
 				} else {
 					campoConsulta.setError("Demanded field.");

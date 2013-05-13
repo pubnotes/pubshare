@@ -24,7 +24,7 @@
 			      android:text="Search Articles on PubShare:"/>
 			
 			    <Spinner
-			        android:id="@+id/spinner"
+			        android:id="@+id/sprinnerLibraries"
 			        android:layout_below="@+id/articletext"
 			        android:layout_width="152dp"
 			        android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
 			        android:id="@+id/radioSearchop"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:layout_below="@+id/spinner"
+			        android:layout_below="@+id/sprinnerLibraries"
 			        >
 			        <RadioButton
 			            android:id="@+id/radioAuthor"
