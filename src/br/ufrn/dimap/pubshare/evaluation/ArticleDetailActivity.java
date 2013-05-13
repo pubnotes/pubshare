@@ -27,6 +27,7 @@ import br.ufrn.dimap.pubshare.activity.PubnotesActivity;
 import br.ufrn.dimap.pubshare.activity.R;
 import br.ufrn.dimap.pubshare.domain.Article;
 import br.ufrn.dimap.pubshare.domain.Evaluation;
+import br.ufrn.dimap.pubshare.domain.User;
 import br.ufrn.dimap.pubshare.mocks.ArticleMockFactory;
 import br.ufrn.dimap.pubshare.util.Constants;
 
@@ -38,6 +39,10 @@ import br.ufrn.dimap.pubshare.util.Constants;
 public class ArticleDetailActivity extends PubnotesActivity
 {
 	private ProgressDialog dialog; 
+	AsyncTask<Article, Void, Evaluation[]> async;
+	Article selectedArticle;
+	private ListView evaluationListView;
+	
 	/**
 	 * 1. prepare the content view
 	 * 2. prepare the title
@@ -50,11 +55,11 @@ public class ArticleDetailActivity extends PubnotesActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_article_detail);
 		setTitle(R.string.title_activity_article_detail);
-		final Article selectedArticle = (Article) getIntent().getSerializableExtra(Article.KEY_INSTANCE);
+		selectedArticle = (Article) getIntent().getSerializableExtra(Article.KEY_INSTANCE);
 		configureMainView(selectedArticle);
 		
 		/** getting evaluations from the server using the async task**/
-		AsyncTask<Article, Void, Evaluation[]> async = new AsyncTask<Article, Void, Evaluation[]>(){
+		async = new AsyncTask<Article, Void, Evaluation[]>(){
 			
 			
 			protected void onPreExecute() {
@@ -79,7 +84,7 @@ public class ArticleDetailActivity extends PubnotesActivity
 				configureEvaluationsSummaryView(selectedArticle);
 			}
 		};
-		async.execute(new Article[]{selectedArticle});
+		async.execute(selectedArticle);
 		/** done **/
 		
 		/** giving life to the evaluation button **/
@@ -88,12 +93,29 @@ public class ArticleDetailActivity extends PubnotesActivity
 				{
 					@Override
 					public void onClick(View view) {
+						
+						
+						EvaluationListAdapter adapter = (EvaluationListAdapter) evaluationListView.getAdapter();
+						User user = getCurrentUser();
+						Evaluation evalFromUser =  null;
+						
+						for(Evaluation element : adapter.getEvaluations())
+						{
+							if(element.getUser().getId() == user.getId())
+							{
+								evalFromUser = element;
+							}
+						}
+						
 						Intent intent = new Intent(ArticleDetailActivity.this, ArticleEvaluationActivity.class);
 						intent.putExtra(Article.KEY_INSTANCE, selectedArticle);
+						intent.putExtra(Evaluation.KEY_INSTANCE, evalFromUser);
 						startActivity(intent);
 					}
 				});
-	}
+	}	
+	
+	
 	
 	/**
 	 * Configure the main view of the activity
@@ -125,7 +147,7 @@ public class ArticleDetailActivity extends PubnotesActivity
 	private void configureEvaluationsSummaryView(Article article)
 	{
 		EvaluationListAdapter adapter = new EvaluationListAdapter(this, R.layout.row_listview_article_evaluation_list, article.getEvaluations());
-		ListView evaluationListView = (ListView) findViewById(R.id.list_view_article_detail_evaluations);
+		evaluationListView = (ListView) findViewById(R.id.list_view_article_detail_evaluations);
 		
 		if(evaluationListView == null)
 		{
@@ -165,22 +187,13 @@ public class ArticleDetailActivity extends PubnotesActivity
 	 */
 	private Evaluation[] retrieveEvaluations(Article article)
 	{
-		HttpHeaders headers = new HttpHeaders();
-		Map<String, String> body = new HashMap<String,String>();
-		body.put("article", article.getTitle());
-		
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
 		
-		String url = "/evaluation/evaluationsFromArticle";
-		ResponseEntity<Evaluation[]> entity = restTemplate.exchange(
-				Constants.URL_SERVER_DANIEL + url, 
-				HttpMethod.POST, 
-				new HttpEntity<Object>(body, headers), 
-				Evaluation[].class);
-		
-		Evaluation[] evaluationsFromUser = entity.getBody();
+		String url = "/evaluation/evaluationsFromArticle?title=" + article.getTitle().trim();
+		Evaluation[] entity = restTemplate
+				.getForObject(Constants.URL_SERVER + url, Evaluation[].class);
 				
-		return evaluationsFromUser;
+		return entity;
 	}
 }

@@ -1,6 +1,7 @@
 package br.ufrn.dimap.pubshare.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,60 +13,35 @@ import org.codehaus.jackson.annotate.JsonProperty;
 public class User implements Serializable  {
 	
 	@JsonProperty
-	private int id;
+	private long id;
 	
 	@JsonProperty
 	private String username;
-	
 	@JsonProperty
 	private String useremail;
-	
 	@JsonProperty
 	private String password;
-	
-	@JsonIgnore
-	private boolean onSigned;
-	@JsonIgnore
-	private String[] friends;
-	@JsonIgnore
-	private String[] tags;
-	@JsonIgnore
-	private HashMap<String, List<String>> tagToUsers;
-	@JsonIgnore
+	@JsonProperty
+	private boolean onsigned;
+	@JsonProperty
+	private List<Friend> friends;
+	@JsonProperty
+	private List<Tag> tags;
+	@JsonProperty
 	private Profile userprofile;
-	
-	public HashMap<String, List<String>> getTagToUsers() {
-		return tagToUsers;
-	}
-
-
-	public void setTagToUsers(HashMap<String, List<String>> tagToUsers) {
-		this.tagToUsers = tagToUsers;
-	}
-
 	
 	public User(){
 		this.id = 0;
-		this.username = "";
-		this.useremail = "";
-		this.password = "";
-		this.onSigned = false;
-		this.friends = null;
-		this.tags = null;
-		this.tagToUsers = new HashMap<String, List<String>>();
+		this.onsigned = false;
+		this.friends = new ArrayList<Friend>();
+		this.tags = new ArrayList<Tag>();
 		this.userprofile = new Profile();
-	}
+	}	
 	
-	
-	public List<String> getUsersFromTag(String tag) {
-		return tagToUsers.get(tag);
-	}
-	
-	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setID(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getUsername() {
@@ -86,11 +62,11 @@ public class User implements Serializable  {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public boolean isOnSigned() {
-		return onSigned;
+	public boolean isOnsigned() {
+		return onsigned;
 	}
-	public void setOnSigned(boolean onSigned) {
-		this.onSigned = onSigned;
+	public void setOnsigned(boolean onSigned) {
+		this.onsigned = onSigned;
 	}
 	
 	public Profile getUserprofile() {
@@ -100,19 +76,20 @@ public class User implements Serializable  {
 		this.userprofile = userprofile;
 	}
 
-	public String[] getFriends() {
+	public List<Friend> getFriends() {
 		return friends;
 	}
 
-	public void setFriends(String[] friends) {
+	public void setFriends(List<Friend> friends) {
 		this.friends = friends;
 	}
 
-	public String[] getTags() {
+	public List<Tag> getTags() {
 		return tags;
 	}
 
-	public void setTags(String[] tags) {
+	public void setTags(List<Tag> tags) {
 		this.tags = tags;
 	}
 }
+

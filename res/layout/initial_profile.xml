@@ -21,7 +21,7 @@
     </LinearLayout>
  
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/usernametext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/thumbnail"
@@ -33,7 +33,7 @@
         android:textStyle="bold"/>
  
     <TextView
-        android:id="@+id/artist"
+        android:id="@+id/aboutmeusertext"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/title"
