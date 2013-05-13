@@ -35,6 +35,7 @@ public class MenuActivity extends Activity {
 		campoConsulta = (EditText) findViewById(R.id.search);		
 
 		option = (RadioGroup) findViewById(R.id.radioSearchop);
+		searchType = "Title";
 		option.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(RadioGroup rGroup, int checkedId) {

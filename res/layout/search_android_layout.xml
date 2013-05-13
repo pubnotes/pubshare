@@ -38,19 +38,19 @@
 			        android:layout_height="wrap_content"
 			        android:layout_below="@+id/sprinnerLibraries"
 			        >
-			        <RadioButton
-			            android:id="@+id/radioAuthor"
-			            android:layout_width="wrap_content"
-			            android:layout_height="wrap_content"
-			            android:text="Author" 
-			            android:checked="true" />
-			 
+			
 			        <RadioButton
 			            android:id="@+id/radioTitle"
 			            android:layout_width="wrap_content"
 			            android:layout_height="wrap_content"
-			            android:text="Title" />
- 
+			            android:text="Title" android:checked="true"/>
+			        	
+			        <RadioButton
+			            android:id="@+id/radioAuthor"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:text="Author" />
+			 
     			</RadioGroup>
 
 			</RelativeLayout>

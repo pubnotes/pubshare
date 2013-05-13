@@ -60,6 +60,7 @@ public class ArticleListActivity extends Activity {
 	private ListView articlesListView;
 	private ArticleListAdapter adapter;
 //	private ProgressBar progressBar;
+	private View searchingView;
 
 	
 	/**
@@ -93,11 +94,14 @@ public class ArticleListActivity extends Activity {
 					"Não foi possível encontrar R.layout.row_listview_article_list");
 		}
 		
+		searchingView = findViewById(R.id.search_status);
+		
 		String texto = getIntent().getStringExtra("textoConsulta");
 		String tipoBusca = getIntent().getStringExtra("searchType");
 		String fonte = getIntent().getStringExtra("library");
 
 		// List<Article> articles = ArticleMockFactory.makeArticleList();
+		
 		new ListagemTask().execute(new String[] {texto, tipoBusca, fonte});
 
 	}
@@ -119,7 +123,7 @@ public class ArticleListActivity extends Activity {
 			if(urls[1].equals("Title")) 
 				articles = parser.findArticlesByTitle(urls[0]);
 			else 
-				articles = parser.findArticlesByTitle(urls[0]);
+				articles = parser.findArticleByAuthor(urls[0]);
 			
 			
 			publishProgress(10);
@@ -132,6 +136,7 @@ public class ArticleListActivity extends Activity {
 			super.onPostExecute(result);
 			publishProgress(70);
 			configureListView(result);
+			searchingView.setVisibility(View.GONE);
 		}
 
 		@Override
@@ -144,6 +149,7 @@ public class ArticleListActivity extends Activity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			publishProgress(10);
+			searchingView.setVisibility(View.VISIBLE);
 		}
 
 	}
