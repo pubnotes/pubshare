@@ -35,7 +35,7 @@ public class SpringerParser extends Parser{
 	public List<Article> findArticleByAuthor(String author) {
 		List<Article> articles = new ArrayList<Article>();
 		try {
-			URL url = new URL("?");
+			URL url = new URL("http://link.springer.com/search?dc.creator="+ author +"&facet-content-type=%22Article%22");
 			parseUrl(articles, url);
 		} catch (IOException e) {
 			e.printStackTrace();

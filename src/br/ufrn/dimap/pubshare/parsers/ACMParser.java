@@ -34,7 +34,10 @@ public class ACMParser extends Parser{
 	public List<Article> findArticleByAuthor(String author) {
 		List<Article> articles = new ArrayList<Article>();
 		try {
-			URL url = new URL("?");
+			URL url = new URL("http://dl.acm.org/results.cfm?adv=1&COLL=DL&DL=ACM&Go.x=-203&Go.y=-113&termzone=all&a" +
+					"llofem=&anyofem=&noneofem=&peoplezone=Author&people="+author+"&peoplehow=and&keyword=&keywordhow=AND&" +
+					"affil=&affilhow=AND&pubin=&pubinhow=and&pubby=&pubbyhow=OR&since_year=&before_year=&pubashow=OR&" +
+					"sponsor=&sponsorhow=AND&confdate=&confdatehow=OR&confloc=&conflochow=OR&isbnhow=OR&isbn=&doi=&ccs=&subj=");
 			parseUrl(articles, url);
 		} catch (IOException e) {
 			e.printStackTrace();
