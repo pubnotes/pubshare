@@ -115,8 +115,6 @@ public class ArticleDetailActivity extends PubnotesActivity
 				});
 	}	
 	
-	
-	
 	/**
 	 * Configure the main view of the activity
 	 * 1. Title - the article's title

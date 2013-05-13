@@ -52,7 +52,7 @@ public class ArticleEvaluationActivity extends PubnotesActivity {
 		this.configureAsyncGet();
 		this.configureUI();
 		session = new SessionManager(getApplicationContext());
-		user = UserMockFactory.makeSingleUser(); // getCurrentUser();
+		user = getCurrentUser();
 		evaluation = (Evaluation) getIntent().getSerializableExtra(Evaluation.KEY_INSTANCE);
 		
 		if(evaluation != null)
