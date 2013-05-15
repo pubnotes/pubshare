@@ -54,6 +54,7 @@ public class MenuActivity extends Activity {
 					i.putExtra("textoConsulta", textoConsulta);
 					i.putExtra("library", spinner.getSelectedItem().toString());
 					i.putExtra("searchType", searchType);
+					i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					startActivity(i);
 				} else {
 					campoConsulta.setError("Demanded field.");
@@ -67,6 +68,7 @@ public class MenuActivity extends Activity {
 					@Override
 					public void onClick(View view) {
 						Intent i = new Intent(MenuActivity.this, SearchPeopleActivity.class);
+						i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		                startActivity(i);
 					}
 				});
@@ -76,6 +78,7 @@ public class MenuActivity extends Activity {
 					@Override
 					public void onClick(View view) {
 						Intent i = new Intent(MenuActivity.this, ShowFriendsActivity.class);
+						i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		                startActivity(i);
 					}
 				});
@@ -87,6 +90,7 @@ public class MenuActivity extends Activity {
 					@Override
 					public void onClick(View v) {
 						Intent i = new Intent(MenuActivity.this, ArticlesDownloadedActivity.class);
+						i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						startActivity(i);						
 					}
 				});

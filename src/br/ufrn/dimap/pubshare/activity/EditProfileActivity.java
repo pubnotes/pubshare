@@ -45,7 +45,7 @@ public class EditProfileActivity extends PubnotesActivity {
 	EditText e8;
 	EditText e9;
 
-	Profile profile;
+	//Profile profile;
 	User userlogado;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +70,16 @@ public class EditProfileActivity extends PubnotesActivity {
 		
 		userlogado = EditProfileActivity.this.getCurrentUser();
 		
+		e1.setText(userlogado.getUserprofile().getInstitution());
+		e2.setText(userlogado.getUserprofile().getDegree());
+		e3.setText(userlogado.getUserprofile().getLocation());
+		e4.setText(userlogado.getUserprofile().getGender());
+		e5.setText(userlogado.getUserprofile().getBirthday());
+		e6.setText(userlogado.getUserprofile().getAboutme());
+		e7.setText(userlogado.getUserprofile().getFacebook());
+		e8.setText(userlogado.getUserprofile().getEmail());
+		e9.setText(userlogado.getUserprofile().getPhone());
+		
 		Log.d("INFO USER ATUAL", "useremail " + EditProfileActivity.this.getCurrentUser().getUseremail());
 		Log.d("INFO USER ATUAL", "password " + EditProfileActivity.this.getCurrentUser().getPassword());
 		
@@ -79,24 +89,27 @@ public class EditProfileActivity extends PubnotesActivity {
 					public void onClick(View view) {
 						
 						//Aqui devo pegar todas as informacoes, criar um Profile
-						profile = new Profile();
-						profile.setId(userlogado.getUserprofile().getId());
-						profile.setInstitution(e1.getText().toString());
-						profile.setDegree(e2.getText().toString());
-						profile.setLocation(e3.getText().toString());
-						profile.setGender(e4.getText().toString());
-						profile.setBirthday(e5.getText().toString());
-						profile.setAboutme(e6.getText().toString());
-						profile.setFacebook(e7.getText().toString());
-						profile.setEmail(e8.getText().toString());
-						profile.setPhone(e9.getText().toString());
+						//profile = new Profile();
+						userlogado.getUserprofile().setId(userlogado.getUserprofile().getId());
+						userlogado.getUserprofile().setInstitution(e1.getText().toString());
+						userlogado.getUserprofile().setDegree(e2.getText().toString());
+						userlogado.getUserprofile().setLocation(e3.getText().toString());
+						userlogado.getUserprofile().setGender(e4.getText().toString());
+						userlogado.getUserprofile().setBirthday(e5.getText().toString());
+						userlogado.getUserprofile().setAboutme(e6.getText().toString());
+						userlogado.getUserprofile().setFacebook(e7.getText().toString());
+						userlogado.getUserprofile().setEmail(e8.getText().toString());
+						userlogado.getUserprofile().setPhone(e9.getText().toString());
 						
-						userlogado.setUserprofile(profile);
+						//userlogado.setUserprofile(profile);
 						
-						EditProfileActivity.this.setCurrentUser(userlogado);
+						//EditProfileActivity.this.setCurrentUser(userlogado);
 						
 						//acessar o servidor atraves do (id) e atualizar o user lah
 						async.execute(userlogado);
+						Intent i = new Intent(EditProfileActivity.this, ShowProfileActivity.class);
+						i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						startActivity(i);
 					}
 				}); 
 		
@@ -112,7 +125,6 @@ public class EditProfileActivity extends PubnotesActivity {
 			}
 			
 			protected UserResult doInBackground(User... user) {
-				Log.d("USER ATUAL ID", "useremail " + user[0].getId());
 				return saveProfile(user[0]);
 				
 			}
@@ -125,9 +137,7 @@ public class EditProfileActivity extends PubnotesActivity {
 				}*/
 				Toast.makeText(EditProfileActivity.this,
 						"Updated profile!", Toast.LENGTH_SHORT).show();
-				Intent i = new Intent(EditProfileActivity.this, ShowProfileActivity.class);
-				i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(i);
+				
 			}
 		};		
 		

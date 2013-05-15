@@ -16,10 +16,12 @@ import org.springframework.web.client.RestTemplate;
 
 import br.ufrn.dimap.pubshare.PubnotesApplication;
 import br.ufrn.dimap.pubshare.adapters.ArticleListAdapter;
+import br.ufrn.dimap.pubshare.adapters.FriendsListAdapter;
 import br.ufrn.dimap.pubshare.adapters.UserListAdapter;
 import br.ufrn.dimap.pubshare.domain.Article;
 import br.ufrn.dimap.pubshare.domain.Evaluation;
 import br.ufrn.dimap.pubshare.domain.Friend;
+import br.ufrn.dimap.pubshare.domain.Tag;
 import br.ufrn.dimap.pubshare.domain.User;
 import br.ufrn.dimap.pubshare.evaluation.ArticleDetailActivity;
 import br.ufrn.dimap.pubshare.evaluation.ArticleEvaluationDetailActivity;
@@ -89,20 +91,22 @@ public class SearchPeopleActivity extends PubnotesActivity {
 							
 							/** now lets update the interface **/
 							protected void onPostExecute(User[] result) {
+								Log.d("INFO USER SEARCH", "username " + SearchPeopleActivity.this.getCurrentUser().getUsername());
+								
 								for (int i = 0; i < result.length; i++) {
+									Log.d("INFO USER RESULT", "username " + result[i].getUsername());
+									//if(result[i].getUsername().equals(userlogado.getUsername())){
+										//Toast.makeText(SearchPeopleActivity.this,
+											//"Usuário está logado neste dispositivo!", Toast.LENGTH_SHORT).show();	
+									//}
 									if(contains(users, result[i].getUsername()) == false)	
 										users.add(result[i]);
 									else{
-										if(result[i].getUsername().equals(userlogado.getUsername())){
-											Toast.makeText(SearchPeopleActivity.this,
-													"Usuário está logado neste dispositivo!", Toast.LENGTH_SHORT).show();	
-										}else{
 											Toast.makeText(SearchPeopleActivity.this,
 													"Usuario já foi buscado!", Toast.LENGTH_SHORT).show();
-										}
 									}
 								}
-								configureListView(users);
+								configureListView(Arrays.asList(result));
 							}
 						};
 						
@@ -121,7 +125,7 @@ public class SearchPeopleActivity extends PubnotesActivity {
 		return contain;
 	}
 	
-	private OnItemClickListener onItemClickEvaluationDetail = new OnItemClickListener()
+	private OnItemClickListener onItemClickAddFriend = new OnItemClickListener()
 	{
 		public void onItemClick(AdapterView adapter, View v, int position, long id) 
 		{
@@ -132,9 +136,19 @@ public class SearchPeopleActivity extends PubnotesActivity {
 				inflater.inflate(R.layout.row_listview_people_list, null);
 			}
 			
-			Friend user = (Friend) adapter.getItemAtPosition(position);
+			User user = (User) adapter.getItemAtPosition(position);
 			userlogado = SearchPeopleActivity.this.getCurrentUser();
-			userlogado.getFriends().add(user);
+			Friend friend = new Friend();
+			friend.setId(user.getId());
+			friend.setPassword(user.getPassword());
+			friend.setUseremail(user.getUseremail());
+			friend.setUsername(user.getUsername());
+			friend.setUserprofile(user.getUserprofile());
+			Tag tag = new Tag();
+			tag.setDescription("default");
+			friend.setTag(tag);
+			
+			userlogado.getFriends().add(friend);
 			
 			async2 = new AsyncTask<User, Void, UserResult>(){
 				
@@ -147,7 +161,6 @@ public class SearchPeopleActivity extends PubnotesActivity {
 					return addFriends(user[0]);
 					
 				}
-				
 				/** now lets update the interface **/
 				protected void onPostExecute(UserResult result) {
 					Toast.makeText(SearchPeopleActivity.this,
@@ -168,6 +181,7 @@ public class SearchPeopleActivity extends PubnotesActivity {
 			Log.d(this.getClass().getSimpleName(), "Não foi possível encontrar R.layout.row_listview_article_list");
 		}
 		usersListView.setAdapter( adapter );
+		usersListView.setOnItemClickListener(onItemClickAddFriend);
 		//Aqui possivelmente virah o codigo do click no botao de +
 	}
 
