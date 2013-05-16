@@ -68,7 +68,7 @@ public class SearchPeopleActivity extends PubnotesActivity {
 		//deve pegar os usuarios (username, aboutme) do servidor numa lista
 		//e adicionar a listview
 		users = new ArrayList<User>();
-		
+		userlogado = SearchPeopleActivity.this.getCurrentUser();
 		
 		
 		/** done **/
@@ -91,22 +91,25 @@ public class SearchPeopleActivity extends PubnotesActivity {
 							
 							/** now lets update the interface **/
 							protected void onPostExecute(User[] result) {
-								Log.d("INFO USER SEARCH", "username " + SearchPeopleActivity.this.getCurrentUser().getUsername());
-								
-								for (int i = 0; i < result.length; i++) {
-									Log.d("INFO USER RESULT", "username " + result[i].getUsername());
-									//if(result[i].getUsername().equals(userlogado.getUsername())){
-										//Toast.makeText(SearchPeopleActivity.this,
-											//"Usuário está logado neste dispositivo!", Toast.LENGTH_SHORT).show();	
+								if(result.length != 0){
+									if(result[0].getUsername().equals(userlogado.getUsername())){
+										Toast.makeText(SearchPeopleActivity.this,
+										"Usuário está logado neste dispositivo!", Toast.LENGTH_SHORT).show();	
+									}else{
+										//for (int i = 0; i < result.length; i++) {
+										if(contains(users, result[0].getUsername()) == false)	
+											users.add(result[0]);
+										else{
+												Toast.makeText(SearchPeopleActivity.this,
+														"Usuario já foi buscado!", Toast.LENGTH_SHORT).show();
+										}
+										configureListView(Arrays.asList(result));
 									//}
-									if(contains(users, result[i].getUsername()) == false)	
-										users.add(result[i]);
-									else{
-											Toast.makeText(SearchPeopleActivity.this,
-													"Usuario já foi buscado!", Toast.LENGTH_SHORT).show();
 									}
+								}else{
+									Toast.makeText(SearchPeopleActivity.this,
+											"Não existe usuário com esse username!", Toast.LENGTH_SHORT).show();	
 								}
-								configureListView(Arrays.asList(result));
 							}
 						};
 						

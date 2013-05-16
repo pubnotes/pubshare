@@ -51,7 +51,6 @@ public class ShowFriendsActivity extends PubnotesActivity {
 		final List<User> users1 = UserMockFactory.makeUserList();
 		userlogado = ShowFriendsActivity.this.getCurrentUser();
 		
-		configureListView(users1);
 		/** getting users from the server using the async task**/
 		async = new AsyncTask<User, Void, User[]>(){
 			
