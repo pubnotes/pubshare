@@ -39,7 +39,7 @@
         android:layout_below="@id/title"
         android:textColor="#343434"
         android:textSize="15dip"
-        android:layout_marginTop="1dip"
+        android:layout_marginTop="30dip"
         android:layout_toRightOf="@+id/thumbnail"
         android:text="UFRN-DIMAp" />
  

@@ -1,5 +1,6 @@
-package br.ufrn.dimap.pubshare.adapters;
+	package br.ufrn.dimap.pubshare.adapters;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.AlertDialog;
@@ -26,6 +27,8 @@ import br.ufrn.dimap.pubshare.mocks.UserMockFactory;
 
 public class FriendsListAdapter extends ArrayAdapter<User> {
 	
+	List<String> tags;
+	
 	public FriendsListAdapter(Context context, int textViewResourceId,
 			List<User> objects) {
 		super(context, textViewResourceId, objects);
@@ -42,13 +45,15 @@ public class FriendsListAdapter extends ArrayAdapter<User> {
 		User item = getItem(position);
 		if (item!= null) {
 			User user = UserMockFactory.makeSingleUser();
-			final List<br.ufrn.dimap.pubshare.domain.Tag> tags = user.getTags();
+			//final List<br.ufrn.dimap.pubshare.domain.Tag> tags = user.getTags();
+			tags = new ArrayList<String>();
+			tags = UserMockFactory.usersTags;
 			final PopupMenu popupMenu;
 			popupMenu = new PopupMenu(this.getContext(), view.findViewById(R.id.addtag));
 			popupMenu.getMenu().add(Menu.NONE, tags.size()+ 1, Menu.NONE, "Create New Tag");
 			
 			for (int i = 0; i < tags.size(); i++) {
-				popupMenu.getMenu().add(Menu.NONE, i, Menu.NONE, tags.get(i).getDescription());
+				popupMenu.getMenu().add(Menu.NONE, i, Menu.NONE, tags.get(i));
 			}
 		
 			view.findViewById(R.id.addtag).setOnClickListener(new View.OnClickListener() {
@@ -97,12 +102,12 @@ public class FriendsListAdapter extends ArrayAdapter<User> {
 			   					    public void onClick(DialogInterface dialog,int id) {
 			   						// get user input and set it to result
 			   						// edit text
-			   					    	br.ufrn.dimap.pubshare.domain.Tag tag = new br.ufrn.dimap.pubshare.domain.Tag();
-			   					    	tag.setDescription(userInput.getText().toString());
+			   					    	//br.ufrn.dimap.pubshare.domain.Tag tag = new br.ufrn.dimap.pubshare.domain.Tag();
+			   					    	//tag.setDescription();
 			   					    	//adicionando nova tag a lista de tags do user
-			   					    	tags.add(tag);
+			   					    	tags.add(userInput.getText().toString());
 			   					    	int newid = tags.size() + 1;
-			   					    	popupMenu.getMenu().add(Menu.NONE, newid++, Menu.NONE, tag.getDescription());
+			   					    	popupMenu.getMenu().add(Menu.NONE, newid++, Menu.NONE, userInput.getText().toString());
 			   					    	FriendsListAdapter.this.notifyDataSetChanged();
 			   					    }
 			   					  })

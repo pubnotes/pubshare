@@ -16,10 +16,12 @@ import org.springframework.web.client.RestTemplate;
 
 import br.ufrn.dimap.pubshare.PubnotesApplication;
 import br.ufrn.dimap.pubshare.adapters.ArticleListAdapter;
+import br.ufrn.dimap.pubshare.adapters.FriendsListAdapter;
 import br.ufrn.dimap.pubshare.adapters.UserListAdapter;
 import br.ufrn.dimap.pubshare.domain.Article;
 import br.ufrn.dimap.pubshare.domain.Evaluation;
 import br.ufrn.dimap.pubshare.domain.Friend;
+import br.ufrn.dimap.pubshare.domain.Tag;
 import br.ufrn.dimap.pubshare.domain.User;
 import br.ufrn.dimap.pubshare.evaluation.ArticleDetailActivity;
 import br.ufrn.dimap.pubshare.evaluation.ArticleEvaluationDetailActivity;
@@ -36,6 +38,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -66,7 +69,7 @@ public class SearchPeopleActivity extends PubnotesActivity {
 		//deve pegar os usuarios (username, aboutme) do servidor numa lista
 		//e adicionar a listview
 		users = new ArrayList<User>();
-		
+		userlogado = SearchPeopleActivity.this.getCurrentUser();
 		
 		
 		/** done **/
@@ -89,15 +92,20 @@ public class SearchPeopleActivity extends PubnotesActivity {
 							
 							/** now lets update the interface **/
 							protected void onPostExecute(User[] result) {
-								for (int i = 0; i < result.length; i++) {
-									if(contains(users, result[i].getUsername()) == false)	
-										users.add(result[i]);
-									else{
-										Toast.makeText(SearchPeopleActivity.this,
-												"Usuario já foi buscado!", Toast.LENGTH_SHORT).show();
-									}
+								if(result.length != 0){
+										//for (int i = 0; i < result.length; i++) {
+										if(contains(users, result[0].getUsername()) == false)	
+											users.add(result[0]);
+										else{
+												Toast.makeText(SearchPeopleActivity.this,
+														"Usuario já foi buscado!", Toast.LENGTH_SHORT).show();
+										}
+										configureListView(Arrays.asList(result));
+									//}
+								}else{
+									Toast.makeText(SearchPeopleActivity.this,
+											"Não existe usuário com esse username!", Toast.LENGTH_SHORT).show();	
 								}
-								configureListView(users);
 							}
 						};
 						
@@ -116,7 +124,7 @@ public class SearchPeopleActivity extends PubnotesActivity {
 		return contain;
 	}
 	
-	private OnItemClickListener onItemClickEvaluationDetail = new OnItemClickListener()
+	private OnItemClickListener onItemClickAddFriend = new OnItemClickListener()
 	{
 		public void onItemClick(AdapterView adapter, View v, int position, long id) 
 		{
@@ -127,31 +135,47 @@ public class SearchPeopleActivity extends PubnotesActivity {
 				inflater.inflate(R.layout.row_listview_people_list, null);
 			}
 			
-			Friend user = (Friend) adapter.getItemAtPosition(position);
+			User user = (User) adapter.getItemAtPosition(position);
 			userlogado = SearchPeopleActivity.this.getCurrentUser();
-			userlogado.getFriends().add(user);
-			
-			async2 = new AsyncTask<User, Void, UserResult>(){
+			if(user.getUsername().equals(userlogado.getUsername())){
+				Toast.makeText(SearchPeopleActivity.this,
+						"Usuario está logada nesse dispositivo!", Toast.LENGTH_SHORT).show();
+		
+			}else{
+				Friend friend = new Friend();
+				friend.setId(user.getId());
+				friend.setPassword(user.getPassword());
+				friend.setUseremail(user.getUseremail());
+				friend.setUsername(user.getUsername());
+				friend.setUserprofile(user.getUserprofile());
+				Tag tag = new Tag();
+				tag.setDescription("default");
+				friend.setTag(tag);
 				
+				userlogado.getFriends().add(friend);
 				
-				protected void onPreExecute() {
-					super.onPreExecute();
-				}
-				
-				protected UserResult doInBackground(User... user) {
-					return addFriends(user[0]);
+				async2 = new AsyncTask<User, Void, UserResult>(){
 					
-				}
+					
+					protected void onPreExecute() {
+						super.onPreExecute();
+					}
+					
+					protected UserResult doInBackground(User... user) {
+						return addFriends(user[0]);
+						
+					}
+					/** now lets update the interface **/
+					protected void onPostExecute(UserResult result) {
+						Toast.makeText(SearchPeopleActivity.this,
+								"Amigo adicionado!", Toast.LENGTH_SHORT).show();
+					}
+				};		
 				
-				/** now lets update the interface **/
-				protected void onPostExecute(UserResult result) {
-					Toast.makeText(SearchPeopleActivity.this,
-							"Amigo adicionado!", Toast.LENGTH_SHORT).show();
-				}
-			};		
-			
-			async2.execute(userlogado);
-			
+				async2.execute(userlogado);
+		
+			}
+					
 		}
 	};
 	
@@ -163,6 +187,7 @@ public class SearchPeopleActivity extends PubnotesActivity {
 			Log.d(this.getClass().getSimpleName(), "Não foi possível encontrar R.layout.row_listview_article_list");
 		}
 		usersListView.setAdapter( adapter );
+		usersListView.setOnItemClickListener(onItemClickAddFriend);
 		//Aqui possivelmente virah o codigo do click no botao de +
 	}
 

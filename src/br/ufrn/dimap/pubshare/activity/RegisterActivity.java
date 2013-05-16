@@ -55,40 +55,41 @@ public class RegisterActivity extends PubnotesActivity {
 						user.setUseremail(mailText.getText().toString());
 						user.setPassword(passwordText.getText().toString());
 						
+
+						/** creating the new asyncTask here **/
+						async = new AsyncTask<User, Void, UserResult>(){
+							
+							
+							protected void onPreExecute() {
+								dialog = new ProgressDialog(RegisterActivity.this);
+								super.onPreExecute();
+								dialog.setMessage("Registering account...");
+								dialog.show();
+							}
+							
+							protected UserResult doInBackground(User... user) {
+								return registerUser(user[0]);
+								
+							}
+							
+							/** now lets update the interface **/
+							protected void onPostExecute(UserResult result) {
+								if(dialog.isShowing())
+								{
+									dialog.dismiss();
+								}
+								Toast.makeText(RegisterActivity	.this,
+									"Account registered successfully!", Toast.LENGTH_SHORT).show();
+								Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
+								i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				                startActivity(i);
+							}
+						};
+						
 						//e mandar pra o servidor
 						async.execute(user);
 					}
 				}); 
-		
-		/** creating the new asyncTask here **/
-		async = new AsyncTask<User, Void, UserResult>(){
-			
-			
-			protected void onPreExecute() {
-				dialog = new ProgressDialog(RegisterActivity.this);
-				super.onPreExecute();
-				dialog.setMessage("Registering account...");
-				dialog.show();
-			}
-			
-			protected UserResult doInBackground(User... user) {
-				return registerUser(user[0]);
-				
-			}
-			
-			/** now lets update the interface **/
-			protected void onPostExecute(UserResult result) {
-				if(dialog.isShowing())
-				{
-					dialog.dismiss();
-				}
-				Toast.makeText(RegisterActivity	.this,
-					"Account registered successfully!", Toast.LENGTH_SHORT).show();
-				Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
-				i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(i);
-			}
-		};
 	}
 
 	@Override

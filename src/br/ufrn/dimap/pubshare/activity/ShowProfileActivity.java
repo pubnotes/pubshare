@@ -63,8 +63,7 @@ public class ShowProfileActivity extends PubnotesActivity {
 		email = (TextView) findViewById(R.id.textemail);
 		phone = (TextView) findViewById(R.id.textphone);
 		
-		//Log.d("INFO USER", "useremail " + ShowProfileActivity.this.getCurrentUser().getUseremail());
-		//Log.d("INFO USER", "password " + ShowProfileActivity.this.getCurrentUser().getPassword());
+		
 		//Aqui eu devo pegar a ref do User, fazer uma busca no banco
 		//pegar o Profile do user e setar os campos da activity
 		User userlogado = ShowProfileActivity.this.getCurrentUser(); 
@@ -89,10 +88,10 @@ public class ShowProfileActivity extends PubnotesActivity {
 					
 					
 					protected void onPreExecute() {
-						dialog = new ProgressDialog(ShowProfileActivity.this);
+						//dialog = new ProgressDialog(ShowProfileActivity.this);
 						super.onPreExecute();
-						dialog.setMessage("Loading profile...");
-						dialog.show();
+						//dialog.setMessage("Loading profile...");
+						//dialog.show();
 					}
 					
 					protected Profile doInBackground(User... user) {
@@ -102,10 +101,10 @@ public class ShowProfileActivity extends PubnotesActivity {
 					
 					/** now lets update the interface **/
 					protected void onPostExecute(Profile profile) {
-						if(dialog.isShowing())
+						/*if(dialog.isShowing())
 						{
 							dialog.dismiss();
-						}
+						}*/
 						
 						if (profile.getId() != 0) {
 							atext.setText(profile.getAboutme());

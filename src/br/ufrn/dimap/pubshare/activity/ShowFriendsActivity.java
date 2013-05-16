@@ -65,7 +65,7 @@ public class ShowFriendsActivity extends PubnotesActivity {
 			
 			/** now lets update the interface **/
 			protected void onPostExecute(User[] result) {
-				configureListView(users1);
+				configureListView(Arrays.asList(result));
 			}
 		};
 		
