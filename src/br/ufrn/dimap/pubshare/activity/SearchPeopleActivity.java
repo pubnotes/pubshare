@@ -38,6 +38,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -92,10 +93,6 @@ public class SearchPeopleActivity extends PubnotesActivity {
 							/** now lets update the interface **/
 							protected void onPostExecute(User[] result) {
 								if(result.length != 0){
-									if(result[0].getUsername().equals(userlogado.getUsername())){
-										Toast.makeText(SearchPeopleActivity.this,
-										"Usuário está logado neste dispositivo!", Toast.LENGTH_SHORT).show();	
-									}else{
 										//for (int i = 0; i < result.length; i++) {
 										if(contains(users, result[0].getUsername()) == false)	
 											users.add(result[0]);
@@ -105,7 +102,6 @@ public class SearchPeopleActivity extends PubnotesActivity {
 										}
 										configureListView(Arrays.asList(result));
 									//}
-									}
 								}else{
 									Toast.makeText(SearchPeopleActivity.this,
 											"Não existe usuário com esse username!", Toast.LENGTH_SHORT).show();	
@@ -141,38 +137,45 @@ public class SearchPeopleActivity extends PubnotesActivity {
 			
 			User user = (User) adapter.getItemAtPosition(position);
 			userlogado = SearchPeopleActivity.this.getCurrentUser();
-			Friend friend = new Friend();
-			friend.setId(user.getId());
-			friend.setPassword(user.getPassword());
-			friend.setUseremail(user.getUseremail());
-			friend.setUsername(user.getUsername());
-			friend.setUserprofile(user.getUserprofile());
-			Tag tag = new Tag();
-			tag.setDescription("default");
-			friend.setTag(tag);
-			
-			userlogado.getFriends().add(friend);
-			
-			async2 = new AsyncTask<User, Void, UserResult>(){
+			if(user.getUsername().equals(userlogado.getUsername())){
+				Toast.makeText(SearchPeopleActivity.this,
+						"Usuario está logada nesse dispositivo!", Toast.LENGTH_SHORT).show();
+		
+			}else{
+				Friend friend = new Friend();
+				friend.setId(user.getId());
+				friend.setPassword(user.getPassword());
+				friend.setUseremail(user.getUseremail());
+				friend.setUsername(user.getUsername());
+				friend.setUserprofile(user.getUserprofile());
+				Tag tag = new Tag();
+				tag.setDescription("default");
+				friend.setTag(tag);
 				
+				userlogado.getFriends().add(friend);
 				
-				protected void onPreExecute() {
-					super.onPreExecute();
-				}
-				
-				protected UserResult doInBackground(User... user) {
-					return addFriends(user[0]);
+				async2 = new AsyncTask<User, Void, UserResult>(){
 					
-				}
-				/** now lets update the interface **/
-				protected void onPostExecute(UserResult result) {
-					Toast.makeText(SearchPeopleActivity.this,
-							"Amigo adicionado!", Toast.LENGTH_SHORT).show();
-				}
-			};		
-			
-			async2.execute(userlogado);
-			
+					
+					protected void onPreExecute() {
+						super.onPreExecute();
+					}
+					
+					protected UserResult doInBackground(User... user) {
+						return addFriends(user[0]);
+						
+					}
+					/** now lets update the interface **/
+					protected void onPostExecute(UserResult result) {
+						Toast.makeText(SearchPeopleActivity.this,
+								"Amigo adicionado!", Toast.LENGTH_SHORT).show();
+					}
+				};		
+				
+				async2.execute(userlogado);
+		
+			}
+					
 		}
 	};
 	
