@@ -33,7 +33,7 @@
         android:text="Juvane"
         android:textColor="#040404"
         android:typeface="sans"
-        android:textSize="15dip"
+        android:textSize="20dip"
         android:textStyle="bold"/>
  
     <!-- User About me -->
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/friendnametext"
         android:textColor="#343434"
-        android:textSize="10dip"
+        android:textSize="15dip"
         android:layout_marginTop="1dip"
         android:layout_toRightOf="@+id/friendrow"
         android:text="DIMAp-UFRN ..." />
@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/friendaboutme"
         android:textColor="#FF8C00"
-        android:textSize="10dip"
+        android:textSize="18dip"
         android:layout_marginTop="1dip"
         android:layout_toRightOf="@+id/friendrow"
         android:text="Add tag +" />    

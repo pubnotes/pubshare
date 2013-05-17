@@ -24,7 +24,7 @@ public class User implements Serializable  {
 	@JsonProperty
 	private boolean onsigned;
 	@JsonProperty
-	private List<Friend> friends;
+	private List<User> friends;
 	@JsonProperty
 	private List<Tag> tags;
 	@JsonProperty
@@ -33,7 +33,7 @@ public class User implements Serializable  {
 	public User(){
 		this.id = 0;
 		this.onsigned = false;
-		this.friends = new ArrayList<Friend>();
+		this.friends = new ArrayList<User>();
 		this.tags = new ArrayList<Tag>();
 		this.userprofile = new Profile();
 	}	
@@ -76,11 +76,11 @@ public class User implements Serializable  {
 		this.userprofile = userprofile;
 	}
 
-	public List<Friend> getFriends() {
+	public List<User> getFriends() {
 		return friends;
 	}
 
-	public void setFriends(List<Friend> friends) {
+	public void setFriends(List<User> friends) {
 		this.friends = friends;
 	}
 
