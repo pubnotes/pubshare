@@ -11,7 +11,10 @@ import org.springframework.http.converter.json.MappingJacksonHttpMessageConverte
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -119,7 +122,22 @@ public class ArticleEvaluationActivity extends PubnotesActivity {
 				TextView notes = (TextView) findViewById(R.id.editText_comments);
 				ArticleEvaluationActivity.this.evaluation
 						.setReviewerNotes(notes.getText().toString());
-				async_save.execute(evaluation);
+				
+				DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener(){
+					@Override
+					public void onClick(DialogInterface dialog, int which){
+						ArticleEvaluationActivity.this.evaluation
+							.setPublished( which == DialogInterface.BUTTON_POSITIVE );
+						
+						async_save.execute(evaluation);
+					};
+				};
+				
+				AlertDialog.Builder builder = new AlertDialog.Builder(ArticleEvaluationActivity.this);
+				builder.setMessage("Do you want to publish this evaluation?");
+				builder.setPositiveButton("Yes", dialogClickListener);
+				builder.setNegativeButton("No", dialogClickListener);
+				builder.show();
 			}
 		};
 		
@@ -221,6 +239,11 @@ public class ArticleEvaluationActivity extends PubnotesActivity {
 				}
 				Toast.makeText(getApplicationContext(), "Evaluation Saved...",
 						Toast.LENGTH_LONG).show();
+				
+				
+				Intent intent = new Intent(ArticleEvaluationActivity.this, ArticleDetailActivity.class);
+				intent.putExtra(Article.KEY_INSTANCE, selectedArticle);
+				startActivity(intent);
 			}
 		};
 	}
