@@ -43,8 +43,7 @@ public class FriendsListAdapter extends ArrayAdapter<User> {
 
 		User item = getItem(position);
 		if (item!= null) {
-			User user = UserMockFactory.makeSingleUser();
-			//final List<br.ufrn.dimap.pubshare.domain.Tag> tags = user.getTags();
+			
 		
 			TextView friendnameText = (TextView) view.findViewById(R.id.friendnametext);
 			friendnameText.setText( item.getUsername() );
