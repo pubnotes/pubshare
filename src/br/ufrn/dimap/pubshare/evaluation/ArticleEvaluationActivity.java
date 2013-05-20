@@ -43,7 +43,7 @@ public class ArticleEvaluationActivity extends PubnotesActivity {
 	private ProgressDialog dialog;
 	private Article selectedArticle;
 	private User user;
-	AsyncTask<Evaluation, Void, EvaluationResult> async_save;
+	AsyncTask<Evaluation, Void, EvaluationResult> async_evaluate;
 	AsyncTask<Evaluation, Void, EvaluationResult> async_publish;
 	AsyncTask<User, Void, Evaluation> async_get;
 
@@ -114,11 +114,11 @@ public class ArticleEvaluationActivity extends PubnotesActivity {
 		((RatingBar) findViewById(R.id.ratingBar_reviewerfamiliarity))
 				.setOnRatingBarChangeListener((OnRatingBarChangeListener) listener);
 
-		OnClickListener save_listener = new OnClickListener() {
+		OnClickListener evaluate_listener = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 
-				configureAsyncSave();
+				configureAsyncEvaluate();
 				TextView notes = (TextView) findViewById(R.id.editText_comments);
 				ArticleEvaluationActivity.this.evaluation
 						.setReviewerNotes(notes.getText().toString());
@@ -129,7 +129,7 @@ public class ArticleEvaluationActivity extends PubnotesActivity {
 						ArticleEvaluationActivity.this.evaluation
 							.setPublished( which == DialogInterface.BUTTON_POSITIVE );
 						
-						async_save.execute(evaluation);
+						async_evaluate.execute(evaluation);
 					};
 				};
 				
@@ -139,25 +139,10 @@ public class ArticleEvaluationActivity extends PubnotesActivity {
 				builder.setNegativeButton("No", dialogClickListener);
 				builder.show();
 			}
-		};
-		
-		OnClickListener publish_listener = new OnClickListener() {
-			@Override
-			public void onClick(View v) {
+		};	
 
-				configureAsyncPublish();
-				TextView notes = (TextView) findViewById(R.id.editText_comments);
-				ArticleEvaluationActivity.this.evaluation.setPublished(true);
-				ArticleEvaluationActivity.this.evaluation
-						.setReviewerNotes(notes.getText().toString());
-				async_publish.execute(evaluation);
-			}
-		};
-
-		((Button) findViewById(R.id.button_save))
-		.setOnClickListener(save_listener);
-		((Button) findViewById(R.id.button_publish))
-				.setOnClickListener(publish_listener);
+		((Button) findViewById(R.id.button_evaluate))
+		.setOnClickListener(evaluate_listener);
 	}
 	
 	
@@ -207,10 +192,10 @@ public class ArticleEvaluationActivity extends PubnotesActivity {
 		};
 	}
 	
-	private void configureAsyncSave()
+	private void configureAsyncEvaluate()
 	{
 		/************** SAVE ******************/
-		async_save = new AsyncTask<Evaluation, Void, EvaluationResult>() {
+		async_evaluate = new AsyncTask<Evaluation, Void, EvaluationResult>() {
 
 			protected void onPreExecute() {
 				dialog = new ProgressDialog(ArticleEvaluationActivity.this);
@@ -240,41 +225,14 @@ public class ArticleEvaluationActivity extends PubnotesActivity {
 				Toast.makeText(getApplicationContext(), "Evaluation Saved...",
 						Toast.LENGTH_LONG).show();
 				
-				
-				Intent intent = new Intent(ArticleEvaluationActivity.this, ArticleDetailActivity.class);
-				intent.putExtra(Article.KEY_INSTANCE, selectedArticle);
-				startActivity(intent);
+				finish();
+				//Intent intent = new Intent(ArticleEvaluationActivity.this, ArticleDetailActivity.class);
+				//intent.putExtra(Article.KEY_INSTANCE, selectedArticle);
+				//startActivity(intent);
 			}
 		};
 	}
 	
-	private void configureAsyncPublish()
-	{
-		/************** PUBLISH ******************/
-		async_publish = new AsyncTask<Evaluation, Void, EvaluationResult>() {
-
-			protected void onPreExecute() {
-				dialog = new ProgressDialog(ArticleEvaluationActivity.this);
-				super.onPreExecute();
-				dialog.setMessage("Publishing Evaluation...");
-				dialog.show();
-			}
-
-			protected EvaluationResult doInBackground(Evaluation... evaluation) {
-				return updateEvaluation(evaluation[0]);
-			}
-
-			/** now lets update the interface **/
-			protected void onPostExecute(EvaluationResult result) {
-				if (dialog.isShowing()) {
-					dialog.dismiss();
-				}
-				Toast.makeText(getApplicationContext(),
-						"Evaluation Published...", Toast.LENGTH_LONG).show();
-			}
-		};
-	}
-
 	/**
 	 * Auxiliary method for async_save
 	 * 

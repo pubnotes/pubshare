@@ -19,7 +19,6 @@
     <string name="write">Write</string>
     <string name="relevance">Relevance</string>
     <string name="comments">Comments</string>
-    <string name="save">Save</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="confirmation_of_deletion">Confirmation of deletion</string>
@@ -49,5 +48,5 @@
     <string name="spinner_title2">Add tag +</string>
     <string name="spinner_title">Search Articles on PubShare</string>
     <string name="searching">Searching</string>
-    <string name="publish">Publish</string>
+    <string name="evaluate">Evaluate</string>
 </resources>
