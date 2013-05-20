@@ -118,8 +118,7 @@
 		                android:id="@+id/eaboutme"
 		                android:layout_width="match_parent"
 		                android:layout_height="wrap_content"
-		                android:inputType="text"
-		                android:maxLines="1"
+		                android:inputType="textMultiLine" 
 		                android:singleLine="true"
 		                android:layout_marginTop="5dip"
 		  				android:layout_marginBottom="20dip" />

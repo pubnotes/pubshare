@@ -53,17 +53,6 @@ public class UserListAdapter extends ArrayAdapter<User> {
 			TextView aboutmeText = (TextView) view.findViewById(R.id.aboutmetext);
 			aboutmeText.setText( item.getUserprofile().getAboutme() );
 			
-			ImageView add = (ImageView) view.findViewById(R.id.btnadd);
-			
-			add.setOnClickListener(
-					new View.OnClickListener() {
-						@Override
-						public void onClick(View view) {
-							Toast.makeText(UserListAdapter.this.getContext(),
-									"Você adicionou " + usernameText.getText() + " ao PubShare", Toast.LENGTH_SHORT).show();
-						}
-					});
-			
 			//Falta tratar imagem do usuario
 			users.add(item);
 		}
