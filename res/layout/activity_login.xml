@@ -99,14 +99,6 @@
 		                android:singleLine="true"
 		                android:layout_marginTop="5dip" />
 		            
-		            <CheckBox 
-					  	 android:id="@+id/ManterLogado"
-			        	 android:layout_width="wrap_content"
-			        	 android:layout_height="wrap_content"
-			        	 android:text="Keep me signed-in on this device"
-			        	 android:checked="true"    
-		  			/>
-		
 		            <Button
 		                android:id="@+id/sign_in_button"
 		                android:layout_width="wrap_content"
