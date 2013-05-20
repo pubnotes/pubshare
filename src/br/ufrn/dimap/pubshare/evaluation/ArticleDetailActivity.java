@@ -1,13 +1,7 @@
 package br.ufrn.dimap.pubshare.evaluation;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
@@ -28,7 +22,6 @@ import br.ufrn.dimap.pubshare.activity.R;
 import br.ufrn.dimap.pubshare.domain.Article;
 import br.ufrn.dimap.pubshare.domain.Evaluation;
 import br.ufrn.dimap.pubshare.domain.User;
-import br.ufrn.dimap.pubshare.mocks.ArticleMockFactory;
 import br.ufrn.dimap.pubshare.util.Constants;
 
 /**
@@ -38,6 +31,7 @@ import br.ufrn.dimap.pubshare.util.Constants;
  */
 public class ArticleDetailActivity extends PubnotesActivity
 {
+	private final static int REQUEST_CODE = 14566;
 	private ProgressDialog dialog; 
 	AsyncTask<Article, Void, Evaluation[]> async;
 	Article selectedArticle;
@@ -57,7 +51,51 @@ public class ArticleDetailActivity extends PubnotesActivity
 		setTitle(R.string.title_activity_article_detail);
 		selectedArticle = (Article) getIntent().getSerializableExtra(Article.KEY_INSTANCE);
 		configureMainView(selectedArticle);
+		getEvaluationsAsyncTask();
+		async.execute(selectedArticle);
+		/** done **/
 		
+		/** giving life to the evaluation button **/
+		findViewById(R.id.button_evaluate).setOnClickListener(
+				new View.OnClickListener() 
+				{
+					@Override
+					public void onClick(View view) {
+						
+						
+						EvaluationListAdapter adapter = (EvaluationListAdapter) evaluationListView.getAdapter();
+						User user = getCurrentUser();
+						Evaluation evalFromUser =  null;
+						
+						for(Evaluation element : adapter.getEvaluations())
+						{
+							if(element.getUser().getId() == user.getId())
+							{
+								evalFromUser = element;
+							}
+						}
+						
+						Intent intent = null;
+						if(evalFromUser != null)
+						{
+							intent = new Intent(ArticleDetailActivity.this, ArticleEvaluationDetailActivity.class);
+							intent.putExtra(Article.KEY_INSTANCE, selectedArticle);
+							intent.putExtra(Evaluation.KEY_INSTANCE, evalFromUser);
+							startActivity(intent);
+						}
+						else
+						{
+							intent = new Intent(ArticleDetailActivity.this, ArticleEvaluationActivity.class);
+							intent.putExtra(Article.KEY_INSTANCE, selectedArticle);
+							intent.putExtra(Evaluation.KEY_INSTANCE, evalFromUser);
+							startActivityForResult(intent, REQUEST_CODE);
+						}
+					}
+				});
+	}	
+	
+	public void getEvaluationsAsyncTask()
+	{
 		/** getting evaluations from the server using the async task**/
 		async = new AsyncTask<Article, Void, Evaluation[]>(){
 			
@@ -84,36 +122,7 @@ public class ArticleDetailActivity extends PubnotesActivity
 				configureEvaluationsSummaryView(selectedArticle);
 			}
 		};
-		async.execute(selectedArticle);
-		/** done **/
-		
-		/** giving life to the evaluation button **/
-		findViewById(R.id.button_evaluate).setOnClickListener(
-				new View.OnClickListener() 
-				{
-					@Override
-					public void onClick(View view) {
-						
-						
-						EvaluationListAdapter adapter = (EvaluationListAdapter) evaluationListView.getAdapter();
-						User user = getCurrentUser();
-						Evaluation evalFromUser =  null;
-						
-						for(Evaluation element : adapter.getEvaluations())
-						{
-							if(element.getUser().getId() == user.getId())
-							{
-								evalFromUser = element;
-							}
-						}
-						
-						Intent intent = new Intent(ArticleDetailActivity.this, ArticleEvaluationActivity.class);
-						intent.putExtra(Article.KEY_INSTANCE, selectedArticle);
-						intent.putExtra(Evaluation.KEY_INSTANCE, evalFromUser);
-						startActivity(intent);
-					}
-				});
-	}	
+	}
 	
 	/**
 	 * Configure the main view of the activity
@@ -126,13 +135,8 @@ public class ArticleDetailActivity extends PubnotesActivity
 	{
 		TextView articleTitle = (TextView) findViewById(R.id.label_article_title);
 		TextView articleAbstract = (TextView) findViewById(R.id.label_article_abstract_text);
-		RatingBar rating = (RatingBar) findViewById(R.id.rating_overall_evaluation);
-		
 		articleTitle.setText(article.getTitle());
-		//shouldn't we put abstract in the article class?
-		articleAbstract.setText("abstract here!");
-		//we must create a method in the article for retrieving the unified evaluation value
-		rating.setRating(3.5f);
+		articleAbstract.setText(article.getAbztract());
 	}
 	
 	/**
@@ -144,6 +148,21 @@ public class ArticleDetailActivity extends PubnotesActivity
 	 */
 	private void configureEvaluationsSummaryView(Article article)
 	{
+		RatingBar rating = (RatingBar) findViewById(R.id.rating_overall_evaluation);
+		if(article.getEvaluations() == null || article.getEvaluations().isEmpty())
+		{
+			rating.setRating(0.0f);
+		}
+		else
+		{
+			float overall = 0.0f;
+			for(Evaluation eval : article.getEvaluations())
+			{
+				overall += eval.getOverall();
+			}
+			overall = overall/article.getEvaluations().size();
+			rating.setRating(overall);
+		}
 		EvaluationListAdapter adapter = new EvaluationListAdapter(this, R.layout.row_listview_article_evaluation_list, article.getEvaluations());
 		evaluationListView = (ListView) findViewById(R.id.list_view_article_detail_evaluations);
 		
@@ -193,5 +212,15 @@ public class ArticleDetailActivity extends PubnotesActivity
 				.getForObject(Constants.URL_SERVER + url, Evaluation[].class);
 				
 		return entity;
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(requestCode == REQUEST_CODE)
+		{
+			getEvaluationsAsyncTask();
+			async.execute(selectedArticle);
+		}
 	}
 }

@@ -129,17 +129,10 @@
 
             <Button
                 style="BordlessButton"
-                android:id="@+id/button_save"
+                android:id="@+id/button_evaluate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/save" />
-
-            <Button
-                style="BordlessButton"
-                android:id="@+id/button_publish"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/publish" />
+                android:text="@string/evaluate" />
         </LinearLayout>
     </LinearLayout>
 
