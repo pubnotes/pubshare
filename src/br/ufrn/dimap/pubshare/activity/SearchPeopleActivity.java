@@ -97,13 +97,13 @@ public class SearchPeopleActivity extends PubnotesActivity {
 											users.add(result[0]);
 										else{
 												Toast.makeText(SearchPeopleActivity.this,
-														"Usuario já foi buscado!", Toast.LENGTH_SHORT).show();
+														"The user has been fetched!", Toast.LENGTH_SHORT).show();
 										}
 										configureListView(Arrays.asList(result));
 									//}
 								}else{
 									Toast.makeText(SearchPeopleActivity.this,
-											"Não existe usuário com esse username!", Toast.LENGTH_SHORT).show();	
+											"There is no user with that username!", Toast.LENGTH_SHORT).show();	
 								}
 							}
 						};
@@ -138,13 +138,14 @@ public class SearchPeopleActivity extends PubnotesActivity {
 			userlogado = SearchPeopleActivity.this.getCurrentUser();
 			if(userfriend.getUsername().equals(userlogado.getUsername())){
 				Toast.makeText(SearchPeopleActivity.this,
-						"Usuario está logado nesse dispositivo!", Toast.LENGTH_SHORT).show();
+						"User logged on this device!", Toast.LENGTH_SHORT).show();
 		
 			}else{
 				
 				if(contains(userlogado.getFriends(), userfriend.getUsername()) == false)	{
 					userlogado.getFriends().add(userfriend);
-					//SearchPeopleActivity.this.setCurrentUser(userlogado);
+					SearchPeopleActivity.this.setCurrentUser(userlogado);
+					Log.d("AMIGOS SEARCCH", "tamanho " + userlogado.getFriends().size());
 					
 					async2 = new AsyncTask<User, Void, UserResult>(){
 						
@@ -160,14 +161,14 @@ public class SearchPeopleActivity extends PubnotesActivity {
 						/** now lets update the interface **/
 						protected void onPostExecute(UserResult result) {
 							Toast.makeText(SearchPeopleActivity.this,
-									"Amigo adicionado!", Toast.LENGTH_SHORT).show();
+									"Friend added!", Toast.LENGTH_SHORT).show();
 						}
 					};		
 					
 					async2.execute(userlogado);
 				}else{
 					Toast.makeText(SearchPeopleActivity.this,
-							userfriend.getUsername() + " já é seu amigo!", Toast.LENGTH_SHORT).show();
+							userfriend.getUsername() + " is already your friend!", Toast.LENGTH_SHORT).show();
 				}
 			}
 					

@@ -46,14 +46,25 @@
         android:textSize="10dip"
         android:layout_marginTop="1dip"
         android:layout_toRightOf="@+id/peoplerow"
-        android:text="DIMAp-UFRN ..." />
+        android:text="DIMAp-UFRN ..." />   
     
-      <!-- plus option -->
-     <ImageView android:layout_width="wrap_content"
+      <!-- <ImageView android:layout_width="wrap_content"
         android:id="@+id/btnadd" 
         android:layout_height="wrap_content"
         android:src="@drawable/plusicon"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true"/> -->
+     
+
+     <TextView
+         android:id="@+id/addfriendtext"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:layout_alignLeft="@+id/aboutmetext"
+         android:layout_alignParentRight="true"
+         android:layout_below="@+id/aboutmetext"
+         android:text="Click to add friend"
+         android:textColor="#FF8C00"
+         android:textSize="18dip" />
  
 </RelativeLayout>
