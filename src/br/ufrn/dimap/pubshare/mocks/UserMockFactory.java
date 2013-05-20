@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import br.ufrn.dimap.pubshare.adapters.FriendsListAdapter;
-import br.ufrn.dimap.pubshare.domain.Friend;
 import br.ufrn.dimap.pubshare.domain.Profile;
 import br.ufrn.dimap.pubshare.domain.Tag;
 import br.ufrn.dimap.pubshare.domain.User;
@@ -73,19 +72,19 @@ public class UserMockFactory {
 			user.setFriends(makeFriendList());
 			user.setTags(getUsersTags(usersTags));
 			user.setUserprofile(p);
-			associateFriendsWithTags(user.getFriends(), user.getTags());
+			//associateFriendsWithTags(user.getFriends(), user.getTags());
 			
 			users.add(user);
 		}
 		return users;
 	}
 	
-	public static List<Friend> makeFriendList(){
-		List<Friend> friends = new ArrayList<Friend>();
+	public static List<User> makeFriendList(){
+		List<User> friends = new ArrayList<User>();
 		Profile p = makeSingleProfile();
 
 		for( int i = 0; i < 5 ; i++ ){
-			Friend friend = new Friend();
+			User friend = new User();
 			friend.setId(i+1);
 			friend.setOnsigned(true);
 			friend.setUsername(usersNames[i]);
@@ -101,11 +100,11 @@ public class UserMockFactory {
 		return friends;
 	}
 	
-	public static List<Friend> getFriends (List<String> usersFriends){
-		List<Friend> friends = new ArrayList<Friend>();
+	public static List<User> getFriends (List<String> usersFriends){
+		List<User> friends = new ArrayList<User>();
 		for (int i = 0; i < usersFriends.size(); i++) {
 			//neste caso, pra cada amigo, deve-se pegar o aboutme do profile
-			Friend friend = new Friend();
+			User friend = new User();
 			friend.setUsername(usersFriends.get(i));
 			friend.getUserprofile().setAboutme("Algo sobre mim...");
 			friends.add(friend);
@@ -113,15 +112,15 @@ public class UserMockFactory {
 		return friends;
 	}
 	
-	public static void associateFriendsWithTags(List<Friend> friends ,List<Tag> tags){
+	/*public static void associateFriendsWithTags(List<User> friends ,List<Tag> tags){
 		
 		for(int i = 0; i < 5; i++)
 		{
-			Friend friend = friends.get(i);
+			User friend = friends.get(i);
 			Tag tag = tags.get(i);
 			friend.setTag(tag);
 		}
-	}
+	}*/
 	
 	
 	public static Profile makeSingleProfile(){

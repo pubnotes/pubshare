@@ -24,17 +24,20 @@ public class User implements Serializable  {
 	@JsonProperty
 	private boolean onsigned;
 	@JsonProperty
-	private List<Friend> friends;
+	private List<User> friends;
 	@JsonProperty
 	private List<Tag> tags;
+	@JsonProperty
+	private List<TagUser> markedTags;
 	@JsonProperty
 	private Profile userprofile;
 	
 	public User(){
 		this.id = 0;
 		this.onsigned = false;
-		this.friends = new ArrayList<Friend>();
+		this.friends = new ArrayList<User>();
 		this.tags = new ArrayList<Tag>();
+		this.markedTags = new ArrayList<TagUser>();
 		this.userprofile = new Profile();
 	}	
 	
@@ -44,6 +47,15 @@ public class User implements Serializable  {
 	public void setId(long id) {
 		this.id = id;
 	}
+	
+	public List<TagUser> getMarkedTags() {
+		return markedTags;
+	}
+
+	public void setMarkedTags(List<TagUser> markedTags) {
+		this.markedTags = markedTags;
+	}
+	
 	public String getUsername() {
 		return username;
 	}
@@ -76,11 +88,11 @@ public class User implements Serializable  {
 		this.userprofile = userprofile;
 	}
 
-	public List<Friend> getFriends() {
+	public List<User> getFriends() {
 		return friends;
 	}
 
-	public void setFriends(List<Friend> friends) {
+	public void setFriends(List<User> friends) {
 		this.friends = friends;
 	}
 

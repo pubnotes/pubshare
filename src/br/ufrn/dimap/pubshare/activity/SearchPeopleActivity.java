@@ -20,7 +20,6 @@ import br.ufrn.dimap.pubshare.adapters.FriendsListAdapter;
 import br.ufrn.dimap.pubshare.adapters.UserListAdapter;
 import br.ufrn.dimap.pubshare.domain.Article;
 import br.ufrn.dimap.pubshare.domain.Evaluation;
-import br.ufrn.dimap.pubshare.domain.Friend;
 import br.ufrn.dimap.pubshare.domain.Tag;
 import br.ufrn.dimap.pubshare.domain.User;
 import br.ufrn.dimap.pubshare.evaluation.ArticleDetailActivity;
@@ -135,45 +134,41 @@ public class SearchPeopleActivity extends PubnotesActivity {
 				inflater.inflate(R.layout.row_listview_people_list, null);
 			}
 			
-			User user = (User) adapter.getItemAtPosition(position);
+			User userfriend = (User) adapter.getItemAtPosition(position);
 			userlogado = SearchPeopleActivity.this.getCurrentUser();
-			if(user.getUsername().equals(userlogado.getUsername())){
+			if(userfriend.getUsername().equals(userlogado.getUsername())){
 				Toast.makeText(SearchPeopleActivity.this,
-						"Usuario está logada nesse dispositivo!", Toast.LENGTH_SHORT).show();
+						"Usuario está logado nesse dispositivo!", Toast.LENGTH_SHORT).show();
 		
 			}else{
-				Friend friend = new Friend();
-				friend.setId(user.getId());
-				friend.setPassword(user.getPassword());
-				friend.setUseremail(user.getUseremail());
-				friend.setUsername(user.getUsername());
-				friend.setUserprofile(user.getUserprofile());
-				Tag tag = new Tag();
-				tag.setDescription("default");
-				friend.setTag(tag);
 				
-				userlogado.getFriends().add(friend);
-				
-				async2 = new AsyncTask<User, Void, UserResult>(){
+				if(contains(userlogado.getFriends(), userfriend.getUsername()) == false)	{
+					userlogado.getFriends().add(userfriend);
+					//SearchPeopleActivity.this.setCurrentUser(userlogado);
 					
-					
-					protected void onPreExecute() {
-						super.onPreExecute();
-					}
-					
-					protected UserResult doInBackground(User... user) {
-						return addFriends(user[0]);
+					async2 = new AsyncTask<User, Void, UserResult>(){
 						
-					}
-					/** now lets update the interface **/
-					protected void onPostExecute(UserResult result) {
-						Toast.makeText(SearchPeopleActivity.this,
-								"Amigo adicionado!", Toast.LENGTH_SHORT).show();
-					}
-				};		
-				
-				async2.execute(userlogado);
-		
+						
+						protected void onPreExecute() {
+							super.onPreExecute();
+						}
+						
+						protected UserResult doInBackground(User... user) {
+							return addFriends(user[0]);
+							
+						}
+						/** now lets update the interface **/
+						protected void onPostExecute(UserResult result) {
+							Toast.makeText(SearchPeopleActivity.this,
+									"Amigo adicionado!", Toast.LENGTH_SHORT).show();
+						}
+					};		
+					
+					async2.execute(userlogado);
+				}else{
+					Toast.makeText(SearchPeopleActivity.this,
+							userfriend.getUsername() + " já é seu amigo!", Toast.LENGTH_SHORT).show();
+				}
 			}
 					
 		}
