@@ -91,7 +91,7 @@ public class LoginActivity extends PubnotesActivity {
 		mEmail = getIntent().getStringExtra(EXTRA_EMAIL);
 		mEmailView = (EditText) findViewById(R.id.email);
 		mEmailView.setText(mEmail);
-		checklog = (CheckBox) findViewById(R.id.ManterLogado);
+		
 
 		mPasswordView = (EditText) findViewById(R.id.password);
 		mPasswordView
@@ -269,6 +269,8 @@ public class LoginActivity extends PubnotesActivity {
 				// a partir de agora os dados de login do usuario podem ser
 				// acessados pelas outras activities
 				LoginActivity.this.setCurrentUser(u);
+				mEmailView.setText(u.getUseremail());
+				mPasswordView.setText(u.getPassword());
 				
 				// O Profile serah exibido vazio ateh que o usuario edite o
 				// profile
