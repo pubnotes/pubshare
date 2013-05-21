@@ -79,7 +79,7 @@ public class RegisterActivity extends PubnotesActivity {
 									dialog.dismiss();
 								}
 								Toast.makeText(RegisterActivity	.this,
-									"Account registered successfully!", Toast.LENGTH_SHORT).show();
+									"Account registered successfully!", Toast.LENGTH_LONG).show();
 								Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
 								i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				                startActivity(i);

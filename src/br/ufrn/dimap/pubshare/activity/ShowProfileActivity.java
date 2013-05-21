@@ -72,6 +72,8 @@ public class ShowProfileActivity extends PubnotesActivity {
 		utext.setText(userlogado.getUsername());
 		atext.setText(userlogado.getUserprofile().getAboutme());
 		
+		email.setText(userlogado.getUseremail());
+		
 		Button btnMenu = (Button) findViewById(R.id.btnMainMenu);
 				btnMenu.setOnClickListener(
 						new View.OnClickListener() {
@@ -118,7 +120,7 @@ public class ShowProfileActivity extends PubnotesActivity {
 							aboutme.setText(profile.getAboutme());
 							
 							facebook.setText(profile.getFacebook());
-							email.setText(profile.getEmail());
+							//email.setText(profile.getEmail());
 							phone.setText(profile.getPhone());
 						}
 					}
