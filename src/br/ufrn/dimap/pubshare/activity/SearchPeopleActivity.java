@@ -97,13 +97,13 @@ public class SearchPeopleActivity extends PubnotesActivity {
 											users.add(result[0]);
 										else{
 												Toast.makeText(SearchPeopleActivity.this,
-														"The user has been fetched!", Toast.LENGTH_SHORT).show();
+														"The user has been fetched!", Toast.LENGTH_LONG).show();
 										}
 										configureListView(Arrays.asList(result));
 									//}
 								}else{
 									Toast.makeText(SearchPeopleActivity.this,
-											"There is no user with that username!", Toast.LENGTH_SHORT).show();	
+											"There is no user with that username!", Toast.LENGTH_LONG).show();	
 								}
 							}
 						};
@@ -138,7 +138,7 @@ public class SearchPeopleActivity extends PubnotesActivity {
 			userlogado = SearchPeopleActivity.this.getCurrentUser();
 			if(userfriend.getUsername().equals(userlogado.getUsername())){
 				Toast.makeText(SearchPeopleActivity.this,
-						"User logged on this device!", Toast.LENGTH_SHORT).show();
+						"User logged on this device!", Toast.LENGTH_LONG).show();
 		
 			}else{
 				
@@ -161,14 +161,14 @@ public class SearchPeopleActivity extends PubnotesActivity {
 						/** now lets update the interface **/
 						protected void onPostExecute(UserResult result) {
 							Toast.makeText(SearchPeopleActivity.this,
-									"Friend added!", Toast.LENGTH_SHORT).show();
+									"Friend added!", Toast.LENGTH_LONG).show();
 						}
 					};		
 					
 					async2.execute(userlogado);
 				}else{
 					Toast.makeText(SearchPeopleActivity.this,
-							userfriend.getUsername() + " is already your friend!", Toast.LENGTH_SHORT).show();
+							userfriend.getUsername() + " is already your friend!", Toast.LENGTH_LONG).show();
 				}
 			}
 					

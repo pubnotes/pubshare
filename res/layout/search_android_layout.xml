@@ -16,7 +16,7 @@
 			      android:id="@+id/articletext"  
 			      android:layout_width="fill_parent"
 			      android:layout_height="wrap_content"
-			      android:text="Search Papers on PubShare:"/>
+			      android:text="Search Papers on Pubnotes:"/>
 			
 			    <Spinner
 			        android:id="@+id/sprinnerLibraries"

@@ -63,7 +63,6 @@ public class LoginActivity extends PubnotesActivity {
 	private View mLoginFormView;
 	private View mLoginStatusView;
 	private TextView mLoginStatusMessageView;
-	private CheckBox checklog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

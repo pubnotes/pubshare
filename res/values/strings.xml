@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">PubShare</string>
+    <string name="app_name">Pubnotes</string>
     <string name="title_activity_article_list">Search Results</string>
     <string name="title_activity_article_detail">Article Detail</string>
     <string name="title_activity_articles_downloaded">My Downloads</string>
@@ -34,7 +34,7 @@
     <string name="evalution_relatedWorks">Related works</string>
     <string name="evalution_reviewerFamiliarity">Your familiarity with this subject</string>
     <string name="evalution_overall">Overall</string>
-    <string name="title_activity_register">Register on Pubshare</string>
+    <string name="title_activity_register">Register on Pubnotes</string>
     <string name="title_activity_article_search">Search Article</string>
 	<string name="title">Title</string>
 	<string name="author">Author</string>
@@ -46,7 +46,7 @@
     <string name="title_activity_edit_profile">Edit My Profile</string>
     <string name="title_activity_show_friends">Show Friends</string>
     <string name="spinner_title2">Add tag +</string>
-    <string name="spinner_title">Search Articles on PubShare</string>
+    <string name="spinner_title">Search Articles on Pubnotes</string>
     <string name="searching">Searching</string>
     <string name="evaluate">Evaluate</string>
 </resources>

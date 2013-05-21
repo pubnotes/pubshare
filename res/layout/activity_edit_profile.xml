@@ -149,21 +149,6 @@
 			 <TextView android:layout_width="fill_parent"
 				  		android:layout_height="wrap_content"
 				  		android:textColor="#372c24"
-				  		android:text="  E-mail"
-				  		android:textSize="15sp" />	
-			 <EditText
-		                android:id="@+id/eemail"
-		                android:layout_width="match_parent"
-		                android:layout_height="wrap_content"
-		                android:inputType="textEmailAddress"
-		                android:maxLines="1"
-		                android:singleLine="true"
-		                android:layout_marginTop="5dip"
-		  				android:layout_marginBottom="20dip" /> 
-		  				
-			 <TextView android:layout_width="fill_parent"
-				  		android:layout_height="wrap_content"
-				  		android:textColor="#372c24"
 				  		android:text="  Phone"
 				  		android:textSize="15sp" />	
 				 	

@@ -126,6 +126,7 @@ public class ShowFriendsActivity extends PubnotesActivity {
 	   				    View promptsView = li.inflate(R.layout.tags, null);
 	    	    	    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
 	   					ShowFriendsActivity.this);
+	    	    	    alertDialogBuilder.setMessage("Do you want to create a new tag?");
 	    	    	    
 		    	    	if(item.getItemId() ==  tags.size() + 1){    
 			   				// set prompts.xml to alertdialog builder
@@ -166,7 +167,7 @@ public class ShowFriendsActivity extends PubnotesActivity {
 											/** now lets update the interface **/
 											protected void onPostExecute(UserResult result) {
 												Toast.makeText(ShowFriendsActivity.this,
-														"Added tag!", Toast.LENGTH_SHORT).show();
+														"Added tag!", Toast.LENGTH_LONG).show();
 											}
 										};		
 										
@@ -212,14 +213,14 @@ public class ShowFriendsActivity extends PubnotesActivity {
 										}
 										protected void onPostExecute(UserResult result) {
 											Toast.makeText(ShowFriendsActivity.this,
-													"The user " + userfriend.getUsername() + " was added to the group " + tagmarcada.getDescription(), Toast.LENGTH_SHORT).show();
+													"The user " + userfriend.getUsername() + " was added to the group " + tagmarcada.getDescription(), Toast.LENGTH_LONG).show();
 										}
 									};		
 									
 									async3.execute(userfriend);
 			    	    	    }else{
 			    	    	    	Toast.makeText(ShowFriendsActivity.this,
-											"You've added" + userfriend.getUsername() + " to the group " + tagmarcada.getDescription(), Toast.LENGTH_SHORT).show();
+											"You've added" + userfriend.getUsername() + " to the group " + tagmarcada.getDescription(), Toast.LENGTH_LONG).show();
 			    	    	    	
 			    	    	    	
 			    	    	    }
@@ -304,7 +305,7 @@ public class ShowFriendsActivity extends PubnotesActivity {
 									}
 									protected void onPostExecute(UserResult result) {
 										Toast.makeText(ShowFriendsActivity.this,
-												"The user " + userf.getUsername() + " has been removed from your friends list!", Toast.LENGTH_SHORT).show();
+												"The user " + userf.getUsername() + " has been removed from your friends list!", Toast.LENGTH_LONG).show();
 										Intent i = new Intent(ShowFriendsActivity.this, ShowFriendsActivity.class);
 										i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						                startActivity(i);

@@ -25,6 +25,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class EditProfileActivity extends PubnotesActivity {
@@ -42,7 +43,6 @@ public class EditProfileActivity extends PubnotesActivity {
 	EditText e6;
 	//Contact information
 	EditText e7;
-	EditText e8;
 	EditText e9;
 
 	//Profile profile;
@@ -65,10 +65,15 @@ public class EditProfileActivity extends PubnotesActivity {
 		e6 = (EditText) findViewById(R.id.eaboutme);
 		//Contact information
 		e7 = (EditText) findViewById(R.id.efacebook);
-		e8 = (EditText) findViewById(R.id.eemail);
 		e9 = (EditText) findViewById(R.id.ephone);
 		
+		TextView usernamet = (TextView) findViewById(R.id.title);
+		TextView about = (TextView) findViewById(R.id.artist);
+		
 		userlogado = EditProfileActivity.this.getCurrentUser();
+		
+		usernamet.setText(userlogado.getUsername());
+		about.setText(userlogado.getUserprofile().getAboutme());
 		
 		e1.setText(userlogado.getUserprofile().getInstitution());
 		e2.setText(userlogado.getUserprofile().getDegree());
@@ -77,7 +82,6 @@ public class EditProfileActivity extends PubnotesActivity {
 		e5.setText(userlogado.getUserprofile().getBirthday());
 		e6.setText(userlogado.getUserprofile().getAboutme());
 		e7.setText(userlogado.getUserprofile().getFacebook());
-		e8.setText(userlogado.getUserprofile().getEmail());
 		e9.setText(userlogado.getUserprofile().getPhone());
 		
 		Log.d("INFO USER ATUAL", "useremail " + EditProfileActivity.this.getCurrentUser().getUseremail());
@@ -98,7 +102,6 @@ public class EditProfileActivity extends PubnotesActivity {
 						userlogado.getUserprofile().setBirthday(e5.getText().toString());
 						userlogado.getUserprofile().setAboutme(e6.getText().toString());
 						userlogado.getUserprofile().setFacebook(e7.getText().toString());
-						userlogado.getUserprofile().setEmail(e8.getText().toString());
 						userlogado.getUserprofile().setPhone(e9.getText().toString());
 						
 						//userlogado.setUserprofile(profile);
