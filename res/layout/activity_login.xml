@@ -36,8 +36,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 		<RelativeLayout 
-  			android:layout_width="fill_parent"
-  			android:layout_height="wrap_content" android:background="#ffffff">
+  			android:layout_width="match_parent"
+  			android:layout_height="match_parent" android:background="#ffffff">
+  			
 	  		<!--  Header  Starts-->
 	  		<LinearLayout android:id="@+id/header"
 	  				android:layout_width="fill_parent"
@@ -54,26 +55,28 @@
 	  		</LinearLayout>
 	  		
 	  		<!--  Header Ends -->  
-	  		<!-- Footer Start -->
+	  		
+	  		 <!-- Footer Start -->
 	  
 	  		<LinearLayout android:id="@+id/footer"
-  				android:layout_width="fill_parent"
+  				android:layout_width="match_parent"
   				android:layout_height="90dip"
   				android:background="@layout/footer_repeat"
   				android:layout_alignParentBottom="true"
-  				android:layout_marginTop="495dip"
+  				android:layout_below="@+id/loginformac"
+  				android:layout_marginTop="500dip"
   				>
   		    </LinearLayout>
 	  		<!-- Footer Ends -->
 	  		
 		        <LinearLayout
+		            android:id="@+id/loginformac"
 		            style="@style/LoginFormContainer"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_below="@id/header"
 		            android:orientation="vertical"
-		  			android:layout_width="match_parent"
-		  			android:layout_height="wrap_content"
-		  			android:padding="10dip"
-		  			android:layout_below="@id/header" 
-		            >
+		            android:padding="10dip" >
 	  				
 		            <EditText
 		                android:id="@+id/email"
@@ -120,6 +123,7 @@
 				  		android:textColor="#0b84aa"/>
 		            
 		        </LinearLayout>
+		        
 		  </RelativeLayout>
     </ScrollView>
 </merge>

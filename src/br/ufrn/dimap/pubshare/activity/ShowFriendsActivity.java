@@ -44,19 +44,8 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class ShowFriendsActivity extends PubnotesActivity {
 
-	private ListView usersListView;
-	private FriendsListAdapter adapter;
 	
-	AsyncTask<User, Void, User[]> async; 
-	AsyncTask<User, Void, UserResult> async2;
-	AsyncTask<User, Void, UserResult> async3;
-	AsyncTask<User, Void, UserResult> async4;
-	ImageButton search;
 	User userlogado;
-	User userfriend;
-	Tag tagmarcada;
-	private List<Tag> tags;
-	private PopupMenu popupMenu;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -67,11 +56,10 @@ public class ShowFriendsActivity extends PubnotesActivity {
 		//a lista de amigos (User) dele
 		//e adicionar a listview
 
-		final List<User> users1 = UserMockFactory.makeUserList();
 		userlogado = ShowFriendsActivity.this.getCurrentUser();
 		
 		/** getting users from the server using the async task**/
-		async = new AsyncTask<User, Void, User[]>(){
+		AsyncTask<User, Void, User[]> async = new AsyncTask<User, Void, User[]>(){
 			
 			
 			protected void onPreExecute() {
@@ -103,12 +91,12 @@ public class ShowFriendsActivity extends PubnotesActivity {
 				inflater.inflate(R.layout.row_friends_list, null);
 			}
 			
-			userfriend = (User) adapter.getItemAtPosition(position);
+			final User userfriend = (User) adapter.getItemAtPosition(position);
 			userlogado = ShowFriendsActivity.this.getCurrentUser();
 			
-			tags = userlogado.getTags();
+			final List<Tag> tags = userlogado.getTags();
 			
-			popupMenu = new PopupMenu(ShowFriendsActivity.this, view.findViewById(R.id.addtag));
+			final PopupMenu popupMenu = new PopupMenu(ShowFriendsActivity.this, view.findViewById(R.id.addtag));
 			popupMenu.getMenu().add(Menu.NONE, tags.size()+ 1, Menu.NONE, "Create New Tag");
 			
 			for (int i = 0; i < tags.size(); i++) {
@@ -153,7 +141,7 @@ public class ShowFriendsActivity extends PubnotesActivity {
 			   					    	
 					    	    	    userlogado.getTags().add(tag);
 					    	    	    
-					    	    	    async2 = new AsyncTask<User, Void, UserResult>(){
+					    	    		AsyncTask<User, Void, UserResult> async2 = new AsyncTask<User, Void, UserResult>(){
 											
 											
 											protected void onPreExecute() {
@@ -190,7 +178,7 @@ public class ShowFriendsActivity extends PubnotesActivity {
 			   				
 		    	    	}else{
 		    	    		  	TagUser markedTagUser = new TagUser();
-			    	    	    tagmarcada = new Tag();
+			    	    	    final Tag tagmarcada = new Tag();
 			    	    	    tagmarcada.setDescription(item.toString());
 			    	    	    boolean inside = containsUserTag(userfriend.getMarkedTags(), tagmarcada.getDescription());
 			    	    	    //eu marquei você?
@@ -200,7 +188,7 @@ public class ShowFriendsActivity extends PubnotesActivity {
 				    	    	    
 				    	    	    userfriend.getMarkedTags().add(markedTagUser);
 				    	    	    
-				    	    	    async3 = new AsyncTask<User, Void, UserResult>(){
+				    	    	    AsyncTask<User, Void, UserResult> async3 = new AsyncTask<User, Void, UserResult>(){
 										
 										
 										protected void onPreExecute() {
@@ -220,7 +208,7 @@ public class ShowFriendsActivity extends PubnotesActivity {
 									async3.execute(userfriend);
 			    	    	    }else{
 			    	    	    	Toast.makeText(ShowFriendsActivity.this,
-											"You've added" + userfriend.getUsername() + " to the group " + tagmarcada.getDescription(), Toast.LENGTH_LONG).show();
+											"You've added " + userfriend.getUsername() + " to the group " + tagmarcada.getDescription(), Toast.LENGTH_LONG).show();
 			    	    	    	
 			    	    	    	
 			    	    	    }
@@ -245,9 +233,9 @@ public class ShowFriendsActivity extends PubnotesActivity {
 		return isInside;
 	}
 	private void configureListView(List<User> users) {
-		adapter = new FriendsListAdapter(this, R.layout.row_friends_list , users);
+		final FriendsListAdapter adapter = new FriendsListAdapter(this, R.layout.row_friends_list , users);
 		
-		usersListView = (ListView) findViewById(R.id.list_view_friends_detail);
+		ListView usersListView = (ListView) findViewById(R.id.list_view_friends_detail);
 		if ( usersListView == null ){
 			Log.d(this.getClass().getSimpleName(), "Não foi possível encontrar R.layout.row_listview_article_list");
 		}
@@ -292,7 +280,7 @@ public class ShowFriendsActivity extends PubnotesActivity {
 	   					    		Log.d("AMIGOS", "tamanho " + userlogado.getFriends().size());
 	   					    	
 	   					    	
-	   					    	async4 = new AsyncTask<User, Void, UserResult>(){
+	   					    	 AsyncTask<User, Void, UserResult>	async4 = new AsyncTask<User, Void, UserResult>(){
 									
 									
 									protected void onPreExecute() {
