@@ -3,7 +3,7 @@ package br.ufrn.dimap.pubshare.util;
 public interface Constants { 
 
 	
-	String URL_SERVER = "http://179.100.235.235:8080/pubnote.server/rest"; 
+	String URL_SERVER = "http://177.27.233.57:8080/pubnote.server/rest"; 
  
 	
 	// Daniel's server

@@ -34,19 +34,6 @@ public class LoginActivity extends PubnotesActivity {
 
 	// Session Manager Class
 	SessionManager session;
-	private ProgressDialog dialog;
-
-	/**
-	 * A dummy authentication store containing known user names and passwords.
-	 * TODO: remove after connecting to a real authentication system.
-	 */
-	private static final String[] DUMMY_CREDENTIALS = new String[] {
-			"foo@example.com:hello", "bar@example.com:world" };
-
-	/**
-	 * The default email to populate the email field with.
-	 */
-	public static final String EXTRA_EMAIL = "com.example.android.authenticatordemo.extra.EMAIL";
 
 	/**
 	 * Keep track of the login task to ensure we can cancel it if requested.
@@ -87,11 +74,8 @@ public class LoginActivity extends PubnotesActivity {
 		});
 
 		// Set up the login form.
-		mEmail = getIntent().getStringExtra(EXTRA_EMAIL);
 		mEmailView = (EditText) findViewById(R.id.email);
-		mEmailView.setText(mEmail);
 		
-
 		mPasswordView = (EditText) findViewById(R.id.password);
 		mPasswordView
 				.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -263,10 +247,6 @@ public class LoginActivity extends PubnotesActivity {
 				// email
 				String password = user.get(SessionManager.KEY_PASSWORD);
 
-				// Aqui eu seto os dados do usuario, dado que ele conseguiu se
-				// logar com sucesso
-				// a partir de agora os dados de login do usuario podem ser
-				// acessados pelas outras activities
 				LoginActivity.this.setCurrentUser(u);
 				mEmailView.setText(u.getUseremail());
 				mPasswordView.setText(u.getPassword());

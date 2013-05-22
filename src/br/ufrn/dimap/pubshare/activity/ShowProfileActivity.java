@@ -31,37 +31,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ShowProfileActivity extends PubnotesActivity {
-	private ProgressDialog dialog;
-	AsyncTask<User, Void, Profile> async;
-	
-	TextView institution;
-	TextView degree;
-	TextView city;
-	TextView gender;
-
-	TextView birthday;
-	TextView aboutme;
-	
-	TextView facebook;
-	TextView email;
-	TextView phone;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_show_profile);
 		
-		institution = (TextView) findViewById(R.id.textinstitution);
-		degree = (TextView) findViewById(R.id.textdegree);
-		city = (TextView) findViewById(R.id.textcountry);
-		gender = (TextView) findViewById(R.id.textgender);
+		final TextView institution = (TextView) findViewById(R.id.textinstitution);
+		final TextView degree = (TextView) findViewById(R.id.textdegree);
+		final TextView city = (TextView) findViewById(R.id.textcountry);
+		final TextView gender = (TextView) findViewById(R.id.textgender);
 		
-		birthday = (TextView) findViewById(R.id.textbirthday);
-		aboutme = (TextView) findViewById(R.id.textaboutme);
+		final TextView birthday = (TextView) findViewById(R.id.textbirthday);
+		final TextView aboutme = (TextView) findViewById(R.id.textaboutme);
 		
-		facebook = (TextView) findViewById(R.id.textfacebook);
-		email = (TextView) findViewById(R.id.textemail);
-		phone = (TextView) findViewById(R.id.textphone);
+		final TextView facebook = (TextView) findViewById(R.id.textfacebook);
+		final TextView email = (TextView) findViewById(R.id.textemail);
+		final TextView phone = (TextView) findViewById(R.id.textphone);
 		
 		
 		//Aqui eu devo pegar a ref do User, fazer uma busca no banco
@@ -86,7 +72,7 @@ public class ShowProfileActivity extends PubnotesActivity {
 						});
 				
 				/** creating the new asyncTask here **/
-				async = new AsyncTask<User, Void, Profile>(){
+				AsyncTask<User, Void, Profile> async = new AsyncTask<User, Void, Profile>(){
 					
 					
 					protected void onPreExecute() {
