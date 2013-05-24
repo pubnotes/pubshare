@@ -26,12 +26,14 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -42,18 +44,8 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class ShowFriendsActivity extends PubnotesActivity {
 
-	private ListView usersListView;
-	private FriendsListAdapter adapter;
 	
-	AsyncTask<User, Void, User[]> async; 
-	AsyncTask<User, Void, UserResult> async2;
-	AsyncTask<User, Void, UserResult> async3;
-	ImageButton search;
 	User userlogado;
-	User userfriend;
-	Tag tagmarcada;
-	private List<Tag> tags;
-	private PopupMenu popupMenu;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,11 +56,10 @@ public class ShowFriendsActivity extends PubnotesActivity {
 		//a lista de amigos (User) dele
 		//e adicionar a listview
 
-		final List<User> users1 = UserMockFactory.makeUserList();
 		userlogado = ShowFriendsActivity.this.getCurrentUser();
 		
 		/** getting users from the server using the async task**/
-		async = new AsyncTask<User, Void, User[]>(){
+		AsyncTask<User, Void, User[]> async = new AsyncTask<User, Void, User[]>(){
 			
 			
 			protected void onPreExecute() {
@@ -88,6 +79,7 @@ public class ShowFriendsActivity extends PubnotesActivity {
 		async.execute(userlogado);
 	}
 	
+	
 	private OnItemClickListener onItemClickAddTag = new OnItemClickListener()
 	{
 		public void onItemClick(AdapterView adapter, View v, int position, long id) 
@@ -99,15 +91,12 @@ public class ShowFriendsActivity extends PubnotesActivity {
 				inflater.inflate(R.layout.row_friends_list, null);
 			}
 			
-			userfriend = (User) adapter.getItemAtPosition(position);
+			final User userfriend = (User) adapter.getItemAtPosition(position);
 			userlogado = ShowFriendsActivity.this.getCurrentUser();
 			
-			tags = userlogado.getTags();
+			final List<Tag> tags = userlogado.getTags();
 			
-			//tags = new ArrayList<String>();
-			//tags = UserMockFactory.usersTags;
-			
-			popupMenu = new PopupMenu(ShowFriendsActivity.this, view.findViewById(R.id.addtag));
+			final PopupMenu popupMenu = new PopupMenu(ShowFriendsActivity.this, view.findViewById(R.id.addtag));
 			popupMenu.getMenu().add(Menu.NONE, tags.size()+ 1, Menu.NONE, "Create New Tag");
 			
 			for (int i = 0; i < tags.size(); i++) {
@@ -121,16 +110,17 @@ public class ShowFriendsActivity extends PubnotesActivity {
 	               new PopupMenu.OnMenuItemClickListener() {
 	           @Override
 	       		public boolean onMenuItemClick(MenuItem item) {
-	    	    	    //LayoutInflater li = LayoutInflater.from(ShowFriendsActivity.this);
-	   				    //View promptsView = li.inflate(R.layout.tags, null);
+	    	    	    LayoutInflater li = LayoutInflater.from(ShowFriendsActivity.this);
+	   				    View promptsView = li.inflate(R.layout.tags, null);
 	    	    	    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
 	   					ShowFriendsActivity.this);
+	    	    	    alertDialogBuilder.setMessage("Do you want to create a new tag?");
 	    	    	    
 		    	    	if(item.getItemId() ==  tags.size() + 1){    
 			   				// set prompts.xml to alertdialog builder
-			   				alertDialogBuilder.setView(view);
+			   				alertDialogBuilder.setView(promptsView);
 			    
-			   				final EditText userInput = (EditText) view
+			   				final EditText userInput = (EditText) promptsView
 			   						.findViewById(R.id.editTextDialogUserInput);
 			    
 			   				// set dialog message
@@ -151,7 +141,7 @@ public class ShowFriendsActivity extends PubnotesActivity {
 			   					    	
 					    	    	    userlogado.getTags().add(tag);
 					    	    	    
-					    	    	    async2 = new AsyncTask<User, Void, UserResult>(){
+					    	    		AsyncTask<User, Void, UserResult> async2 = new AsyncTask<User, Void, UserResult>(){
 											
 											
 											protected void onPreExecute() {
@@ -165,7 +155,7 @@ public class ShowFriendsActivity extends PubnotesActivity {
 											/** now lets update the interface **/
 											protected void onPostExecute(UserResult result) {
 												Toast.makeText(ShowFriendsActivity.this,
-														"Tag adicionada!", Toast.LENGTH_SHORT).show();
+														"Added tag!", Toast.LENGTH_LONG).show();
 											}
 										};		
 										
@@ -188,34 +178,41 @@ public class ShowFriendsActivity extends PubnotesActivity {
 			   				
 		    	    	}else{
 		    	    		  	TagUser markedTagUser = new TagUser();
-			    	    	    tagmarcada = new Tag();
-			    	    	    
+			    	    	    final Tag tagmarcada = new Tag();
 			    	    	    tagmarcada.setDescription(item.toString());
-			    	    	    markedTagUser.setTag(tagmarcada);
-			    	    	    markedTagUser.setUser(userlogado);
-			    	    	    
-			    	    	    userfriend.getMarkedTags().add(markedTagUser);
-			    	    	    Log.d("TAM", "tamanho " + userfriend.getMarkedTags().size());
-			    	    	    
-			    	    	    async3 = new AsyncTask<User, Void, UserResult>(){
-									
-									
-									protected void onPreExecute() {
-										super.onPreExecute();
-									}
-									
-									protected UserResult doInBackground(User... user) {
-										return makeTagUser(user[0]);
+			    	    	    boolean inside = containsUserTag(userfriend.getMarkedTags(), tagmarcada.getDescription());
+			    	    	    //eu marquei você?
+			    	    	    if(inside == false){
+				    	    	    markedTagUser.setTag(tagmarcada);
+				    	    	    markedTagUser.setUser(userlogado);
+				    	    	    
+				    	    	    userfriend.getMarkedTags().add(markedTagUser);
+				    	    	    
+				    	    	    AsyncTask<User, Void, UserResult> async3 = new AsyncTask<User, Void, UserResult>(){
 										
-									}
-									protected void onPostExecute(UserResult result) {
-										Toast.makeText(ShowFriendsActivity.this,
-												"O usuario " + userfriend.getUsername() + " foi adicionado ao grupo " + tagmarcada.getDescription(), Toast.LENGTH_SHORT).show();
-									}
-								};		
-								
-								async3.execute(userfriend);
-		    	    	}
+										
+										protected void onPreExecute() {
+											super.onPreExecute();
+										}
+										
+										protected UserResult doInBackground(User... user) {
+											return makeTagUser(user[0]);
+											
+										}
+										protected void onPostExecute(UserResult result) {
+											Toast.makeText(ShowFriendsActivity.this,
+													"The user " + userfriend.getUsername() + " was added to the group " + tagmarcada.getDescription(), Toast.LENGTH_LONG).show();
+										}
+									};		
+									
+									async3.execute(userfriend);
+			    	    	    }else{
+			    	    	    	Toast.makeText(ShowFriendsActivity.this,
+											"You've added " + userfriend.getUsername() + " to the group " + tagmarcada.getDescription(), Toast.LENGTH_LONG).show();
+			    	    	    	
+			    	    	    	
+			    	    	    }
+			    	    	}
 		    	    		   
 	    	       return false;
 	           }
@@ -225,18 +222,112 @@ public class ShowFriendsActivity extends PubnotesActivity {
 		}
 	};
 	
-	
+	public boolean containsUserTag(List<TagUser> t, String name){
+		boolean isInside = false;
+		for (int i = 0; i < t.size(); i++) {
+			if(t.get(i).getTag().getDescription().equals(name)){
+				isInside = true;
+				break;
+			}
+		}
+		return isInside;
+	}
 	private void configureListView(List<User> users) {
-		adapter = new FriendsListAdapter(this, R.layout.row_friends_list , users);
+		final FriendsListAdapter adapter = new FriendsListAdapter(this, R.layout.row_friends_list , users);
 		
-		usersListView = (ListView) findViewById(R.id.list_view_friends_detail);
+		ListView usersListView = (ListView) findViewById(R.id.list_view_friends_detail);
 		if ( usersListView == null ){
 			Log.d(this.getClass().getSimpleName(), "Não foi possível encontrar R.layout.row_listview_article_list");
 		}
 		usersListView.setAdapter( adapter );
 		usersListView.setOnItemClickListener(onItemClickAddTag);
-		//Aqui possivelmente virah o codigo do click no botao de add+
+		
+		usersListView.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+                    int pos, long id) {
+
+            	 
+            	 LayoutInflater li = LayoutInflater.from(ShowFriendsActivity.this);
+				 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+				 ShowFriendsActivity.this);
+				 
+				 final View view = arg1;
+					if(view == null)
+					{
+						LayoutInflater inflater = getLayoutInflater();
+						inflater.inflate(R.layout.row_friends_list, null);
+					}
+					
+					final User userf = (User) adapter.getItem(pos);
+					userlogado = ShowFriendsActivity.this.getCurrentUser();
+					
+				 
+	   				// set dialog message
+	   				alertDialogBuilder
+	   					.setCancelable(false)
+	   					.setPositiveButton("View Groups",
+	   					  new DialogInterface.OnClickListener() {
+	   					    public void onClick(DialogInterface dialog,int id) {
+	   						
+	   					    	
+	   					    }
+	   					  })
+	   					.setNegativeButton("Delete Friend",
+	   					  new DialogInterface.OnClickListener() {
+	   					    public void onClick(DialogInterface dialog,int id) {
+	   					    	userlogado.getFriends().remove(getIndice(userlogado.getFriends(), userf.getUsername()));
+	   					    		Log.d("AMIGOS", "tamanho " + userlogado.getFriends().size());
+	   					    	
+	   					    	
+	   					    	 AsyncTask<User, Void, UserResult>	async4 = new AsyncTask<User, Void, UserResult>(){
+									
+									
+									protected void onPreExecute() {
+										super.onPreExecute();
+									}
+									
+									protected UserResult doInBackground(User... user) {
+										return removeFriend(user[0]);
+										
+									}
+									protected void onPostExecute(UserResult result) {
+										Toast.makeText(ShowFriendsActivity.this,
+												"The user " + userf.getUsername() + " has been removed from your friends list!", Toast.LENGTH_LONG).show();
+										Intent i = new Intent(ShowFriendsActivity.this, ShowFriendsActivity.class);
+										i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						                startActivity(i);
+									}
+								};		
+								
+								async4.execute(userlogado);
+	   					    
+	   					    }
+	   					  });
+	    
+	   				// create alert dialog
+	   				AlertDialog alertDialog = alertDialogBuilder.create();
+	    
+	   				// show it
+	   				alertDialog.show();
+				 
+
+                return true;
+            }
+        }); 
 	}
+	
+	public int getIndice(List<User> u, String name){
+		int ind = 0;
+		for (int i = 0; i < u.size(); i++) {
+			if(name.equals(u.get(i).getUsername())){
+				ind = i;
+				break;
+			}
+		}
+		return ind;
+	}
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -299,6 +390,28 @@ public class ShowFriendsActivity extends PubnotesActivity {
 		restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
 		
 		String url = "/user/addTagUser";
+		
+		ResponseEntity<UserResult> response = restTemplate.exchange(  
+				Constants.URL_SERVER + url, 
+				HttpMethod.POST, 
+				new HttpEntity<Object>(user, requestHeaders), UserResult.class);
+		
+		
+		UserResult result = response.getBody();
+				
+		return result;
+	}
+	
+	private UserResult removeFriend(User user)
+	{
+		HttpHeaders requestHeaders = new HttpHeaders(); 
+		requestHeaders.setContentType(MediaType.APPLICATION_JSON);
+		 
+		RestTemplate restTemplate = new RestTemplate();
+	
+		restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
+		
+		String url = "/user/removeFriend";
 		
 		ResponseEntity<UserResult> response = restTemplate.exchange(  
 				Constants.URL_SERVER + url, 

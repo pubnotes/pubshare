@@ -46,29 +46,20 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class SearchPeopleActivity extends PubnotesActivity {
 
-	private ListView usersListView;
-	private UserListAdapter adapter;
-	AsyncTask<Void, Void, User[]> async; 
-	AsyncTask<User, Void, UserResult> async2;
-	EditText searchpeople;
-	ImageButton search;
-	List<User> users;
-	User userlogado;
-	
-	
+	private User userlogado;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_search_people);
 		
-		searchpeople = (EditText) findViewById(R.id.searchpeopletext);
-		search = (ImageButton) findViewById(R.id.imageButtonsearchpeople);
+		final EditText searchpeople = (EditText) findViewById(R.id.searchpeopletext);
+		final ImageButton search = (ImageButton) findViewById(R.id.imageButtonsearchpeople);
 		//A partir da entrada fornecida no campo de busca
 		//quando clicar no botao de busca, fazer busca no servidor
 		//deve pegar os usuarios (username, aboutme) do servidor numa lista
 		//e adicionar a listview
-		users = new ArrayList<User>();
-		userlogado = SearchPeopleActivity.this.getCurrentUser();
+		final List<User> users = new ArrayList<User>();
+		userlogado  = SearchPeopleActivity.this.getCurrentUser();
 		
 		
 		/** done **/
@@ -78,7 +69,7 @@ public class SearchPeopleActivity extends PubnotesActivity {
 				{
 					public void onClick(View view) {
 						/** getting users from the server using the async task**/
-						async = new AsyncTask<Void, Void, User[]>(){
+						AsyncTask<Void, Void, User[]> async = new AsyncTask<Void, Void, User[]>(){
 							
 							
 							protected void onPreExecute() {
@@ -97,13 +88,13 @@ public class SearchPeopleActivity extends PubnotesActivity {
 											users.add(result[0]);
 										else{
 												Toast.makeText(SearchPeopleActivity.this,
-														"Usuario já foi buscado!", Toast.LENGTH_SHORT).show();
+														"The user has been fetched!", Toast.LENGTH_LONG).show();
 										}
 										configureListView(Arrays.asList(result));
 									//}
 								}else{
 									Toast.makeText(SearchPeopleActivity.this,
-											"Não existe usuário com esse username!", Toast.LENGTH_SHORT).show();	
+											"There is no user with that username!", Toast.LENGTH_LONG).show();	
 								}
 							}
 						};
@@ -138,15 +129,16 @@ public class SearchPeopleActivity extends PubnotesActivity {
 			userlogado = SearchPeopleActivity.this.getCurrentUser();
 			if(userfriend.getUsername().equals(userlogado.getUsername())){
 				Toast.makeText(SearchPeopleActivity.this,
-						"Usuario está logado nesse dispositivo!", Toast.LENGTH_SHORT).show();
+						"User logged on this device!", Toast.LENGTH_LONG).show();
 		
 			}else{
 				
 				if(contains(userlogado.getFriends(), userfriend.getUsername()) == false)	{
 					userlogado.getFriends().add(userfriend);
-					//SearchPeopleActivity.this.setCurrentUser(userlogado);
+					SearchPeopleActivity.this.setCurrentUser(userlogado);
+					Log.d("AMIGOS SEARCCH", "tamanho " + userlogado.getFriends().size());
 					
-					async2 = new AsyncTask<User, Void, UserResult>(){
+					AsyncTask<User, Void, UserResult> async2 = new AsyncTask<User, Void, UserResult>(){
 						
 						
 						protected void onPreExecute() {
@@ -160,14 +152,14 @@ public class SearchPeopleActivity extends PubnotesActivity {
 						/** now lets update the interface **/
 						protected void onPostExecute(UserResult result) {
 							Toast.makeText(SearchPeopleActivity.this,
-									"Amigo adicionado!", Toast.LENGTH_SHORT).show();
+									"Friend added!", Toast.LENGTH_LONG).show();
 						}
 					};		
 					
 					async2.execute(userlogado);
 				}else{
 					Toast.makeText(SearchPeopleActivity.this,
-							userfriend.getUsername() + " já é seu amigo!", Toast.LENGTH_SHORT).show();
+							userfriend.getUsername() + " is already your friend!", Toast.LENGTH_LONG).show();
 				}
 			}
 					
@@ -175,9 +167,9 @@ public class SearchPeopleActivity extends PubnotesActivity {
 	};
 	
 	private void configureListView(List<User> users) {
-		adapter = new UserListAdapter(this, R.layout.row_listview_people_list , users);
+		UserListAdapter adapter = new UserListAdapter(this, R.layout.row_listview_people_list , users);
 		
-		usersListView = (ListView) findViewById(R.id.list_view_people_detail);
+		ListView usersListView = (ListView) findViewById(R.id.list_view_people_detail);
 		if ( usersListView == null ){
 			Log.d(this.getClass().getSimpleName(), "Não foi possível encontrar R.layout.row_listview_article_list");
 		}

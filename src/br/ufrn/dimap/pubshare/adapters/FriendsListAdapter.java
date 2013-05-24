@@ -43,8 +43,6 @@ public class FriendsListAdapter extends ArrayAdapter<User> {
 
 		User item = getItem(position);
 		if (item!= null) {
-			
-		
 			TextView friendnameText = (TextView) view.findViewById(R.id.friendnametext);
 			friendnameText.setText( item.getUsername() );
 			

@@ -48,13 +48,6 @@
         android:layout_toRightOf="@+id/friendrow"
         android:text="DIMAp-UFRN ..." />
     
-       <!--  <Spinner
-             android:id="@+id/spinner2"
-             android:layout_width="152dp"
-             android:layout_height="wrap_content"
-             android:layout_below="@+id/friendaboutme"
-             android:layout_toRightOf="@+id/friendrow"
-             android:prompt="@string/spinner_title2" />-->
     	 <TextView
         android:id="@+id/addtag"
         android:layout_width="fill_parent"
@@ -64,17 +57,14 @@
         android:textSize="18dip"
         android:layout_marginTop="1dip"
         android:layout_toRightOf="@+id/friendrow"
-        android:text="Add tag +" />    
+        android:text="Click friend to add tag" />    
         
-    	  <!--  <Button
-        android:id="@+id/buttonShowDropDown"
-        android:layout_width="wrap_content"
+    	<!--<ImageView android:layout_width="wrap_content"
+        android:id="@+id/btndelete" 
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_below="@id/friendaboutme"
-        android:layout_toRightOf="@+id/friendrow"
-        android:text="Add tag +" />-->
+        android:src="@drawable/ic_menu_delete"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"/>  --> 
    	            
  
 </RelativeLayout>

@@ -1,39 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/tableLayout1"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
      >
     
-      <TableRow
-	        android:id="@+id/tableRow1"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:padding="1dip" >
-	        
  	  <EditText
-            android:id="@+id/searchpeopletext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Search people..."
-            android:inputType="text"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:layout_marginLeft="15dip"
-            android:layout_marginTop="15dip"
-            android:layout_marginBottom="5dip"
-            android:paddingRight="100dip" 
-            />
-       
+ 	      android:id="@+id/searchpeopletext"
+ 	      android:layout_width="match_parent"
+ 	      android:layout_height="wrap_content"
+ 	      android:layout_marginBottom="5dip"
+ 	      android:layout_marginLeft="15dip"
+ 	      android:layout_marginTop="15dip"
+ 	      android:layout_toLeftOf="@+id/imageButtonsearchpeople"
+ 	      android:hint="Search people..."
+ 	      android:inputType="text"
+ 	      android:maxLines="1"
+ 	      android:paddingRight="100dip"
+ 	      android:singleLine="true" />
+
 	  <ImageButton
-	        android:id="@+id/imageButtonsearchpeople"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:src="@drawable/folder_search"
-	        android:layout_marginLeft="5dip"
-	        android:layout_marginTop="15dip"
-	        />
-      
-    </TableRow>
+	      android:id="@+id/imageButtonsearchpeople"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_alignBottom="@+id/searchpeopletext"
+	      android:layout_alignParentRight="true"
+	      android:layout_marginRight="14dp"
+	      android:src="@drawable/folder_search" />
     
-</TableLayout>
+</RelativeLayout>

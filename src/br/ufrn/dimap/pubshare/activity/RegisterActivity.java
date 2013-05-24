@@ -23,13 +23,6 @@ import br.ufrn.dimap.pubshare.restclient.results.UserResult;
 import br.ufrn.dimap.pubshare.util.Constants;
 
 public class RegisterActivity extends PubnotesActivity {
-	private ProgressDialog dialog;
-	AsyncTask<User, Void, UserResult> async;
-	
-	EditText nameText;
-	EditText mailText;
-	EditText passwordText;
-	private User user;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,22 +36,22 @@ public class RegisterActivity extends PubnotesActivity {
 						
 						//Aqui devo pegar as informacoes, criar um User 
 						
-						nameText = (EditText) findViewById(R.id.reg_fullname);
-						mailText = (EditText) findViewById(R.id.reg_email);
-						passwordText = (EditText) findViewById(R.id.reg_password);
+						EditText nameText = (EditText) findViewById(R.id.reg_fullname);
+						EditText mailText = (EditText) findViewById(R.id.reg_email);
+						EditText passwordText = (EditText) findViewById(R.id.reg_password);
 						
 						//User estah se registrando, ainda com profile vazio, tags e amigos vazios
 						
 						String name = nameText.getText().toString();
-						user = new User();
+						User user = new User();
 						user.setUsername(name);
 						user.setUseremail(mailText.getText().toString());
 						user.setPassword(passwordText.getText().toString());
 						
 
 						/** creating the new asyncTask here **/
-						async = new AsyncTask<User, Void, UserResult>(){
-							
+						AsyncTask<User, Void, UserResult> async = new AsyncTask<User, Void, UserResult>(){
+							ProgressDialog dialog;
 							
 							protected void onPreExecute() {
 								dialog = new ProgressDialog(RegisterActivity.this);
@@ -79,7 +72,7 @@ public class RegisterActivity extends PubnotesActivity {
 									dialog.dismiss();
 								}
 								Toast.makeText(RegisterActivity	.this,
-									"Account registered successfully!", Toast.LENGTH_SHORT).show();
+									"Account registered successfully!", Toast.LENGTH_LONG).show();
 								Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
 								i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				                startActivity(i);

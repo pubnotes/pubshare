@@ -48,6 +48,7 @@
   				android:background="@layout/footer_repeat"
   				android:layout_alignParentBottom="true"
   				android:layout_below="@id/menu"
+  				android:layout_marginTop="300dip"
   				>
   		</LinearLayout>
   		<!-- Footer Ends --> 

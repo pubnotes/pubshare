@@ -4,6 +4,7 @@ package br.ufrn.dimap.pubshare.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.service.textservice.SpellCheckerService.Session;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,24 +19,19 @@ public class MenuActivity extends Activity {
 	
 	// Session Manager Class
 	//usar sempre que precisar pegar info do usuario logado atualmente
-	SessionManager session;
-	Spinner spinner;
-	RadioGroup option;
 	String searchType;
-	EditText campoConsulta;
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_menu);
 		
 		 // Session class instance
-        session = new SessionManager(getApplicationContext());
+        final SessionManager session = new SessionManager(getApplicationContext());
 		
-		spinner = (Spinner) findViewById(R.id.sprinnerLibraries);
-		campoConsulta = (EditText) findViewById(R.id.search);		
+        final Spinner spinner = (Spinner) findViewById(R.id.sprinnerLibraries);
+        final EditText campoConsulta = (EditText) findViewById(R.id.search);		
 
-		option = (RadioGroup) findViewById(R.id.radioSearchop);
+        RadioGroup option = (RadioGroup) findViewById(R.id.radioSearchop);
 		searchType = "Title";
 		option.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 			@Override
