@@ -7,10 +7,13 @@
     
      <item android:id="@+id/contextual_menu_share"
           android:title="@string/contextual_menu_share" />
-    
+
+          <item android:id="@+id/contextual_menu_recommend"
+          android:title="@string/contextual_menu_recommend" />
      
      <item android:id="@+id/contextual_menu_download"
           android:title="@string/contextual_menu_download" />
+
 
      
      <item android:id="@+id/contextual_menu_delete"

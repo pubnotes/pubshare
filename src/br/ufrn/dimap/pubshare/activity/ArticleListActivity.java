@@ -45,6 +45,9 @@ import br.ufrn.dimap.pubshare.parsers.ACMParser;
 import br.ufrn.dimap.pubshare.parsers.IEEExplorerParser;
 import br.ufrn.dimap.pubshare.parsers.Parser;
 import br.ufrn.dimap.pubshare.parsers.SpringerParser;
+import br.ufrn.dimap.pubshare.recomendation.ActivityRecommendation;
+import br.ufrn.dimap.pubshare.recomendation.Recommendation_View;
+import br.ufrn.dimap.pubshare.recomendation.Recommendation_list;
 
 /**
  * Responsible for managing the activity of displaying articles available.
@@ -100,8 +103,17 @@ public class ArticleListActivity extends Activity {
 		String tipoBusca = getIntent().getStringExtra("searchType");
 		String fonte = getIntent().getStringExtra("library");
 
-		// List<Article> articles = ArticleMockFactory.makeArticleList();
-		
+		//dados mock
+//		 List<Article> articles = ArticleMockFactory.makeArticleList();
+//		 adapter = new ArticleListAdapter(this,
+//					R.layout.row_listview_article_list, articles);
+//
+//			articlesListView.setAdapter(adapter);
+//			registerForContextMenu(articlesListView);
+//			articlesListView.setOnItemLongClickListener(onArticleClick);
+//		
+			//dados mock - tirar ate aqui
+			
 		new ListagemTask().execute(new String[] {texto, tipoBusca, fonte});
 
 	}
@@ -188,13 +200,27 @@ public class ArticleListActivity extends Activity {
 			return true;
 		case R.id.contextual_menu_download:
 			intent = new Intent(this, DownloaderService.class);
-			selectedArticle = ArticleMockFactory.singleArticle();
+			//selectedArticle = ArticleMockFactory.singleArticle();
 			intent.putExtra(Article.KEY_INSTANCE, selectedArticle);
 			startService(intent);
 			return true;
+		case R.id.contextual_menu_recommend:
+			// share
+			intent = new Intent(this,  ActivityRecommendation.class );	
+			//comentar o dado mock abaixo
+			//selectedArticle = ArticleMockFactory.singleArticle();
+			intent.putExtra( Article.KEY_INSTANCE , selectedArticle );
+			startActivity(intent);
+			return true;
 		case R.id.contextual_menu_share:
 			// share
+			Intent sendIntent = new Intent();
+			sendIntent.setAction(Intent.ACTION_SEND);
+			sendIntent.putExtra(Intent.EXTRA_TEXT, "Look \""+selectedArticle.getTitle() + "\" in "+selectedArticle.getDownloadLink());
+			sendIntent.setType("text/plain");
+			startActivity(sendIntent);
 			return true;
+
 
 		default:
 			return super.onContextItemSelected(item);
