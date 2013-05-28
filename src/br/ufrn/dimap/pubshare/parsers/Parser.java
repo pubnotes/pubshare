@@ -14,8 +14,14 @@ import br.ufrn.dimap.pubshare.domain.Article;
  */
 public abstract class Parser {
 
+	/**
+	 * Link to author search.
+	 */
 	protected String linkAuthorSearch;
 	
+	/**
+	 * Link to title search.
+	 */
 	protected String linkTitleSearch;
 	
 	/**

@@ -20,7 +20,7 @@ import br.ufrn.dimap.pubshare.domain.Article;
 public class IEEExplorerParser extends Parser {
 
 	/**
-	 * Constructor.
+	 * Constructor
 	 */
 	public IEEExplorerParser() {
 		linkTitleSearch = "http://ieeexplore.ieee.org/search/searchresult.jsp?newsearch=true&rowsPerPage=20&queryText=";

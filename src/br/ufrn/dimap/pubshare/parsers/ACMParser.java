@@ -17,6 +17,9 @@ import br.ufrn.dimap.pubshare.domain.Article;
  */
 public class ACMParser extends Parser{
 
+	/**
+	 * Constructor
+	 */
 	public ACMParser() {
 		linkTitleSearch = "http://dl.acm.org/results.cfm?source_query=&start=11&srt=score%20dsc" +
 				"&short=0&source_disp=&since_month=&since_year=&before_month=&before_year=&coll=DL&dl=GUIDE&termshow=matchall&query=";
