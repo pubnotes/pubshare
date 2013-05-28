@@ -17,32 +17,17 @@ import br.ufrn.dimap.pubshare.domain.Article;
  */
 public class ACMParser extends Parser{
 
-	@Override
-	public List<Article> findArticlesByTitle(String title) {
-		List<Article> articles = new ArrayList<Article>();
-		try {
-			URL url = new URL("http://dl.acm.org/results.cfm?query="+title+"&querydisp="+title+"&source_query=&start=11&srt=score%20dsc" +
-					"&short=0&source_disp=&since_month=&since_year=&before_month=&before_year=&coll=DL&dl=GUIDE&termshow=matchall");
-			parseUrl(articles, url);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return articles;
-	}
-
-	@Override
-	public List<Article> findArticleByAuthor(String author) {
-		List<Article> articles = new ArrayList<Article>();
-		try {
-			URL url = new URL("http://dl.acm.org/results.cfm?adv=1&COLL=DL&DL=ACM&Go.x=-203&Go.y=-113&termzone=all&a" +
-					"llofem=&anyofem=&noneofem=&peoplezone=Author&people="+author+"&peoplehow=and&keyword=&keywordhow=AND&" +
-					"affil=&affilhow=AND&pubin=&pubinhow=and&pubby=&pubbyhow=OR&since_year=&before_year=&pubashow=OR&" +
-					"sponsor=&sponsorhow=AND&confdate=&confdatehow=OR&confloc=&conflochow=OR&isbnhow=OR&isbn=&doi=&ccs=&subj=");
-			parseUrl(articles, url);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return articles;
+	/**
+	 * Constructor
+	 */
+	public ACMParser() {
+		linkTitleSearch = "http://dl.acm.org/results.cfm?source_query=&start=11&srt=score%20dsc" +
+				"&short=0&source_disp=&since_month=&since_year=&before_month=&before_year=&coll=DL&dl=GUIDE&termshow=matchall&query=";
+		linkAuthorSearch = "http://dl.acm.org/results.cfm?adv=1&COLL=DL&DL=ACM&Go.x=-203&Go.y=-113&termzone=all&a" +
+				
+				"llofem=&anyofem=&noneofem=&peoplezone=Author&peoplehow=and&keyword=&keywordhow=AND&" +
+				"affil=&affilhow=AND&pubin=&pubinhow=and&pubby=&pubbyhow=OR&since_year=&before_year=&pubashow=OR&" +
+				"sponsor=&sponsorhow=AND&confdate=&confdatehow=OR&confloc=&conflochow=OR&isbnhow=OR&isbn=&doi=&ccs=&people=";
 	}
 
 	@Override
