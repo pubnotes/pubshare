@@ -20,7 +20,7 @@ import br.ufrn.dimap.pubshare.domain.Article;
 public class SpringerParser extends Parser{
 
 	/**
-	 * Constructor
+	 * Constructor.
 	 */
 	public SpringerParser() {
 		linkTitleSearch = "http://link.springer.com/search?facet-content-type=%22Article%22&query=";
