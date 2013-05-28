@@ -19,30 +19,14 @@ import br.ufrn.dimap.pubshare.domain.Article;
  */
 public class SpringerParser extends Parser{
 
-	@Override
-	public List<Article> findArticlesByTitle(String title) {
-		List<Article> articles = new ArrayList<Article>();
-		try {
-			URL url = new URL("http://link.springer.com/search?query="+ title +"&facet-content-type=%22Article%22");
-			parseUrl(articles, url);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return articles;
+	/**
+	 * Constructor.
+	 */
+	public SpringerParser() {
+		linkTitleSearch = "http://link.springer.com/search?facet-content-type=%22Article%22&query=";
+		linkAuthorSearch = "http://link.springer.com/search?facet-content-type=%22Article%22&dc.creator=";
 	}
-
-	@Override
-	public List<Article> findArticleByAuthor(String author) {
-		List<Article> articles = new ArrayList<Article>();
-		try {
-			URL url = new URL("http://link.springer.com/search?dc.creator="+ author +"&facet-content-type=%22Article%22");
-			parseUrl(articles, url);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return articles;
-	}
-
+	
 	@Override
 	protected void parseUrl(List<Article> articles, URL url) throws IOException {
 		Document doc = Jsoup.parse(url, Integer.MAX_VALUE);

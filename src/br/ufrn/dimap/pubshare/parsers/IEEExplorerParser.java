@@ -19,28 +19,12 @@ import br.ufrn.dimap.pubshare.domain.Article;
  */
 public class IEEExplorerParser extends Parser {
 
-	public List<Article> findArticlesByTitle(String title) {
-
-		List<Article> articles = new ArrayList<Article>();
-		try {
-			URL url = new URL("http://ieeexplore.ieee.org/search/searchresult.jsp?newsearch=true&rowsPerPage=20&queryText=" + title);
-			parseUrl(articles, url);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return articles;
-	}
-	
-	
-	public List<Article> findArticleByAuthor(String author) { 
-		List<Article> artigos = new ArrayList<Article>();
-		try {
-			URL url = new URL("http://ieeexplore.ieee.org/search/searchresult.jsp?matchBoolean=true&newsearch=true&searchWithin=p_Last_Names%3A" + author);
-			parseUrl(artigos, url);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return artigos;
+	/**
+	 * Constructor.
+	 */
+	public IEEExplorerParser() {
+		linkTitleSearch = "http://ieeexplore.ieee.org/search/searchresult.jsp?newsearch=true&rowsPerPage=20&queryText=";
+		linkAuthorSearch ="http://ieeexplore.ieee.org/search/searchresult.jsp?matchBoolean=true&newsearch=true&searchWithin=p_Last_Names%3A";
 	}
 
 	protected void parseUrl(List<Article> articles, URL url) throws IOException {

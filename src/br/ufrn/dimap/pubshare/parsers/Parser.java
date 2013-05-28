@@ -2,6 +2,7 @@ package br.ufrn.dimap.pubshare.parsers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.ufrn.dimap.pubshare.domain.Article;
@@ -13,11 +14,24 @@ import br.ufrn.dimap.pubshare.domain.Article;
  */
 public abstract class Parser {
 
+	protected String linkAuthorSearch;
+	
+	protected String linkTitleSearch;
+	
 	/**
 	 * Method to find articles by title.
 	 * @return
 	 */
-	public abstract List<Article> findArticlesByTitle(String title);
+	public  List<Article> findArticlesByTitle(String title) {
+		List<Article> articles = new ArrayList<Article>();
+		try {
+			URL url = new URL(linkTitleSearch + title);
+			parseUrl(articles, url);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return articles;
+	}
 	
 	
 	/**
@@ -25,7 +39,16 @@ public abstract class Parser {
 	 * @param nomeAutor
 	 * @return
 	 */
-	public abstract List<Article> findArticleByAuthor(String author);
+	public List<Article> findArticleByAuthor(String author) {
+		List<Article> artigos = new ArrayList<Article>();
+		try {
+			URL url = new URL(linkAuthorSearch + author);
+			parseUrl(artigos, url);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return artigos;
+	}
 	
 	
 	/**
