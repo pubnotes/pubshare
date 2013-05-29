@@ -36,9 +36,9 @@ public class ACMParser extends Parser{
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 		connection.setRequestProperty("Host", "dl.acm.org");
 		connection.setRequestProperty("Connection", "close");
-		connection.setRequestProperty("User-Agent", "gzip");
+		connection.setRequestProperty("User-Agent", "Pubnotes");
 		connection.setRequestProperty("Accept-Encoding", "dl.acm.org");
-		connection.setRequestProperty("Referer", "www.ufrn.br");
+		connection.setRequestProperty("Referer", "http://www.ufrn.br");
 		
 
 		BufferedReader input = new BufferedReader(new InputStreamReader(
