@@ -22,6 +22,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,21 +34,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import br.ufrn.dimap.pubshare.adapters.ArticleListAdapter;
 import br.ufrn.dimap.pubshare.domain.Article;
 import br.ufrn.dimap.pubshare.download.activity.ArticlesDownloadedActivity;
 import br.ufrn.dimap.pubshare.download.service.DownloaderService;
 import br.ufrn.dimap.pubshare.evaluation.ArticleDetailActivity;
-import br.ufrn.dimap.pubshare.mocks.ArticleMockFactory;
 import br.ufrn.dimap.pubshare.parsers.ACMParser;
 import br.ufrn.dimap.pubshare.parsers.IEEExplorerParser;
 import br.ufrn.dimap.pubshare.parsers.Parser;
 import br.ufrn.dimap.pubshare.parsers.SpringerParser;
 import br.ufrn.dimap.pubshare.recomendation.ActivityRecommendation;
-import br.ufrn.dimap.pubshare.recomendation.Recommendation_View;
-import br.ufrn.dimap.pubshare.recomendation.Recommendation_list;
 
 /**
  * Responsible for managing the activity of displaying articles available.
@@ -62,7 +60,6 @@ public class ArticleListActivity extends Activity {
 	private Article selectedArticle;
 	private ListView articlesListView;
 	private ArticleListAdapter adapter;
-//	private ProgressBar progressBar;
 	private View searchingView;
 
 	
@@ -70,9 +67,9 @@ public class ArticleListActivity extends Activity {
 	 * @author daniel.costa
 	 * Listener to get the selected article
 	 */
-	private OnItemLongClickListener onArticleClick = new OnItemLongClickListener()
+	private OnItemClickListener onArticleClick = new OnItemClickListener()
 	{
-		public boolean onItemLongClick(AdapterView adapter, View v, int position, long id) 
+		public void onItemClick(AdapterView adapter, View v, int position, long id) 
 		{
 			View view = v;
 			if(view == null)
@@ -81,7 +78,14 @@ public class ArticleListActivity extends Activity {
 				inflater.inflate(R.layout.activity_article_list, null);
 			}
 			selectedArticle = (Article) adapter.getItemAtPosition(position); 
-			return false;
+			
+			/**
+			 * these methods simulates the opening of context menu
+			 * in the oneclick event
+			 */
+			registerForContextMenu(view);
+			openContextMenu(view);
+			unregisterForContextMenu(view);
 		}
 	};
 	
@@ -89,7 +93,6 @@ public class ArticleListActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_article_list);
-//		progressBar = (ProgressBar) findViewById(R.id.progressBar1);
 
 		articlesListView = (ListView) findViewById(R.id.list_view_articles);
 		if (articlesListView == null) {
@@ -102,17 +105,6 @@ public class ArticleListActivity extends Activity {
 		String texto = getIntent().getStringExtra("textoConsulta");
 		String tipoBusca = getIntent().getStringExtra("searchType");
 		String fonte = getIntent().getStringExtra("library");
-
-		//dados mock
-//		 List<Article> articles = ArticleMockFactory.makeArticleList();
-//		 adapter = new ArticleListAdapter(this,
-//					R.layout.row_listview_article_list, articles);
-//
-//			articlesListView.setAdapter(adapter);
-//			registerForContextMenu(articlesListView);
-//			articlesListView.setOnItemLongClickListener(onArticleClick);
-//		
-			//dados mock - tirar ate aqui
 			
 		new ListagemTask().execute(new String[] {texto, tipoBusca, fonte});
 
@@ -171,8 +163,8 @@ public class ArticleListActivity extends Activity {
 				R.layout.row_listview_article_list, articles);
 
 		articlesListView.setAdapter(adapter);
-		registerForContextMenu(articlesListView);
-		articlesListView.setOnItemLongClickListener(onArticleClick);
+		//registerForContextMenu(articlesListView);
+		articlesListView.setOnItemClickListener(onArticleClick);
 
 	}
 
@@ -199,10 +191,10 @@ public class ArticleListActivity extends Activity {
 			startActivity(intent);
 			return true;
 		case R.id.contextual_menu_download:
-			intent = new Intent(this, DownloaderService.class);
-			//selectedArticle = ArticleMockFactory.singleArticle();
-			intent.putExtra(Article.KEY_INSTANCE, selectedArticle);
-			startService(intent);
+
+			Intent i = new Intent(Intent.ACTION_VIEW);
+			i.setData(Uri.parse(selectedArticle.getDownloadLink()));
+			startActivity(i);
 			return true;
 		case R.id.contextual_menu_recommend:
 			// share
