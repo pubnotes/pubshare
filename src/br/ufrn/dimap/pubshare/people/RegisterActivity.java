@@ -1,4 +1,4 @@
-package br.ufrn.dimap.pubshare.activity;
+package br.ufrn.dimap.pubshare.people;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -18,8 +18,10 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import br.ufrn.dimap.pubshare.PubnotesActivity;
+import br.ufrn.dimap.pubshare.activity.R;
 import br.ufrn.dimap.pubshare.domain.User;
-import br.ufrn.dimap.pubshare.restclient.results.UserResult;
+import br.ufrn.dimap.pubshare.restclient.UserResult;
 import br.ufrn.dimap.pubshare.util.Constants;
 
 public class RegisterActivity extends PubnotesActivity {

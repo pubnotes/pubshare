@@ -1,10 +1,9 @@
-package br.ufrn.dimap.pubshare.activity;
+package br.ufrn.dimap.pubshare;
 
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.service.textservice.SpellCheckerService.Session;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,7 +11,12 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import br.ufrn.dimap.pubshare.download.activity.ArticlesDownloadedActivity;
+import br.ufrn.dimap.pubshare.activity.R;
+import br.ufrn.dimap.pubshare.articles.ArticleListActivity;
+import br.ufrn.dimap.pubshare.download.ArticlesDownloadedActivity;
+import br.ufrn.dimap.pubshare.people.EditProfileActivity;
+import br.ufrn.dimap.pubshare.people.SearchPeopleActivity;
+import br.ufrn.dimap.pubshare.people.ShowFriendsActivity;
 import br.ufrn.dimap.pubshare.util.SessionManager;
 
 public class MenuActivity extends Activity {

@@ -15,15 +15,12 @@
  *    along with PubShare.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package br.ufrn.dimap.pubshare.activity;
+package br.ufrn.dimap.pubshare;
 
-import br.ufrn.dimap.pubshare.download.activity.ArticlesDownloadedActivity;
 import android.app.Activity;
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
+import br.ufrn.dimap.pubshare.people.LoginActivity;
 
 /**
  * Entry point of application. It can be used to perform some processing, 

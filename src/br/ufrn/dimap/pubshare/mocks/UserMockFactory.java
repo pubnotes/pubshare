@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import br.ufrn.dimap.pubshare.adapters.FriendsListAdapter;
+import br.ufrn.dimap.pubshare.people.FriendsListAdapter;
 import br.ufrn.dimap.pubshare.domain.Profile;
 import br.ufrn.dimap.pubshare.domain.Tag;
 import br.ufrn.dimap.pubshare.domain.User;

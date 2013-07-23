@@ -15,7 +15,7 @@
  *    along with PubShare.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package br.ufrn.dimap.pubshare.download.activity;
+package br.ufrn.dimap.pubshare.download;
 
 import java.io.File;
 import java.util.List;
@@ -42,11 +42,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-import br.ufrn.dimap.pubshare.activity.ArticleListActivity;
 import br.ufrn.dimap.pubshare.activity.R;
+import br.ufrn.dimap.pubshare.articles.ArticleListActivity;
 import br.ufrn.dimap.pubshare.domain.ArticleDownloaded;
-import br.ufrn.dimap.pubshare.download.adapters.ArticlesDownloadedListAdapter;
-import br.ufrn.dimap.pubshare.download.sqlite.DownloadDao;
 import br.ufrn.dimap.pubshare.util.AndroidUtils;
 
 /**

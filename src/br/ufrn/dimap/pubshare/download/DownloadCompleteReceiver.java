@@ -15,7 +15,7 @@
  *    along with PubShare.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package br.ufrn.dimap.pubshare.download.receiver;
+package br.ufrn.dimap.pubshare.download;
 
 import java.util.Date;
 
@@ -32,7 +32,6 @@ import android.net.Uri;
 import android.util.Log;
 import br.ufrn.dimap.pubshare.activity.R;
 import br.ufrn.dimap.pubshare.domain.ArticleDownloaded;
-import br.ufrn.dimap.pubshare.download.sqlite.DownloadDao;
 
 /**
  * 

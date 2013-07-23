@@ -15,7 +15,7 @@
  *    along with PubShare.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package br.ufrn.dimap.pubshare.activity;
+package br.ufrn.dimap.pubshare.articles;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,19 +35,16 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
-import br.ufrn.dimap.pubshare.adapters.ArticleListAdapter;
+import br.ufrn.dimap.pubshare.activity.R;
 import br.ufrn.dimap.pubshare.domain.Article;
-import br.ufrn.dimap.pubshare.download.activity.ArticlesDownloadedActivity;
-import br.ufrn.dimap.pubshare.download.service.DownloaderService;
+import br.ufrn.dimap.pubshare.download.ArticlesDownloadedActivity;
+import br.ufrn.dimap.pubshare.download.DownloaderService;
 import br.ufrn.dimap.pubshare.evaluation.ArticleDetailActivity;
-import br.ufrn.dimap.pubshare.mocks.ArticleMockFactory;
 import br.ufrn.dimap.pubshare.parsers.ACMParser;
 import br.ufrn.dimap.pubshare.parsers.IEEExplorerParser;
 import br.ufrn.dimap.pubshare.parsers.Parser;
 import br.ufrn.dimap.pubshare.parsers.SpringerParser;
 import br.ufrn.dimap.pubshare.recomendation.ActivityRecommendation;
-import br.ufrn.dimap.pubshare.recomendation.Recommendation_View;
-import br.ufrn.dimap.pubshare.recomendation.Recommendation_list;
 
 /**
  * Responsible for managing the activity of displaying articles available.

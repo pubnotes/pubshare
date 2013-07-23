@@ -1,7 +1,6 @@
 package br.ufrn.dimap.pubshare.recomendation;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.http.HttpEntity;
@@ -13,7 +12,6 @@ import org.springframework.http.converter.json.MappingJacksonHttpMessageConverte
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -29,16 +27,13 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import br.ufrn.dimap.pubshare.activity.PubnotesActivity;
 import br.ufrn.dimap.pubshare.activity.R;
-import br.ufrn.dimap.pubshare.domain.Article;
 import br.ufrn.dimap.pubshare.domain.Evaluation;
 import br.ufrn.dimap.pubshare.domain.Recommendation;
 import br.ufrn.dimap.pubshare.domain.User;
-import br.ufrn.dimap.pubshare.restclient.results.EvaluationResult;
 import br.ufrn.dimap.pubshare.util.Constants;
 
-public class ActivityFriends extends PubnotesActivity {
+public class ActivityFriends extends br.ufrn.dimap.pubshare.PubnotesActivity {
 	
 	Context tela;
 

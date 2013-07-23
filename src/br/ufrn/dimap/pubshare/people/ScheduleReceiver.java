@@ -1,4 +1,4 @@
-package br.ufrn.dimap.pubshare.activity;
+package br.ufrn.dimap.pubshare.people;
 
 import java.util.Calendar;
 import android.app.AlarmManager;

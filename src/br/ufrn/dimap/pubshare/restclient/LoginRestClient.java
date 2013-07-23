@@ -9,12 +9,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import android.util.Log;
 import br.ufrn.dimap.pubshare.domain.User;
-import br.ufrn.dimap.pubshare.restclient.results.AuthenticationResult;
 import br.ufrn.dimap.pubshare.util.Constants;
 
 public class LoginRestClient {

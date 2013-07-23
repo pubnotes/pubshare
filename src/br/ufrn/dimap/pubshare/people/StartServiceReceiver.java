@@ -1,4 +1,4 @@
-package br.ufrn.dimap.pubshare.activity;
+package br.ufrn.dimap.pubshare.people;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

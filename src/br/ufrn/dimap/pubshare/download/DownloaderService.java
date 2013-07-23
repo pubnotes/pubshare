@@ -15,13 +15,13 @@
  *    along with PubShare.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package br.ufrn.dimap.pubshare.download.service;
+package br.ufrn.dimap.pubshare.download;
 
 import android.app.DownloadManager;
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.DownloadManager.Request;
 import android.app.IntentService;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -33,7 +33,6 @@ import android.widget.Toast;
 import br.ufrn.dimap.pubshare.activity.R;
 import br.ufrn.dimap.pubshare.domain.Article;
 import br.ufrn.dimap.pubshare.domain.ArticleDownloaded;
-import br.ufrn.dimap.pubshare.download.sqlite.DownloadDao;
 import br.ufrn.dimap.pubshare.util.AndroidUtils;
 
 /**

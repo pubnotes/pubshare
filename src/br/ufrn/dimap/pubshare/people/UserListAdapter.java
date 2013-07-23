@@ -1,4 +1,4 @@
-package br.ufrn.dimap.pubshare.adapters;
+package br.ufrn.dimap.pubshare.people;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +14,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import br.ufrn.dimap.pubshare.activity.R;
-import br.ufrn.dimap.pubshare.activity.RegisterActivity;
-import br.ufrn.dimap.pubshare.activity.SearchPeopleActivity;
-import br.ufrn.dimap.pubshare.activity.ShowProfileActivity;
+import br.ufrn.dimap.pubshare.people.RegisterActivity;
+import br.ufrn.dimap.pubshare.people.SearchPeopleActivity;
+import br.ufrn.dimap.pubshare.people.ShowProfileActivity;
 import br.ufrn.dimap.pubshare.domain.Article;
 import br.ufrn.dimap.pubshare.domain.Evaluation;
 import br.ufrn.dimap.pubshare.domain.User;

@@ -1,9 +1,7 @@
-package br.ufrn.dimap.pubshare.activity;
+package br.ufrn.dimap.pubshare;
 
-import br.ufrn.dimap.pubshare.PubnotesApplication;
-import br.ufrn.dimap.pubshare.domain.User;
-import br.ufrn.dimap.pubshare.mocks.UserMockFactory;
 import android.app.Activity;
+import br.ufrn.dimap.pubshare.domain.User;
 
 public class PubnotesActivity extends Activity{
 	

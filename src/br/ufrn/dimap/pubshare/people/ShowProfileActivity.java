@@ -1,7 +1,4 @@
-package br.ufrn.dimap.pubshare.activity;
-
-import java.util.HashMap;
-import java.util.Map;
+package br.ufrn.dimap.pubshare.people;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -11,32 +8,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
-import br.ufrn.dimap.pubshare.domain.Article;
-import br.ufrn.dimap.pubshare.domain.Evaluation;
-import br.ufrn.dimap.pubshare.domain.Profile;
-import br.ufrn.dimap.pubshare.domain.User;
-import br.ufrn.dimap.pubshare.recomendation.Recommendation_View;
-import br.ufrn.dimap.pubshare.restclient.results.UserResult;
-import br.ufrn.dimap.pubshare.util.Constants;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.app.ProgressDialog;
-import android.app.TaskStackBuilder;
-import android.content.Context;
-import android.content.Intent;
-import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+import br.ufrn.dimap.pubshare.MenuActivity;
+import br.ufrn.dimap.pubshare.PubnotesActivity;
+import br.ufrn.dimap.pubshare.activity.R;
+import br.ufrn.dimap.pubshare.domain.Profile;
+import br.ufrn.dimap.pubshare.domain.User;
+import br.ufrn.dimap.pubshare.util.Constants;
 
 public class ShowProfileActivity extends PubnotesActivity {
 	

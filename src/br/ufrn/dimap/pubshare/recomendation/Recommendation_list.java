@@ -2,11 +2,8 @@ package br.ufrn.dimap.pubshare.recomendation;
 
 import java.util.ArrayList;
 
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
@@ -20,13 +17,11 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-import br.ufrn.dimap.pubshare.activity.PubnotesActivity;
 import br.ufrn.dimap.pubshare.activity.R;
 import br.ufrn.dimap.pubshare.domain.Recommendation;
 import br.ufrn.dimap.pubshare.domain.User;
-import br.ufrn.dimap.pubshare.util.Constants;
 
-public class Recommendation_list extends PubnotesActivity {
+public class Recommendation_list extends br.ufrn.dimap.pubshare.PubnotesActivity {
 
 	private ListView usersListView;
 	private ArrayAdapter<String> adapter;

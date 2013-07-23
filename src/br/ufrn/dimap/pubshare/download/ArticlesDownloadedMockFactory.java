@@ -15,7 +15,7 @@
  *    along with PubShare.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package br.ufrn.dimap.pubshare.download.mocks;
+package br.ufrn.dimap.pubshare.download;
 
 import java.util.ArrayList;
 import java.util.Date;

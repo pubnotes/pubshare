@@ -15,7 +15,7 @@
  *    along with PubShare.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package br.ufrn.dimap.pubshare.download.sqlite;
+package br.ufrn.dimap.pubshare.download;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

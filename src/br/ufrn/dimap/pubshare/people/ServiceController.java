@@ -1,5 +1,6 @@
-package br.ufrn.dimap.pubshare.activity;
+package br.ufrn.dimap.pubshare.people;
 
+import br.ufrn.dimap.pubshare.activity.R;
 import br.ufrn.dimap.pubshare.recomendation.Recommendation_View;
 import br.ufrn.dimap.pubshare.recomendation.Recommendation_list;
 import android.annotation.SuppressLint;

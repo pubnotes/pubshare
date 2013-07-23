@@ -15,7 +15,7 @@
  *    along with PubShare.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package br.ufrn.dimap.pubshare.download.receiver;
+package br.ufrn.dimap.pubshare.download;
 
 import android.app.DownloadManager;
 import android.app.DownloadManager.Query;

@@ -1,4 +1,4 @@
-package br.ufrn.dimap.pubshare.activity;
+package br.ufrn.dimap.pubshare.articles;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import br.ufrn.dimap.pubshare.activity.R;
 import br.ufrn.dimap.pubshare.domain.SearchLibraries;
 
 /**

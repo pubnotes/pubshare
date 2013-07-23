@@ -2,7 +2,7 @@ package br.ufrn.dimap.pubshare.util;
 
 import java.util.HashMap;
 
-import br.ufrn.dimap.pubshare.activity.LoginActivity;
+import br.ufrn.dimap.pubshare.people.LoginActivity;
 
 import android.content.Context;
 import android.content.Intent;

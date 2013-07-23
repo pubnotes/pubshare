@@ -1,10 +1,7 @@
-package br.ufrn.dimap.pubshare.activity;
+package br.ufrn.dimap.pubshare.people;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -14,32 +11,30 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
-import br.ufrn.dimap.pubshare.adapters.FriendsListAdapter;
-import br.ufrn.dimap.pubshare.domain.Tag;
-import br.ufrn.dimap.pubshare.domain.TagUser;
-import br.ufrn.dimap.pubshare.domain.User;
-import br.ufrn.dimap.pubshare.mocks.UserMockFactory;
-import br.ufrn.dimap.pubshare.restclient.results.UserResult;
-import br.ufrn.dimap.pubshare.util.Constants;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
+import br.ufrn.dimap.pubshare.PubnotesActivity;
+import br.ufrn.dimap.pubshare.activity.R;
+import br.ufrn.dimap.pubshare.domain.Tag;
+import br.ufrn.dimap.pubshare.domain.TagUser;
+import br.ufrn.dimap.pubshare.domain.User;
+import br.ufrn.dimap.pubshare.restclient.UserResult;
+import br.ufrn.dimap.pubshare.util.Constants;
 
 
 public class ShowFriendsActivity extends PubnotesActivity {
