@@ -19,7 +19,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" android:name="br.ufrn.dimap.pubshare.PubnotesApplication">
         <activity
-            android:name="br.ufrn.dimap.pubshare.activity.PubshareActivity"
+            android:name="br.ufrn.dimap.pubshare.PubshareActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,35 +29,35 @@
         </activity>
         
         <activity
-            android:name="br.ufrn.dimap.pubshare.activity.ArticleListActivity"
+            android:name="br.ufrn.dimap.pubshare.articles.ArticleListActivity"
             android:label="@string/title_activity_article_list" >
         </activity>
         
         <activity
-            android:name="br.ufrn.dimap.pubshare.download.activity.ArticlesDownloadedActivity"
+            android:name="br.ufrn.dimap.pubshare.download.ArticlesDownloadedActivity"
             android:label="@string/title_activity_articles_downloaded" >
         </activity>
         
-        <service android:name="br.ufrn.dimap.pubshare.download.service.DownloaderService" />
+        <service android:name="br.ufrn.dimap.pubshare.download.DownloaderService" />
 
-        <receiver android:name="br.ufrn.dimap.pubshare.download.receiver.ClickDownloadedReceiver" >
+        <receiver android:name="br.ufrn.dimap.pubshare.download.ClickDownloadedReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED" />
             </intent-filter>
         </receiver>
-        <receiver android:name="br.ufrn.dimap.pubshare.download.receiver.DownloadCompleteReceiver" >
+        <receiver android:name="br.ufrn.dimap.pubshare.download.DownloadCompleteReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
             </intent-filter>
         </receiver>
 
         <activity
-            android:name="br.ufrn.dimap.pubshare.activity.LoginActivity"
+            android:name="br.ufrn.dimap.pubshare.people.LoginActivity"
             android:label="@string/title_activity_login"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
         <activity
-            android:name="br.ufrn.dimap.pubshare.activity.RegisterActivity"
+            android:name="br.ufrn.dimap.pubshare.people.RegisterActivity"
             android:label="@string/title_activity_register" >
         </activity>
         
@@ -75,23 +75,23 @@
             android:label="@string/title_activity_article_evaluation" >
         </activity>
         <activity
-            android:name="br.ufrn.dimap.pubshare.activity.MenuActivity"
+            android:name="br.ufrn.dimap.pubshare.MenuActivity"
             android:label="@string/title_activity_menu" >
         </activity>
         <activity
-            android:name="br.ufrn.dimap.pubshare.activity.SearchPeopleActivity"
+            android:name="br.ufrn.dimap.pubshare.people.SearchPeopleActivity"
             android:label="@string/title_activity_search_people" >
         </activity>
         <activity
-            android:name="br.ufrn.dimap.pubshare.activity.ShowProfileActivity"
+            android:name="br.ufrn.dimap.pubshare.people.ShowProfileActivity"
             android:label="@string/title_activity_show_profile" >
         </activity>
         <activity
-            android:name="br.ufrn.dimap.pubshare.activity.EditProfileActivity"
+            android:name="br.ufrn.dimap.pubshare.people.EditProfileActivity"
             android:label="@string/title_activity_edit_profile" >
         </activity>
         <activity
-            android:name="br.ufrn.dimap.pubshare.activity.ShowFriendsActivity"
+            android:name="br.ufrn.dimap.pubshare.people.ShowFriendsActivity"
             android:label="@string/title_activity_show_friends" >
         </activity>
         <activity android:name="br.ufrn.dimap.pubshare.recomendation.ActivityRecommendation"

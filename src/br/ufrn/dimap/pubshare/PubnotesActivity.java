@@ -15,41 +15,25 @@
  *    along with PubShare.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package br.ufrn.dimap.pubshare.domain;
+package br.ufrn.dimap.pubshare;
 
-import java.io.Serializable;
+import android.app.Activity;
+import br.ufrn.dimap.pubshare.domain.User;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
-
-/**
- * Now this class should ecapsulate the tags
- * @author daniel
- *
- */
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class Tag implements Serializable
-{
-	@JsonProperty
-	private long id;
+public class PubnotesActivity extends Activity{
 	
-	@JsonProperty
-	private String description;
+	public User getCurrentUser()
+	{
+		PubnotesApplication app = (PubnotesApplication) getApplicationContext();
+		return app.getCurrentUser();
+		
+		//return UserMockFactory.makeSingleUser();
+	}
 	
-	public long getId() 
+	public void setCurrentUser(User user)
 	{
-		return id;
+		PubnotesApplication app = (PubnotesApplication) getApplicationContext();
+		app.setCurrentUser(user);
 	}
-	public void setId(long id) 
-	{
-		this.id = id;
-	}
-	public String getDescription() 
-	{
-		return description;
-	}
-	public void setDescription(String description) 
-	{
-		this.description = description;
-	}
+
 }

@@ -15,41 +15,30 @@
  *    along with PubShare.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package br.ufrn.dimap.pubshare.domain;
+package br.ufrn.dimap.pubshare;
 
-import java.io.Serializable;
-
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import br.ufrn.dimap.pubshare.people.LoginActivity;
 
 /**
- * Now this class should ecapsulate the tags
- * @author daniel
+ * Entry point of application. It can be used to perform some processing, 
+ * redirecting to some activity by some logic.
  *
+ * @author Lucas Farias de Oliveira <i>luksrn@gmail.com</i>
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class Tag implements Serializable
-{
-	@JsonProperty
-	private long id;
+public class PubshareActivity extends Activity {
 	
-	@JsonProperty
-	private String description;
 	
-	public long getId() 
-	{
-		return id;
-	}
-	public void setId(long id) 
-	{
-		this.id = id;
-	}
-	public String getDescription() 
-	{
-		return description;
-	}
-	public void setDescription(String description) 
-	{
-		this.description = description;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		//When you develop, change this line to start your activity. (Dev Only)
+		Intent i = new Intent(this, LoginActivity.class);        	        
+				    
+		startActivity(i);
+		finish();
 	}
 }

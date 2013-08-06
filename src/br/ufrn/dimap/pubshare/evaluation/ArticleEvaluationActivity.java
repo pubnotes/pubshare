@@ -1,6 +1,21 @@
-package br.ufrn.dimap.pubshare.evaluation;
+/**
+ *    This file is part of PubShare.
+ *
+ *    PubShare is free software: you can redistribute it and/or modify
+ *    it under the terms of the GNU General Public License as published by
+ *    the Free Software Foundation, either version 3 of the License, or
+ *    (at your option) any later version.
+ *
+ *    PubShare is distributed in the hope that it will be useful,
+ *    but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *    GNU General Public License for more details.
+ *
+ *    You should have received a copy of the GNU General Public License
+ *    along with PubShare.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
-import java.util.Arrays;
+package br.ufrn.dimap.pubshare.evaluation;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -14,7 +29,6 @@ import org.springframework.web.client.RestTemplate;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,13 +40,12 @@ import android.widget.RatingBar;
 import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
-import br.ufrn.dimap.pubshare.activity.PubnotesActivity;
+import br.ufrn.dimap.pubshare.PubnotesActivity;
 import br.ufrn.dimap.pubshare.activity.R;
 import br.ufrn.dimap.pubshare.domain.Article;
 import br.ufrn.dimap.pubshare.domain.Evaluation;
 import br.ufrn.dimap.pubshare.domain.User;
-import br.ufrn.dimap.pubshare.mocks.UserMockFactory;
-import br.ufrn.dimap.pubshare.restclient.results.EvaluationResult;
+import br.ufrn.dimap.pubshare.restclient.EvaluationResult;
 import br.ufrn.dimap.pubshare.util.Constants;
 import br.ufrn.dimap.pubshare.util.SessionManager;
 

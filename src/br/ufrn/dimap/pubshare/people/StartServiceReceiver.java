@@ -15,41 +15,19 @@
  *    along with PubShare.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package br.ufrn.dimap.pubshare.domain;
+package br.ufrn.dimap.pubshare.people;
 
-import java.io.Serializable;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
+public class StartServiceReceiver extends BroadcastReceiver {
 
-/**
- * Now this class should ecapsulate the tags
- * @author daniel
- *
- */
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class Tag implements Serializable
-{
-	@JsonProperty
-	private long id;
-	
-	@JsonProperty
-	private String description;
-	
-	public long getId() 
-	{
-		return id;
+	@Override
+	public void onReceive(Context context, Intent intent) {
+	    // TODO Auto-generated method stub
+		Intent service = new Intent(context, ServiceController.class);
+	    context.startService(service);
 	}
-	public void setId(long id) 
-	{
-		this.id = id;
-	}
-	public String getDescription() 
-	{
-		return description;
-	}
-	public void setDescription(String description) 
-	{
-		this.description = description;
-	}
+
 }
