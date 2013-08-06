@@ -76,12 +76,13 @@
             
         </LinearLayout>
 
-        <ListView
-            android:id="@+id/list_view_article_detail_evaluations"
+        <LinearLayout
+            android:id="@+id/linear_layout_evaluations_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/linear_layout_article_details" >
-        </ListView>
+            android:layout_below="@+id/linear_layout_article_details" 
+            android:orientation="vertical">
+        </LinearLayout>
     </RelativeLayout>
 
 </ScrollView>

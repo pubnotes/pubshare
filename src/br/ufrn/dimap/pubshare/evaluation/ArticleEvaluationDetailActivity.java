@@ -26,11 +26,13 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 /**
- * Class responsible for detailing the information of a specific evaluation of an article
+ * Class responsible for detailing the information of a specific evaluation of
+ * an article
+ * 
  * @author Daniel
- *
+ * 
  */
-public class ArticleEvaluationDetailActivity extends Activity 
+public class ArticleEvaluationDetailActivity extends Activity
 {
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -42,7 +44,7 @@ public class ArticleEvaluationDetailActivity extends Activity
 		Evaluation evaluation = (Evaluation) intent.getSerializableExtra(Evaluation.KEY_INSTANCE);
 		configureView(evaluation);
 	}
-	
+
 	private void configureView(Evaluation evaluation)
 	{
 		RatingBar originality = (RatingBar) findViewById(R.id.rating_originality);
@@ -53,7 +55,7 @@ public class ArticleEvaluationDetailActivity extends Activity
 		RatingBar familiarity = (RatingBar) findViewById(R.id.rating_familiarity);
 		TextView reviewerNotes = (TextView) findViewById(R.id.text_review_notes);
 		TextView finalGrade = (TextView) findViewById(R.id.text_final_grade);
-		
+
 		originality.setRating(evaluation.getOriginality());
 		contribution.setRating(evaluation.getContribution());
 		relevance.setRating(evaluation.getRelevance());
@@ -62,5 +64,14 @@ public class ArticleEvaluationDetailActivity extends Activity
 		familiarity.setRating(evaluation.getReviewerFamiliarity());
 		reviewerNotes.setText(evaluation.getReviewerNotes());
 		finalGrade.setText(String.valueOf(evaluation.getOverall()));
+
+		originality.setEnabled(false);
+		contribution.setEnabled(false);
+		relevance.setEnabled(false);
+		readability.setEnabled(false);
+		relatedworks.setEnabled(false);
+		familiarity.setEnabled(false);
+		reviewerNotes.setEnabled(false);
+		finalGrade.setEnabled(false);
 	}
 }
